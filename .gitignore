@@ -1,0 +1,11 @@
+.DS_Store
+/.build
+/Packages
+/*.xcodeproj
+xcuserdata/
+
+# Swift Package Manager
+.swiftpm
+
+# Ruby Gems
+vendor

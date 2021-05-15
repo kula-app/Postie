@@ -1,0 +1,3 @@
+public protocol APIFormURLEncodedResponse: APIResponse {
+
+}

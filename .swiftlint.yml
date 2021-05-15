@@ -1,0 +1,8 @@
+included:
+  - Sources
+
+# Rules
+identifier_name:
+  excluded:
+    - or
+    - op

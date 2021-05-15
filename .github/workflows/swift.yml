@@ -1,0 +1,38 @@
+name: Build, Lint & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run-macos:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: swift build
+    - name: Run tests
+      run: swift test --enable-code-coverage
+    - name: Generate Code Coverage
+      run: |
+        xcrun llvm-cov export \
+          .build/debug/PostiePackageTests.xctest/Contents/MacOS/PostiePackageTests \
+          -instr-profile .build/debug/codecov/default.profdata \
+          --format="lcov" \
+          --ignore-filename-regex "\\.build" \
+          --ignore-filename-regex "Tests" > info.lcov
+    - name: Upload Code Coverage
+      run: |  
+        bash <(curl -s https://codecov.io/bash) \
+          -J 'Postie' \
+          -G info.lcov
+
+  swiftlint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: SwiftLint
+      uses: norio-nomura/action-swiftlint@3.1.0

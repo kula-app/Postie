@@ -1,0 +1,15 @@
+module: Postie
+
+author: Philip Niedertscheiders
+author_url: https://github.com/philprime
+copyright: '© 2021 [Philip Niedertscheider](https://philpri.me). All rights reserved.'
+github_url: https://github.com/philprime/Postie
+
+theme: fullwidth
+
+separate_global_declarations: true
+use_safe_filenames: true
+
+swift_build_tool: spm
+include: Sources/Postie/**
+
