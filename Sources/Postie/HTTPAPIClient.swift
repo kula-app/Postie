@@ -203,7 +203,7 @@ open class HTTPAPIClient: APIClient {
     // MARK: - Decoders
 
     func createJSONDecoder() -> JSONDecoder {
-        let decoder = JSONDecoder()
+        let decoder = LoggingJSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         switch dateFormat {
         case .iso8601:
@@ -228,7 +228,7 @@ open class HTTPAPIClient: APIClient {
     ///   - request: request conforming to the `APIRequest` protocol
     ///   - urlRequest: generated `urlRequest` with is sent to the endpoint
     fileprivate func log<Request: APIRequest>(request: Request, _ urlRequest: URLRequest) {
-        os_log(.debug, "Sending HTTP %s API request at URL: %s with headers: %@", request.httpMethod, urlRequest.url!.absoluteString)
+        os_log(.debug, "Sending HTTP %s API request at URL: %s with headers: %@", request.httpMethod, urlRequest.url!.absoluteString, urlRequest.allHTTPHeaderFields?.description ?? "nil")
     }
 
     /// Logs a request with the received response and data
