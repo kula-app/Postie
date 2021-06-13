@@ -22,7 +22,7 @@ open class HTTPAPIClient {
         // Encode request
         let urlRequest: URLRequest
         do {
-            urlRequest = try encoder.encode(request: request)
+            urlRequest = try encoder.encode(request)
         } catch {
             // If encoding fails, exit immediately
             return Fail(error: error).eraseToAnyPublisher()

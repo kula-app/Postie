@@ -1,5 +1,5 @@
 import XCTest
-@testable import Postie
+@testable import PostieUtils
 
 // swiftlint:disable:next type_name
 final class String_CamelCaseFromSnakeCaseTests: XCTestCase {

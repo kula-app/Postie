@@ -56,14 +56,27 @@ internal struct ResponseDecoding: Decoder {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(type, from: data)
         }
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//        switch dateFormat {
-//        case .iso8601:
-//            decoder.dateDecodingStrategy = .iso8601
-//        case .iso8601Full:
-//            decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
-//        }
-        return try decoder.decode(type, from: data)
+        if type is PlainDecodable.Type {
+            let encoding: String.Encoding
+            // TODO: Detect string encoding based on response header `Content-Type`
+            encoding = .utf8
+
+            guard let value = String(data: data, encoding: encoding) as? T else {
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath, debugDescription: "Failed to decode using encoding: \(encoding)"))
+            }
+            return value
+        }
+        if type is JSONDecodable.Type {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            //        switch dateFormat {
+            //        case .iso8601:
+            //            decoder.dateDecodingStrategy = .iso8601
+            //        case .iso8601Full:
+            //            decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+            //        }
+            return try decoder.decode(type, from: data)
+        }
+        fatalError("Unsupported body type: \(type)")
     }
 }

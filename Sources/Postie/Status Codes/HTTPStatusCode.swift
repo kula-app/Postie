@@ -312,9 +312,22 @@ public enum HTTPStatusCode: UInt16 {
 
 }
 
-extension HTTPStatusCode: Comparable {
+extension HTTPStatusCode: Comparable, Equatable {
+
     public static func < (lhs: HTTPStatusCode, rhs: HTTPStatusCode) -> Bool {
         lhs.rawValue < rhs.rawValue
+    }
+
+    public static func > (lhs: HTTPStatusCode, rhs: HTTPStatusCode) -> Bool {
+        lhs.rawValue > rhs.rawValue
+    }
+
+    public static func >= (lhs: HTTPStatusCode, rhs: HTTPStatusCode) -> Bool {
+        lhs > rhs || lhs == rhs
+    }
+
+    public static func == (lhs: HTTPStatusCode, rhs: HTTPStatusCode) -> Bool {
+        lhs.rawValue == rhs.rawValue
     }
 }
 

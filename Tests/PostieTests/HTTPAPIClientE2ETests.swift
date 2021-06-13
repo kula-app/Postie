@@ -109,10 +109,42 @@ class HTTPAPIClientE2ETests: XCTestCase {
         XCTAssertEqual(requestBody, "{\"value\":321}".data(using: .utf8)!)
     }
 
+    func testSending_PlainResponse_shouldDecodeResponse() {
+        struct Request: Postie.Request {
+            struct Response: Decodable {
+                @ResponseStatusCode var statusCode
+                @ResponseBody<PlainDecodable> var body
+            }
+        }
+
+        // Prepare response stub
+        let stubResponse: (data: Data, response: URLResponse) = (
+            data: """
+            this is random unformatted plain text
+            """.data(using: .utf8)!,
+            response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        )
+        let stubSession = URLSessionStub(returnResponse: stubResponse)
+
+        // Send request
+        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
+            client.send(request)
+        }
+
+        // Assert response
+        XCTAssertNil(receivedError)
+        XCTAssertNotNil(receivedResponse)
+        guard let response = receivedResponse else {
+            return
+        }
+        XCTAssertEqual(response.statusCode, 200)
+        XCTAssertEqual(response.body, "this is random unformatted plain text")
+    }
+
     func testSending_JSONResponse_shouldDecodeResponse() {
         struct Request: Postie.Request {
-            struct Response: JSONDecodable {
-                struct Body: Decodable {
+            struct Response: Decodable {
+                struct Body: JSONDecodable {
                     var value: String
                 }
 

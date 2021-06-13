@@ -54,7 +54,6 @@ Configuration of the request is done using property wrappers, e.g. `@QueryItem`.
 
 Postie includes a couple of types to build your requests. As a first step, create your `Request` type, with an associated `Response`:
 
-
 ```
 import Postie
 
@@ -72,6 +71,8 @@ If you want to include payload data, use one of the following ones:
 
 All of these expect a `body` instance variable. 
 For `JSONRequest` and `FormURLEncodedRequest` the type of `body` is generic but needs to implement the `Encodable` protocol.
+
+**Example:**
 
 ```
 struct Foo: JSONRequest {
@@ -95,6 +96,8 @@ struct Bar: FormURLEncodedRequest {
 
 For the `PlainRequest` the body expects a plain `String` content. Optionally you can also overwrite the `encoding` variable with a custom encoding (default is `utf8`).
 
+**Example:**
+
 ```
 struct Foo: PlainRequest {
 
@@ -109,6 +112,8 @@ struct Foo: PlainRequest {
 #### Setting the request HTTP Method
 
 The default HTTP method is `GET`, but it can be overwritten by adding an instance property with the property wrapper `@RequestHTTPMethod`:
+
+**Example:**
 
 ```
 struct Request: Encodable {
@@ -132,12 +137,14 @@ As the property name is ignored, it is possible to have multiple properties with
 
 The default path `/`, but it can be overwritten by adding an instance property with the property wrapper `@RequestPath`:
 
+**Example:**
+
 ```
 struct Request: Encodable {
 
     typealias Response = EmptyResponse
 
-    @RequestHTTPMethod var method
+    @RequestPath var path
 
 }
 
@@ -152,7 +159,9 @@ Also you need to require a leading forward slash (`/`) in the path.
 
 #### Adding query items to the URL
 
-Multiple query items can be added by adding them as properties using the property wrapper `@QueryItem`
+Multiple query items can be added by adding them as properties using the property wrapper `@QueryItem`.
+
+**Example:**
 
 ```
 struct Request: Encodable {
@@ -194,7 +203,9 @@ This does not apply to synthesized names, as a Swift type can not have more than
 
 #### Adding Headers to the request
 
-Multiple headers can be set by adding them as properties using the property wrapper `@RequestHeader`
+Multiple headers can be set by adding them as properties using the property wrapper `@RequestHeader`.
+
+**Example:**
 
 ```
 struct Request: Encodable {
@@ -231,5 +242,257 @@ This does not apply to synthesized names, as a Swift type can not have more than
 
 ### Defining the response
 
-Every struct implementing `Request` expects to have an associated `Response` type. 
+Every struct implementing `Request` expects to have an associated `Response` type implementing the `Decodable` protocol. 
 In the examples above the `EmptyResponse` convenience type (which is an empty, decodable type) has been used.
+
+The response structure will be populated with data from either the response body data or metadata.
+
+#### Parsing the response body
+
+To parse the response data into a `Decodable` type, add a property with the property wrapper `@ResponseBody<BodyType>` where `BodyType` is the response body type.
+
+**Example:**
+
+```
+struct Request: Postie.Request {
+    struct Response: Decodable {
+        struct Body: Decodable {
+            var value: String
+        }
+
+        @ResponseBody<Body> var body
+    }
+}
+```
+
+To indicate the decoding system which response data format should be expected, conform your response type to one of the following protocols:
+
+- `PlainDecodable`
+- `JSONDecodable`
+- `FormURLEncodedDecodable`
+
+For `JSONDecodable` and `FormURLEncodedDecodable` the type of `body` is generic but needs to implement the `Decodable` protocol.
+
+**Example:**
+
+```
+struct Request: Postie.Request {
+    struct Response: Decodable {
+        struct Body: JSONDecodable {
+            var value: String
+        }
+
+        @ResponseBody<Body> var body
+    }
+}
+
+struct Request: Postie.Request {
+    struct Response: Decodable {
+        struct Body: FormURLEncodedDecodable {
+            var value: String
+        }
+
+        @ResponseBody<Body> var body
+    }
+}
+```
+
+For the type `PlainDecodable`, use it directly, as it is an alias for `String`.
+
+**Example:**
+
+```
+struct Request: Postie.Request {
+    struct Response: Decodable {
+        @ResponseBody<PlainDecodable> var body
+    }
+}
+```
+
+#### Response body on error
+
+As mentioned in [Core Concept](#core-concept) Postie allows defining a body response type when receiving an invalid status code (>=400).
+
+It's usage is exactly the same as with `@ResponseBody`, but instead you need to use the property wrapper `@ResponseErrorBody`.
+Either the `@ResponseBody` or the `@ResponseErrorBody` is set, never both at the same time. 
+
+The error response body gets set if the response status code is neither a 2XX nor a 3XX status code.
+
+**Example:**
+
+```
+struct Request: Postie.Request {
+    struct Response: Decodable {
+        struct ErrorBody: JSONDecodable {
+            var message: String
+        }
+        @ResponseErrorBody<ErrorBody> var errorBody
+    }
+}
+```
+
+#### Response headers
+
+Use the property wrapper `@ResponseHeader<Strategy>` inside the response type. 
+
+In the moment, the following decoding strategies are implemented:
+
+- `DefaultStategy`
+
+Converts the property name into camel-case format (e.g. `Content-Type` becomes `contentType`) and compares case-insensitive (e.g. `Authorization` equals `authorization`)
+This strategy expects the response header to be set, otherwise an error will be thrown.
+
+Response from URL requests are always of type `String` and no casting will be performed. Therefore the only valid property type is `String`.
+
+- `DefaultOptionalStategy`
+
+Same as `DefaultStrategy` but won't fail if the header can not be found.
+
+**Example:**
+
+```
+struct Response: Decodable {
+
+    @ResponseHeader<DefaultStrategy>
+    var authorization: String
+
+    @ResponseHeader<DefaultStrategy>
+    var contentType: String
+
+    @ResponseHeader<DefaultStrategyOptional>
+    var optionalValue: String?
+
+}
+```
+
+#### Response Status
+
+The default HTTP method is `GET`, but it can be overwritten by adding an instance property with the property wrapper `@RequestHTTPMethod`:
+
+**Example:**
+
+```
+struct Response: Decodable {
+
+    @ResponseStatusCode var statusCode
+
+}
+```
+
+**Note:**
+
+Multiple properties can be declared with this property wrapper. All of them will have the value set.
+
+
+### HTTP API Client
+
+The easiest way of sending Postie requests, is using the `HTTPAPIClient` which takes care of encoding requests, and decoding responses.
+
+All it takes to create a client, is the URL which is used as a base for all requests. Afterwards you can just send the requests, using the Combine publishers.
+
+Additionally the `HTTPAPIClient` provides the option of setting a `session` provider, which encapsulates the default `URLSession` by a protocol.
+This allows to create networking clients which can be mocked (perfect for unit testing).
+
+**Example:**
+
+```
+let url: URL = ...
+let client = HTTPAPIClient(baseURL: url)
+
+// ... create request ...
+
+client.send(request)
+    .sink(receiveCompletion: { completion in
+        switch completion {
+        case .failure(let error):
+            // handle error
+            break
+        case .finished:
+            break
+        }
+    }, receiveValue: { response in
+        // process response
+        print(response)
+    })
+    .store(in: &cancellables)
+//
+```
+
+### Encoding & Decoding
+
+The `RequestEncoder` is responsible to turn an encodable `Request` into an `URLRequest`. It requires an URL in the initializer, as Postie requests are relative requests.
+
+**Example:**
+
+```
+// A request as explained above
+let request: Request = ...
+
+// Create a request encoder
+let url = URL(string: "http://techprimate.com")
+let encoder = RequestEncoder(baseURL: url)
+
+// Encode request
+let urlRequest: URLRequest
+do {
+    let urlRequest = try encoder.encode(request)
+    // continue with url request
+    ...
+} catch {
+    // Handle error
+    ...
+}
+```
+
+As its contrarity component, the `RequestDecoder` is responsible to turn a tuple of `(data: Data, response: HTTPURLResponse)` into a given type `Response`.
+
+**Example:**
+
+```
+// Data received from the URL session task
+let response: HTTPURLResponse = ...
+let data: Data = ...
+
+// Create decoder
+let decoder = ResponseDecoder()
+do {
+    let decoded = try decoder.decode(Response.self, from: (data, response))) 
+    // continue with decoded response
+    ...
+} catch{
+    // Handle error
+    ...
+}
+```
+
+#### Combine Support
+
+`RequestEncoder` conforms to `TopLevelEncoder` and `RequestDecoder` conforms to `TopLevelDecoder`.
+This means both encoders can be used in a Combine pipeline.
+
+**Example:**
+
+```
+let request = Request()
+let session = URLSession.shared
+
+let url = URL(string: "https://techprimate.com")!
+let encodedRequest = try RequestEncoder(baseURL: url).encode(request)
+
+// Send request using the given URL session provider
+return session
+    .dataTaskPublisher(for: encodedRequest)
+    .tryMap { (data: Data, response: URLResponse) in
+        guard let response = response as? HTTPURLResponse else {
+            fatalError("handle non HTTP url responses")
+        }
+        return (data: data, response: response)
+    }
+    .decode(type: Request.Response.self, decoder: ResponseDecoder())
+    .sink(receiveCompletion: { result in
+        // handle result
+    }, receiveValue: { decoded in
+        // do something with decoded response
+    })
+```
+

@@ -62,7 +62,7 @@ class QueryCodingTests: XCTestCase {
         let encoder = RequestEncoder(baseURL: baseURL)
         let encoded: URLRequest
         do {
-            encoded = try encoder.encode(request: request)
+            encoded = try encoder.encode(request)
         } catch {
             XCTFail("Failed to encode: " + error.localizedDescription, file: file, line: line)
             return nil

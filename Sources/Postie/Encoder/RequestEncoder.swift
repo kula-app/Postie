@@ -1,19 +1,22 @@
 import Foundation
 import URLEncodedFormCoding
+import Combine
 
-class RequestEncoder {
-
+public class RequestEncoder: TopLevelEncoder {
+    
     let baseURL: URL
 
-    init(baseURL: URL) {
+    public init(baseURL: URL) {
         self.baseURL = baseURL
     }
 
-    func encode<Request>(request: Request) throws -> URLRequest where Request: Encodable {
+    public func encode<Request>(_ request: Request) throws -> URLRequest where Request: Encodable {
         try encodeToBaseURLRequest(request)
     }
 
-    func encodeJson<Request: JSONEncodable>(request: Request) throws -> URLRequest {
+    // MARK: - JSON
+
+    public func encodeJson<Request>(request: Request) throws -> URLRequest where Request: JSONEncodable {
         var urlRequest = try encodeToBaseURLRequest(request)
         urlRequest.httpBody = try encodeJsonBody(request.body)
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
@@ -27,7 +30,9 @@ class RequestEncoder {
         return try encoder.encode(body)
     }
 
-    func encodeFormURLEncoded<Request: FormURLEncodedEncodable>(request: Request) throws -> URLRequest {
+    // MARK: - Form URL Encoded
+
+    public func encodeFormURLEncoded<Request>(request: Request) throws -> URLRequest where Request: FormURLEncodedEncodable {
         var urlRequest = try encodeToBaseURLRequest(request)
         urlRequest.httpBody = try encodeFormURLEncodedBody(request.body)
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
@@ -43,7 +48,7 @@ class RequestEncoder {
 
     // MARK: - Plain
 
-    func encodePlain<Request: PlainEncodable>(request: Request) throws -> URLRequest {
+    public func encodePlain<Request>(request: Request) throws -> URLRequest where Request: PlainEncodable {
         var urlRequest = try encodeToBaseURLRequest(request)
         urlRequest.httpBody = try encodePlainBody(request.body, encoding: request.encoding)
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
