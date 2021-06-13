@@ -61,6 +61,21 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
     }
 
+    open func send<Request: PlainRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
+        // Create a request encoder
+        let encoder = RequestEncoder(baseURL: url)
+        // Encode request
+        let urlRequest: URLRequest
+        do {
+            urlRequest = try encoder.encodePlain(request: request)
+        } catch {
+            // If encoding fails, exit immediately
+            return Fail(error: error).eraseToAnyPublisher()
+        }
+        log(request: request, urlRequest)
+        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
+    }
+
     private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest) -> AnyPublisher<Response, Error> {
         // Send request using the given URL session provider
         return session

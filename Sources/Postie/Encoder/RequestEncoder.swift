@@ -22,6 +22,11 @@ class RequestEncoder {
         return urlRequest
     }
 
+    private func encodeJsonBody<Body: Encodable>(_ body: Body) throws -> Data {
+        let encoder = JSONEncoder()
+        return try encoder.encode(body)
+    }
+
     func encodeFormURLEncoded<Request: FormURLEncodedEncodable>(request: Request) throws -> URLRequest {
         var urlRequest = try encodeToBaseURLRequest(request)
         urlRequest.httpBody = try encodeFormURLEncodedBody(request.body)
@@ -30,6 +35,31 @@ class RequestEncoder {
         }
         return urlRequest
     }
+
+    private func encodeFormURLEncodedBody<Body: Encodable>(_ body: Body) throws -> Data {
+        let encoder = URLEncodedFormEncoder()
+        return try encoder.encode(body)
+    }
+
+    // MARK: - Plain
+
+    func encodePlain<Request: PlainEncodable>(request: Request) throws -> URLRequest {
+        var urlRequest = try encodeToBaseURLRequest(request)
+        urlRequest.httpBody = try encodePlainBody(request.body, encoding: request.encoding)
+        if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        return urlRequest
+    }
+
+    private func encodePlainBody(_ body: String, encoding: String.Encoding) throws -> Data {
+        guard let data = body.data(using: encoding) else {
+            throw APIError.failedToEncodePlainText(encoding: encoding)
+        }
+        return data
+    }
+
+    // MARK: - Shared
 
     private func encodeToBaseURLRequest<Request: Encodable>(_ request: Request) throws -> URLRequest {
         let encoder = RequestEncoding()
@@ -47,16 +77,6 @@ class RequestEncoder {
         request.httpMethod = encoder.httpMethod.rawValue
         request.allHTTPHeaderFields = encoder.headers
         return request
-    }
-
-    private func encodeJsonBody<Body: Encodable>(_ body: Body) throws -> Data {
-        let encoder = JSONEncoder()
-        return try encoder.encode(body)
-    }
-
-    private func encodeFormURLEncodedBody<Body: Encodable>(_ body: Body) throws -> Data {
-        let encoder = URLEncodedFormEncoder()
-        return try encoder.encode(body)
     }
 
     // MARK: - Legacy:

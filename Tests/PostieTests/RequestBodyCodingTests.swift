@@ -9,7 +9,7 @@ class RequestBodyCodingTests: XCTestCase {
         struct Foo: JSONEncodable {
 
             struct Body: Encodable {}
-            struct Response: Decodable {}
+            typealias Response = EmptyResponse
 
             var body: Body
 
@@ -32,7 +32,7 @@ class RequestBodyCodingTests: XCTestCase {
         struct Foo: JSONEncodable {
 
             struct Body: Encodable {}
-            struct Response: Decodable {}
+            typealias Response = EmptyResponse
 
             var body: Body
 
@@ -59,7 +59,7 @@ class RequestBodyCodingTests: XCTestCase {
             struct Body: Encodable {
                 var value: Int
             }
-            struct Response: Decodable {}
+            typealias Response = EmptyResponse
 
             var body: Body
 
@@ -82,7 +82,7 @@ class RequestBodyCodingTests: XCTestCase {
         struct Foo: FormURLEncodedEncodable {
 
             struct Body: Encodable {}
-            struct Response: Decodable {}
+            typealias Response = EmptyResponse
 
             var body: Body
 
@@ -106,7 +106,7 @@ class RequestBodyCodingTests: XCTestCase {
         struct Foo: FormURLEncodedEncodable {
 
             struct Body: Encodable {}
-            struct Response: Decodable {}
+            typealias Response = EmptyResponse
 
             var body: Body
 
@@ -135,7 +135,7 @@ class RequestBodyCodingTests: XCTestCase {
                 var value: Int
                 var others: String
             }
-            struct Response: Decodable {}
+            typealias Response = EmptyResponse
 
             var body: Body
 
@@ -152,5 +152,48 @@ class RequestBodyCodingTests: XCTestCase {
         }
         XCTAssertEqual(encoded.httpBody, "others=This%20escaped%20string&value=123".data(using: .utf8)!)
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded")
+    }
+
+    func testEncoding_nonEmptyPlainTextBody_shouldEncodeUsingDefaultEncoding() {
+        struct Foo: PlainEncodable {
+
+            typealias Response = EmptyResponse
+
+            var body: String
+
+        }
+
+        let request = Foo(body: "some string")
+        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoded: URLRequest
+        do {
+            encoded = try encoder.encodePlain(request: request)
+        } catch {
+            XCTFail("Failed to encode: " + error.localizedDescription)
+            return
+        }
+        XCTAssertEqual(encoded.httpBody, "some string".data(using: .utf8)!)
+    }
+
+    func testEncoding_nonEmptyPlainTextBodyCustomEncoding_shouldEncodeUsingCustomEncoding() {
+        struct Foo: PlainEncodable {
+
+            typealias Response = EmptyResponse
+
+            var body: String
+            var encoding: String.Encoding = .utf16
+
+        }
+
+        let request = Foo(body: "some string")
+        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoded: URLRequest
+        do {
+            encoded = try encoder.encodePlain(request: request)
+        } catch {
+            XCTFail("Failed to encode: " + error.localizedDescription)
+            return
+        }
+        XCTAssertEqual(encoded.httpBody, "some string".data(using: .utf16)!)
     }
 }

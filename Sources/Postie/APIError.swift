@@ -6,6 +6,7 @@ public enum APIError: LocalizedError {
     case invalidResponse
     case urlError(URLError)
     case decodingError(DecodingError)
+    case failedToEncodePlainText(encoding: String.Encoding)
     case unknown(error: Error)
 
     public var errorDescription: String? {
@@ -29,6 +30,8 @@ public enum APIError: LocalizedError {
             @unknown default:
                 return error.localizedDescription
             }
+        case .failedToEncodePlainText(let encoding):
+            return "Failed to encode plain text body using encoding: \(encoding)"
         case .unknown(let error):
             return "Unknown Error: " + error.localizedDescription
         }
