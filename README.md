@@ -1,5 +1,9 @@
 # Postie - Structured HTTP Client using Combine
 
+[![CI](https://github.com/philprime/Postie/workflows/Build,%20Lint%20&%20Test/badge.svg)](https://github.com/philprime/Postie/actions)
+[![Documentation](https://raw.githubusercontent.com/philprime/Postie/gh-pages/badge.svg)](https://philprime.github.io/Postie/)
+[![codecov](https://codecov.io/gh/philprime/Postie/branch/main/graph/badge.svg)](https://codecov.io/gh/philprime/Postie)
+
 Postie is a pure Swift library for building URLRequests using property wrappers.
 
 ## Core Concept

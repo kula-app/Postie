@@ -15,14 +15,14 @@ public struct ResponseErrorBody<Body: Decodable> {
 extension ResponseErrorBody: Decodable {
 
     public init(from decoder: Decoder) throws {
-        guard let decoder = decoder as? ResponseDecoding else {
+        guard let responseDecoder = decoder as? ResponseDecoding else {
             self.wrappedValue = try Body(from: decoder)
             return
         }
-        if (HTTPStatusCode.continue..<HTTPStatusCode.badRequest) ~= decoder.response.statusCode {
+        if (HTTPStatusCode.continue..<HTTPStatusCode.badRequest) ~= responseDecoder.response.statusCode {
             self.wrappedValue = nil
             return
         }
-        self.wrappedValue = try decoder.decodeBody(to: Body.self)
+        self.wrappedValue = try responseDecoder.decodeBody(to: Body.self)
     }
 }

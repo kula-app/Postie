@@ -15,15 +15,15 @@ public struct ResponseBody<Body: Decodable> {
 extension ResponseBody: Decodable {
 
     public init(from decoder: Decoder) throws {
-        guard let decoder = decoder as? ResponseDecoding else {
+        guard let responseDecoder = decoder as? ResponseDecoding else {
             self.wrappedValue = try Body(from: decoder)
             return
         }
-        guard HTTPStatusCode.ok..<HTTPStatusCode.multipleChoices ~= decoder.response.statusCode else {
+        guard HTTPStatusCode.ok..<HTTPStatusCode.multipleChoices ~= responseDecoder.response.statusCode else {
             self.wrappedValue = nil
             return
         }
-        self.wrappedValue = try decoder.decodeBody(to: Body.self)
+        self.wrappedValue = try responseDecoder.decodeBody(to: Body.self)
     }
 }
 
