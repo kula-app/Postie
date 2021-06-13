@@ -13,7 +13,7 @@ public class URLEncodedFormEncoder: TopLevelEncoder {
         self.encoding = encoding
     }
 
-    public func encode<T>(_ value: T) throws -> Data where T : Encodable {
+    public func encode<T>(_ value: T) throws -> Data where T: Encodable {
         let context = URLEncodedFormDataContext()
         let encoder = _URLEncodedFormEncoder(context: context)
         try value.encode(to: encoder)
@@ -132,7 +132,7 @@ private final class _URLEncodedFormKeyedEncoder<K>: KeyedEncodingContainerProtoc
     }
 
     /// See `KeyedEncodingContainerProtocol`
-    func encode<T>(_ value: T, forKey key: K) throws where T : Encodable {
+    func encode<T>(_ value: T, forKey key: K) throws where T: Encodable {
         if let convertible = value as? URLEncodedElementConvertible {
             try context.set(to: convertible.convertToURLEncodedElement(), at: codingPath + [key])
         } else {

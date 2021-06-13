@@ -4,7 +4,7 @@ internal class RequestEncoding: Encoder {
 
     var parent: RequestEncoding?
     var codingPath: [CodingKey]
-    var userInfo: [CodingUserInfoKey : Any] = [:]
+    var userInfo: [CodingUserInfoKey: Any] = [:]
 
     private(set) var httpMethod: HTTPMethod = .get
     private(set) var path: String = ""

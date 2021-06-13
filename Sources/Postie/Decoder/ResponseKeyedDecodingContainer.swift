@@ -19,13 +19,15 @@ class ResponseKeyedDecodingContainer<Key>: KeyedDecodingContainerProtocol where 
         fatalError()
     }
 
-    func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T : Decodable {
-        let decoding = ResponseDecoding(response: decoder.response, data: decoder.data, codingPath: codingPath + [key])
+    func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T: Decodable {
+        let decoding = ResponseDecoding(response: decoder.response, data: decoder.data,
+                                        codingPath: codingPath + [key])
         let container = try decoding.singleValueContainer()
         return try container.decode(type)
     }
 
-    func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {
+    func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws
+        -> KeyedDecodingContainer<NestedKey> where NestedKey: CodingKey {
         fatalError()
     }
 

@@ -6,3 +6,5 @@ identifier_name:
   excluded:
     - or
     - op
+
+line_length: 150

@@ -3,7 +3,7 @@ import URLEncodedFormCoding
 import Combine
 
 public class RequestEncoder: TopLevelEncoder {
-    
+
     let baseURL: URL
 
     public init(baseURL: URL) {
@@ -88,13 +88,13 @@ public class RequestEncoder: TopLevelEncoder {
 
     // MARK: - URL Request
 
-    /// Creates the `URLRequest` from the given `request` and the client configuration
-    ///
-    /// If the `request` provides a `predefinedUrl`, it is used instead of building one based on the configuration
-    ///
-    /// - Parameter request: request object implementing the `APIRequest` protocol
-    /// - Throws: `APIError` if it is not possible to create an URL from the given query items
-    /// - Returns: `URLRequest` object which can be used to communicate with the API endpoitn
+//    /// Creates the `URLRequest` from the given `request` and the client configuration
+//    ///
+//    /// If the `request` provides a `predefinedUrl`, it is used instead of building one based on the configuration
+//    ///
+//    /// - Parameter request: request object implementing the `APIRequest` protocol
+//    /// - Throws: `APIError` if it is not possible to create an URL from the given query items
+//    /// - Returns: `URLRequest` object which can be used to communicate with the API endpoitn
 //    func createURLRequest<Request: APIRequest>(for request: Request) throws -> URLRequest {
 //        var urlRequest: URLRequest
 //

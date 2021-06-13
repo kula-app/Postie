@@ -35,7 +35,10 @@ public struct DefaultStrategy: ResponseHeaderDecodingStrategy {
         }
         // Transform dash separator to camelCase
         guard let value = responseDecoding.valueForHeaderCaseInsensitive(key) else {
-            throw DecodingError.valueNotFound(RawValue.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Missing value for case-insensitive header key: \(key)"))
+            throw DecodingError.valueNotFound(RawValue.self, DecodingError.Context(
+                codingPath: decoder.codingPath,
+                debugDescription: "Missing value for case-insensitive header key: \(key)")
+            )
         }
         return value
     }

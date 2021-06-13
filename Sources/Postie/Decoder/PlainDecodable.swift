@@ -1,6 +1,4 @@
-/// A type that representing
-// public typealias PlainDecodable = Decodable & PlainFormatProvider
-
+/// A type which represents plain text
 public typealias PlainDecodable = String
 
 extension PlainDecodable: PlainFormatProvider {

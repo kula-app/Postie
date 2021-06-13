@@ -24,7 +24,9 @@ extension RequestHeader where T == String {
 
 extension RequestHeader: Encodable where T: Encodable {}
 
-extension RequestHeader: ExpressibleByStringLiteral, ExpressibleByExtendedGraphemeClusterLiteral, ExpressibleByUnicodeScalarLiteral where T == String {
+extension RequestHeader: ExpressibleByStringLiteral,
+                         ExpressibleByExtendedGraphemeClusterLiteral,
+                         ExpressibleByUnicodeScalarLiteral where T == String {
 
     public typealias ExtendedGraphemeClusterLiteralType = String.ExtendedGraphemeClusterLiteralType
     public typealias UnicodeScalarLiteralType = String.UnicodeScalarLiteralType

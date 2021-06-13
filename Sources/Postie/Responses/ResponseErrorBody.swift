@@ -1,13 +1,13 @@
 @propertyWrapper
 public struct ResponseErrorBody<Body: Decodable> {
 
-    public var wrappedValue: Optional<Body>
+    public var wrappedValue: Body?
 
     public init() {
         wrappedValue = nil
     }
 
-    public init(wrappedValue: Optional<Body>) {
+    public init(wrappedValue: Body?) {
         self.wrappedValue = wrappedValue
     }
 }

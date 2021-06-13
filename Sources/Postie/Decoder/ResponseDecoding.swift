@@ -5,7 +5,7 @@ import URLEncodedFormCoding
 internal struct ResponseDecoding: Decoder {
 
     var codingPath: [CodingKey]
-    var userInfo: [CodingUserInfoKey : Any] = [:]
+    var userInfo: [CodingUserInfoKey: Any] = [:]
     var response: HTTPURLResponse
     var data: Data
 
@@ -15,7 +15,7 @@ internal struct ResponseDecoding: Decoder {
         self.codingPath = codingPath
     }
 
-    func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> where Key : CodingKey {
+    func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> where Key: CodingKey {
         let container = ResponseKeyedDecodingContainer(decoder: self, keyedBy: type, codingPath: codingPath)
         return KeyedDecodingContainer(container)
     }
@@ -62,7 +62,10 @@ internal struct ResponseDecoding: Decoder {
             encoding = .utf8
 
             guard let value = String(data: data, encoding: encoding) as? T else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: codingPath, debugDescription: "Failed to decode using encoding: \(encoding)"))
+                throw DecodingError.dataCorrupted(DecodingError.Context(
+                    codingPath: codingPath,
+                    debugDescription: "Failed to decode using encoding: \(encoding)")
+                )
             }
             return value
         }

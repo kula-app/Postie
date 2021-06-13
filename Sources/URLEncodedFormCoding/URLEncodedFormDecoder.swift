@@ -97,7 +97,11 @@ private final class _URLEncodedFormSingleValueDecoder: SingleValueDecodingContai
         switch element {
         case .text(let content):
             guard let castedText = content as? T else {
-                throw DecodingError.typeMismatch(T.self, .init(codingPath: codingPath, debugDescription: "Failed to decode String to type " + String(describing: T.self)))
+                throw DecodingError.typeMismatch(T.self, .init(
+                        codingPath: codingPath,
+                        debugDescription: "Failed to decode String to type " + String(describing: T.self)
+                    )
+                )
             }
             return castedText
         default:

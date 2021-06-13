@@ -14,7 +14,8 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
         encoder.addQueryItem(name: key.stringValue, value: nil)
     }
 
-    func encode<T>(_ value: T, forKey key: Key) throws where T : Encodable {
+    // swiftlint:disable cyclomatic_complexity function_body_length
+    func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
         switch value {
         case let queryItem as QueryItem<String>:
             encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: queryItem.wrappedValue)
@@ -74,8 +75,10 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
             break
         }
     }
+    // swiftlint:enable cyclomatic_complexity function_body_length
 
-    func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: Key) -> KeyedEncodingContainer<NestedKey> where NestedKey : CodingKey {
+    func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: Key)
+        -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
         RequestEncoding(parent: encoder, codingPath: [key]).container(keyedBy: keyType)
     }
 
@@ -92,12 +95,12 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
     }
 }
 
-protocol AnyOptional {
+fileprivate protocol AnyOptional {
     var isNil: Bool { get }
 }
 
 extension Optional: AnyOptional {
-    var isNil: Bool {
+    fileprivate var isNil: Bool {
         self == nil
     }
 }

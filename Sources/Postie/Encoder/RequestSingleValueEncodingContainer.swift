@@ -12,7 +12,7 @@ class RequestSingleValueEncodingContainer: SingleValueEncodingContainer {
         fatalError()
     }
 
-    func encode<T>(_ value: T) throws where T : Encodable {
+    func encode<T>(_ value: T) throws where T: Encodable {
         fatalError()
     }
 }
