@@ -12,9 +12,14 @@ let package = Package(
         .library(name: "PostieMock", targets: ["PostieMock"])
     ],
     targets: [
-        .target(name: "Postie", dependencies: []),
-        .testTarget(name: "PostieTests", dependencies: ["Postie"]),
+        .target(name: "Postie", dependencies: ["URLEncodedFormCoding", "PostieUtils"]),
+        .testTarget(name: "PostieTests", dependencies: ["Postie", "PostieMock"]),
 
-        .target(name: "PostieMock", dependencies: ["Postie"])
+        .target(name: "PostieMock", dependencies: ["Postie"]),
+
+        .target(name: "URLEncodedFormCoding", dependencies: ["PostieUtils"]),
+
+        .target(name: "PostieUtils"),
+        .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"]),
     ]
 )

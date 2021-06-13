@@ -3,15 +3,17 @@ import Foundation
 public enum APIError: LocalizedError {
 
     case responseError(statusCode: Int, data: Data)
+    case invalidResponse
     case urlError(URLError)
     case decodingError(DecodingError)
-    case invalidURL(url: URL, query: [String: APIQueryValue])
     case unknown(error: Error)
 
     public var errorDescription: String? {
         switch self {
         case .responseError(let statusCode, let data):
             return "ResponseError \(statusCode), data: " + (String(data: data, encoding: .utf8) ?? "nil")
+        case .invalidResponse:
+            return "Received invalid URL response"
         case .urlError(let error):
             return error.localizedDescription
         case .decodingError(let error):
@@ -27,8 +29,6 @@ public enum APIError: LocalizedError {
             @unknown default:
                 return error.localizedDescription
             }
-        case let .invalidURL(url, query):
-            return "Failed to construct URL from " + url.debugDescription + " and query parameters " + query.debugDescription
         case .unknown(let error):
             return "Unknown Error: " + error.localizedDescription
         }
