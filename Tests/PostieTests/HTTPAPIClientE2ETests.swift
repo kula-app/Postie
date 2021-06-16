@@ -180,6 +180,54 @@ class HTTPAPIClientE2ETests: XCTestCase {
         XCTAssertEqual(response.body?.value, "response value")
     }
 
+    func testSending_JSONArrayResponse_shouldDecodeResponseItems() {
+        struct Request: Postie.Request {
+            struct Response: Decodable {
+                struct BodyItem: JSONDecodable, Equatable {
+                    var value: String
+                }
+
+                typealias Body = [BodyItem]
+
+                @ResponseStatusCode var statusCode
+                @ResponseBody<Body> var body
+            }
+        }
+
+        // Prepare response stub
+        let stubResponse: (data: Data, response: URLResponse) = (
+            data: """
+            [
+                {
+                    "value": "response value1"
+                },
+                {
+                    "value": "response value2"
+                }
+            ]
+            """.data(using: .utf8)!,
+            response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        )
+        let stubSession = URLSessionStub(returnResponse: stubResponse)
+
+        // Send request
+        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
+            client.send(request)
+        }
+
+        // Assert response
+        XCTAssertNil(receivedError)
+        XCTAssertNotNil(receivedResponse)
+        guard let response = receivedResponse else {
+            return
+        }
+        XCTAssertEqual(response.statusCode, 200)
+        XCTAssertNotNil(response.body)
+        XCTAssertEqual(response.body?.count, 2)
+        XCTAssertEqual(response.body?[0], Request.Response.BodyItem(value: "response value1"))
+        XCTAssertEqual(response.body?[1], Request.Response.BodyItem(value: "response value2"))
+    }
+
     func testSending_invalidResponse_shouldThrowError() {
         struct Request: Postie.Request {
             struct Response: JSONDecodable {
