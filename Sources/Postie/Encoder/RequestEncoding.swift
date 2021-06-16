@@ -6,6 +6,7 @@ internal class RequestEncoding: Encoder {
     var codingPath: [CodingKey]
     var userInfo: [CodingUserInfoKey: Any] = [:]
 
+    private(set) var customUrl: URL?
     private(set) var httpMethod: HTTPMethod = .get
     private(set) var path: String = ""
     private(set) var queryItems: [URLQueryItem] = []
@@ -27,6 +28,14 @@ internal class RequestEncoding: Encoder {
 
     func singleValueContainer() -> SingleValueEncodingContainer {
         RequestSingleValueEncodingContainer(encoder: self, codingPath: codingPath)
+    }
+
+    func setCustomUrl(url: URL) {
+        if let parent = parent {
+            parent.setCustomUrl(url: url)
+        } else {
+            self.customUrl = url
+        }
     }
 
     func addQueryItem(name: String, value: String?) {

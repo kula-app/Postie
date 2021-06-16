@@ -70,6 +70,11 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
             encoder.setPath(path.wrappedValue)
         case let method as RequestHTTPMethod:
             encoder.setHttpMethod(method.wrappedValue)
+        case let url as RequestUrl:
+            guard let customUrl = url.wrappedValue else {
+                break
+            }
+            encoder.setCustomUrl(url: customUrl)
         default:
             // ignore any other values
             break

@@ -70,11 +70,23 @@ public class RequestEncoder: TopLevelEncoder {
         let encoder = RequestEncoding()
         try request.encode(to: encoder)
 
-        guard var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: true) else {
-            throw RequestEncodingError.invalidBaseURL
+        var components: URLComponents
+        // If a customURL got defined, use that one and append query items
+        if let url = encoder.customUrl {
+            guard let comps = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+                throw RequestEncodingError.invalidCustomURL(url)
+            }
+            components = comps
+        } else {
+            guard let comps = URLComponents(url: baseURL, resolvingAgainstBaseURL: true) else {
+                throw RequestEncodingError.invalidBaseURL
+            }
+            components = comps
+            components.path = encoder.path
         }
-        components.path = encoder.path
-        components.queryItems = encoder.queryItems
+        if !encoder.queryItems.isEmpty {
+            components.queryItems = encoder.queryItems
+        }
         guard let url = components.url else {
             throw RequestEncodingError.failedToCreateURL
         }
