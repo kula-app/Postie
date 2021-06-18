@@ -11,6 +11,7 @@ internal class RequestEncoding: Encoder {
     private(set) var path: String = ""
     private(set) var queryItems: [URLQueryItem] = []
     private(set) var headers: [String: String] = [:]
+    private(set) var pathParameters: [String: RequestPathParameterValue] = [:]
 
     init(parent: RequestEncoding? = nil, codingPath: [CodingKey] = []) {
         self.parent = parent
@@ -68,5 +69,33 @@ internal class RequestEncoding: Encoder {
         } else {
             self.httpMethod = httpMethod
         }
+    }
+
+    func setPathParameter(key: String, value: RequestPathParameterValue) {
+        if let parent = parent {
+            parent.setPathParameter(key: key, value: value)
+        } else {
+            self.pathParameters[key] = value
+        }
+    }
+
+    // MARK: - Accessors
+
+    func resolvedPath() throws -> String {
+        let resolvedPath = NSMutableString(string: path)
+        for (key, value) in pathParameters {
+            let regex: NSRegularExpression
+            do {
+                regex = try NSRegularExpression(pattern: "\\{\(key)\\}", options: [])
+            } catch {
+                throw RequestEncodingError.invalidPathParameterName(key)
+            }
+            let replacement = value.serialized.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? value.serialized
+            regex.replaceMatches(in: resolvedPath,
+                                 options: [],
+                                 range: NSRange(location: 0, length: path.count),
+                                 withTemplate: replacement)
+        }
+        return resolvedPath as String
     }
 }

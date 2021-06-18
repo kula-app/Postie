@@ -38,6 +38,7 @@ class ReponseStatusCodeCodingTests: XCTestCase {
             return
         }
         XCTAssertEqual(decoded.statusCode, 200)
+        XCTAssertEqual(decoded.statusCode, 200)
         XCTAssertEqual(decoded.statusCodeAgain, 200)
     }
 }

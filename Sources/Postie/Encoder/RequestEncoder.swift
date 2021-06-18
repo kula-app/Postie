@@ -82,7 +82,7 @@ public class RequestEncoder: TopLevelEncoder {
                 throw RequestEncodingError.invalidBaseURL
             }
             components = comps
-            components.path = encoder.path
+            components.path = try encoder.resolvedPath()
         }
         if !encoder.queryItems.isEmpty {
             components.queryItems = encoder.queryItems
@@ -95,52 +95,4 @@ public class RequestEncoder: TopLevelEncoder {
         request.allHTTPHeaderFields = encoder.headers
         return request
     }
-
-    // MARK: - Legacy:
-
-    // MARK: - URL Request
-
-//    /// Creates the `URLRequest` from the given `request` and the client configuration
-//    ///
-//    /// If the `request` provides a `predefinedUrl`, it is used instead of building one based on the configuration
-//    ///
-//    /// - Parameter request: request object implementing the `APIRequest` protocol
-//    /// - Throws: `APIError` if it is not possible to create an URL from the given query items
-//    /// - Returns: `URLRequest` object which can be used to communicate with the API endpoitn
-//    func createURLRequest<Request: APIRequest>(for request: Request) throws -> URLRequest {
-//        var urlRequest: URLRequest
-//
-//        // Check if the request has a predefined url
-//        if let predefinedUrl = request.predefinedUrl {
-//            urlRequest = URLRequest(url: predefinedUrl)
-//        } else {
-//            // Start of with base URL
-//            var baseURL = self.url
-//            // If a path prefix is given, append it to the base url
-//            if let prefix = pathPrefix {
-//                baseURL.appendPathComponent(prefix)
-//            }
-//            // Append the resource path
-//            baseURL.appendPathComponent(request.resourcePath)
-//
-//            let encoder = RequestEncoder(baseURL: baseURL)
-//            urlRequest = try encoder.encode(request: request)
-//        }
-//
-//        // Create the URL request
-//        urlRequest.allHTTPHeaderFields = request.headers
-//        urlRequest.httpMethod = request.httpMethod
-//
-//        // If the request includeds a body payload, set it to the request body
-//        if let payloadRequest = request as? APIPayloadRequest {
-//            urlRequest.httpBody = payloadRequest.body
-//        }
-//
-//        // Apply caching policy if cache should not be used
-//        if !request.useCachedResponse {
-//            urlRequest.cachePolicy = .reloadIgnoringLocalCacheData
-//        }
-//
-//        return urlRequest
-//    }
 }

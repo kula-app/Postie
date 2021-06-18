@@ -83,7 +83,7 @@ internal struct ResponseDecoding: Decoder {
     }
 
     private func createJSONDecoder() -> JSONDecoder {
-        let decoder = JSONDecoder()
+        let decoder = LoggingJSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         //        switch dateFormat {
         //        case .iso8601:

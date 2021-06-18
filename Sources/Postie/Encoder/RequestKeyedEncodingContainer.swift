@@ -66,6 +66,11 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
                 encoder.setHeader(name: header.name ?? key.stringValue, value: value ? "true" : "false")
             }
 
+        case let param as RequestPathParameter<String>:
+            encoder.setPathParameter(key: param.name ?? key.stringValue, value: param.wrappedValue)
+        case let param as RequestPathParameter<Int>:
+            encoder.setPathParameter(key: param.name ?? key.stringValue, value: param.wrappedValue)
+
         case let path as RequestPath:
             encoder.setPath(path.wrappedValue)
         case let method as RequestHTTPMethod:

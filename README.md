@@ -156,6 +156,30 @@ struct Request: Encodable {
 let request = Request(path: "/some-detail-path")
 ```
 
+Additionally the request path can contain variables using the mustache syntax, e.g. `/path/with/{variable_name}/inside`.
+
+To set the variable value, add a new instance property using the `@RequestPathParameter` property wrapper. 
+By default the encoder uses the variable name for encoding, but you can also define a custom name:
+
+```
+struct Request: Encodable {
+
+    typealias Response = EmptyResponse
+
+    @RequestPath var path = "/app/{id}/contacts/{cid}"
+    @RequestParameter var id: Int
+    @RequestParameter(name: "cid") var contactId: String
+
+}
+
+// Usage
+var request = Request(id: 123)
+request.contactId = "ABC456"
+
+// Result: 
+https://postie.local/app/123/contacts/ABC456
+```
+
 **Note:**
 
 As the property name is ignored, it is possible to have multiple properties with this property wrapper, but only the *last* one will be used.
