@@ -39,7 +39,9 @@ extension RequestPathParameter: ExpressibleByNilLiteral where T: ExpressibleByNi
     }
 }
 
-extension RequestPathParameter: ExpressibleByStringLiteral, ExpressibleByExtendedGraphemeClusterLiteral, ExpressibleByUnicodeScalarLiteral where T == String {
+extension RequestPathParameter: ExpressibleByStringLiteral,
+                                ExpressibleByExtendedGraphemeClusterLiteral,
+                                ExpressibleByUnicodeScalarLiteral where T == String {
 
     public typealias ExtendedGraphemeClusterLiteralType = String.ExtendedGraphemeClusterLiteralType
     public typealias UnicodeScalarLiteralType = String.UnicodeScalarLiteralType

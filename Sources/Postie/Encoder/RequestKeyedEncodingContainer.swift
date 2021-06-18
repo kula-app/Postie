@@ -105,7 +105,7 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
     }
 }
 
-fileprivate protocol AnyOptional {
+private protocol AnyOptional {
     var isNil: Bool { get }
 }
 

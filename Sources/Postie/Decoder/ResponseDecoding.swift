@@ -50,7 +50,7 @@ internal struct ResponseDecoding: Decoder {
         response.value(forHTTPHeaderField: header)
     }
 
-    func decodeBody<E: Decodable>(to type: Array<E>.Type) throws -> Array<E> {
+    func decodeBody<E: Decodable>(to type: Array<E>.Type) throws -> [E] {
         fatalError()
     }
 
@@ -66,9 +66,11 @@ internal struct ResponseDecoding: Decoder {
         }
 
         if type is CollectionProtocol.Type {
-            let collectionType = type as! CollectionProtocol.Type
+            guard let collectionType = type as? CollectionProtocol.Type else {
+                preconditionFailure("this cast should not fail, contact the developers!")
+            }
             let elementType = collectionType.getElementType()
-            
+
             if elementType is FormURLEncodedDecodable.Type {
                 return try createFormURLEncodedDecoder().decode(type, from: data)
             }
@@ -101,9 +103,7 @@ internal struct ResponseDecoding: Decoder {
     }
 
     private func decodeString<T>(_ type: T.Type, from data: Data) throws -> T {
-        let encoding: String.Encoding
-        // TODO: Detect string encoding based on response header `Content-Type`
-        encoding = .utf8
+        let encoding: String.Encoding = .utf8
 
         guard let value = String(data: data, encoding: encoding) as? T else {
             throw DecodingError.dataCorrupted(DecodingError.Context(
