@@ -27,6 +27,7 @@ public class RequestEncoder: TopLevelEncoder {
 
     private func encodeJsonBody<Body: Encodable>(_ body: Body) throws -> Data {
         let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
         return try encoder.encode(body)
     }
 
