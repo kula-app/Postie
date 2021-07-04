@@ -32,8 +32,13 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: JSONRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
+        var baseURL = url
+        // Append the path prefix if given
+        if let prefix = pathPrefix {
+            baseURL.appendPathComponent(prefix)
+        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: url)
+        let encoder = RequestEncoder(baseURL: baseURL)
         // Encode request
         let urlRequest: URLRequest
         do {

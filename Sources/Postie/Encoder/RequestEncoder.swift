@@ -79,11 +79,20 @@ public class RequestEncoder: TopLevelEncoder {
             }
             components = comps
         } else {
-            guard let comps = URLComponents(url: baseURL, resolvingAgainstBaseURL: true) else {
+            var url = baseURL
+            // If given, append custom path to base url
+            var path = try encoder.resolvedPath()
+            // If the defined path starts with a leading slash, trim it
+            if encoder.path.starts(with: "/") {
+                path = String(path.dropFirst())
+            }
+            if !path.isEmpty {
+                url = url.appendingPathComponent(path)
+            }
+            guard let comps = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
                 throw RequestEncodingError.invalidBaseURL
             }
             components = comps
-            components.path = try encoder.resolvedPath()
         }
         if !encoder.queryItems.isEmpty {
             components.queryItems = encoder.queryItems

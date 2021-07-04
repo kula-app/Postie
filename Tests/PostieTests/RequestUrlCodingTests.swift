@@ -11,7 +11,7 @@ fileprivate struct Request: Encodable {
 
 class RequestUrlCodingTests: XCTestCase {
 
-    let baseURL = URL(string: "https://postie.local")!
+    let baseURL = URL(string: "https://postie.local/")!
 
     func testEncoding_emptyPath_shouldSetEmptyURLPath() {
         let request = Request()

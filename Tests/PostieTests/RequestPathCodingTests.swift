@@ -11,26 +11,44 @@ fileprivate struct Request: Encodable {
 
 class RequestPathCodingTests: XCTestCase {
 
-    let baseURL = URL(string: "https://local.url")!
+    let baseURL = URL(string: "https://local.url/")!
 
     func testEncoding_emptyPath_shouldSetEmptyURLPath() {
         let request = Request()
         guard let urlRequest = encodeRequest(request: request) else {
             return
         }
-        XCTAssertEqual(urlRequest.url?.path, "")
+        XCTAssertEqual(urlRequest.url, baseURL)
     }
 
-    func testEncoding_nonEmptyPath_shouldSetEmptyURLPath() {
+    func testEncoding_pathWithLeadingSlashAndBaseURLWithPath_shouldBeValidURL() {
+        let baseURL = URL(string: "https://local.url/prefix")!
+        let request = Request(path: "/some-detail-path")
+        guard let urlRequest = encodeRequest(request: request, baseURL: baseURL) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url, URL(string: "https://local.url/prefix/some-detail-path")!)
+    }
+
+    func testEncoding_pathWithLeadingSlash_shouldBeValidURL() {
         let request = Request(path: "/some-detail-path")
         guard let urlRequest = encodeRequest(request: request) else {
             return
         }
-        XCTAssertEqual(urlRequest.url?.path, "/some-detail-path")
+        XCTAssertEqual(urlRequest.url, URL(string: "https://local.url/some-detail-path")!)
     }
 
-    internal func encodeRequest<T: Encodable>(request: T, file: StaticString = #filePath, line: UInt = #line) -> URLRequest? {
-        let encoder = RequestEncoder(baseURL: baseURL)
+    func testEncoding_pathWithoutLeadingSlashAndBaseURLWithPath_shouldBeValidURL() {
+        let baseURL = URL(string: "https://local.url/prefix")!
+        let request = Request(path: "some-detail-path")
+        guard let urlRequest = encodeRequest(request: request, baseURL: baseURL) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url, URL(string: "https://local.url/prefix/some-detail-path")!)
+    }
+
+    internal func encodeRequest<T: Encodable>(request: T, baseURL: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> URLRequest? {
+        let encoder = RequestEncoder(baseURL: baseURL ?? self.baseURL)
         let encoded: URLRequest
         do {
             encoded = try encoder.encode(request)
