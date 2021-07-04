@@ -21,7 +21,7 @@ Also the response needs to be decoded, and even if a few decoders are included, 
 
 Even worse when the response structure differs in case of an error, e.g. instead of
 
-```
+```json
 { 
     "some": "data"
 }
@@ -29,7 +29,7 @@ Even worse when the response structure differs in case of an error, e.g. instead
 
 an error object is returned:
 
-```
+```json
 {
     "error":  {
         "message": "Something went wrong!"
@@ -39,7 +39,7 @@ an error object is returned:
 
 This would require to create combined types such as this one:
 
-```
+```swift
 struct Response: Decodable {
     struct ErrorResponse: Decodable {
         var message: String
@@ -61,7 +61,7 @@ Configuration of the request is done using property wrappers, e.g. `@QueryItem`.
 
 Postie includes a couple of types to build your requests. As a first step, create your `Request` type, with an associated `Response`:
 
-```
+```swift
 import Postie
 
 struct FooRequest: Request  {
@@ -81,7 +81,7 @@ For `JSONRequest` and `FormURLEncodedRequest` the type of `body` is generic but 
 
 **Example:**
 
-```
+```swift
 struct Foo: JSONRequest {
 
     struct Body: Encodable {}
@@ -105,7 +105,7 @@ For the `PlainRequest` the body expects a plain `String` content. Optionally you
 
 **Example:**
 
-```
+```swift
 struct Foo: PlainRequest {
 
     typealias Response = EmptyResponse
@@ -122,7 +122,7 @@ The default HTTP method is `GET`, but it can be overwritten by adding an instanc
 
 **Example:**
 
-```
+```swift
 struct Request: Encodable {
 
     typealias Response = EmptyResponse
@@ -146,7 +146,7 @@ The default path `/`, but it can be overwritten by adding an instance property w
 
 **Example:**
 
-```
+```swift
 struct Request: Encodable {
 
     typealias Response = EmptyResponse
@@ -164,7 +164,7 @@ Additionally the request path can contain variables using the mustache syntax, e
 To set the variable value, add a new instance property using the `@RequestPathParameter` property wrapper. 
 By default the encoder uses the variable name for encoding, but you can also define a custom name:
 
-```
+```swift
 struct Request: Encodable {
 
     typealias Response = EmptyResponse
@@ -194,7 +194,7 @@ Multiple query items can be added by adding them as properties using the propert
 
 **Example:**
 
-```
+```swift
 struct Request: Encodable {
 
     typealias Response = EmptyResponse
@@ -238,7 +238,7 @@ Multiple headers can be set by adding them as properties using the property wrap
 
 **Example:**
 
-```
+```swift
 struct Request: Encodable {
 
     typealias Response = EmptyResponse
@@ -284,7 +284,7 @@ To parse the response data into a `Decodable` type, add a property with the prop
 
 **Example:**
 
-```
+```swift
 struct Request: Postie.Request {
     struct Response: Decodable {
         struct Body: Decodable {
@@ -306,7 +306,7 @@ For `JSONDecodable` and `FormURLEncodedDecodable` the type of `body` is generic 
 
 **Example:**
 
-```
+```swift
 struct Request: Postie.Request {
     struct Response: Decodable {
         struct Body: JSONDecodable {
@@ -332,7 +332,7 @@ For the type `PlainDecodable`, use it directly, as it is an alias for `String`.
 
 **Example:**
 
-```
+```swift
 struct Request: Postie.Request {
     struct Response: Decodable {
         @ResponseBody<PlainDecodable> var body
@@ -351,7 +351,7 @@ The error response body gets set if the response status code is neither a 2XX no
 
 **Example:**
 
-```
+```swift
 struct Request: Postie.Request {
     struct Response: Decodable {
         struct ErrorBody: JSONDecodable {
@@ -381,7 +381,7 @@ Same as `DefaultStrategy` but won't fail if the header can not be found.
 
 **Example:**
 
-```
+```swift
 struct Response: Decodable {
 
     @ResponseHeader<DefaultStrategy>
@@ -402,7 +402,7 @@ The default HTTP method is `GET`, but it can be overwritten by adding an instanc
 
 **Example:**
 
-```
+```swift
 struct Response: Decodable {
 
     @ResponseStatusCode var statusCode
@@ -413,7 +413,6 @@ struct Response: Decodable {
 **Note:**
 
 Multiple properties can be declared with this property wrapper. All of them will have the value set.
-
 
 ### HTTP API Client
 
@@ -426,7 +425,7 @@ This allows to create networking clients which can be mocked (perfect for unit t
 
 **Example:**
 
-```
+```swift
 let url: URL = ...
 let client = HTTPAPIClient(baseURL: url)
 
@@ -455,7 +454,7 @@ The `RequestEncoder` is responsible to turn an encodable `Request` into an `URLR
 
 **Example:**
 
-```
+```swift
 // A request as explained above
 let request: Request = ...
 
@@ -479,7 +478,7 @@ As its contrarity component, the `RequestDecoder` is responsible to turn a tuple
 
 **Example:**
 
-```
+```swift
 // Data received from the URL session task
 let response: HTTPURLResponse = ...
 let data: Data = ...
@@ -503,7 +502,7 @@ This means both encoders can be used in a Combine pipeline.
 
 **Example:**
 
-```
+```swift
 let request = Request()
 let session = URLSession.shared
 
