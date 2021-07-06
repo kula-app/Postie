@@ -13,7 +13,7 @@ public struct ResponseStatusCode: Decodable {
         self.wrappedValue = wrappedValue
     }
 
-    var statusCode: HTTPStatusCode? {
+    public var projectedValue: HTTPStatusCode? {
         HTTPStatusCode(rawValue: wrappedValue)
     }
 }
