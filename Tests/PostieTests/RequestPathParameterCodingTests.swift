@@ -183,6 +183,23 @@ class RequestPathParameterCodingTests: XCTestCase {
         XCTAssertEqual(urlRequest.url?.path, "/nil")
     }
 
+    func testEncoding_optionalParamIsGiven_shouldSerializedWrappedValue() {
+        struct Request: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestPath var path = "/{id}"
+            @RequestPathParameter var id: Int?
+
+        }
+        var request = Request()
+        request.id = 321
+        guard let urlRequest = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url?.path, "/321")
+    }
+
     internal func encodeRequest<T: Encodable>(request: T, file: StaticString = #filePath, line: UInt = #line) -> URLRequest? {
         let encoder = RequestEncoder(baseURL: baseURL)
         let encoded: URLRequest
