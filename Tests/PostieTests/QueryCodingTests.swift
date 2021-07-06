@@ -58,6 +58,42 @@ class QueryCodingTests: XCTestCase {
         XCTAssertTrue(items.contains(URLQueryItem(name: "optionalText", value: "optional")))
     }
 
+    func testEncoding_defaultValueIsGiven_shouldBeUsed() {
+        struct Foo: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @QueryItem(defaultValue: "some default")
+            var text: String
+
+        }
+
+        let request = Foo()
+        guard let items = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(items.count, 1)
+        XCTAssertTrue(items.contains(URLQueryItem(name: "text", value: "some default")))
+    }
+
+    func testEncoding_defaultValueWithCustomNameIsGiven_shouldBeUsed() {
+        struct Foo: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @QueryItem(name: "other_text", defaultValue: "some default")
+            var text: String
+
+        }
+
+        let request = Foo()
+        guard let items = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(items.count, 1)
+        XCTAssertTrue(items.contains(URLQueryItem(name: "other_text", value: "some default")))
+    }
+
     internal func encodeRequest<T: Encodable>(request: T, file: StaticString = #filePath, line: UInt = #line) -> [URLQueryItem]? {
         let encoder = RequestEncoder(baseURL: baseURL)
         let encoded: URLRequest

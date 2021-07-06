@@ -16,6 +16,14 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
 
     // swiftlint:disable cyclomatic_complexity function_body_length
     func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
+        let type = type(of: value)
+        if type is RequestPathParameterProtocol.Type {
+            guard let param = value as? RequestPathParameterProtocol else {
+                preconditionFailure()
+            }
+            encoder.setPathParameter(key: param.name ?? key.stringValue,
+                                     value:param.untypedValue.serialized)
+        }
         switch value {
         case let queryItem as QueryItem<String>:
             encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: queryItem.wrappedValue)
@@ -66,11 +74,9 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
                 encoder.setHeader(name: header.name ?? key.stringValue, value: value ? "true" : "false")
             }
 
-        case let param as RequestPathParameter<String>:
-            encoder.setPathParameter(key: param.name ?? key.stringValue, value: param.wrappedValue)
-        case let param as RequestPathParameter<Int>:
-            encoder.setPathParameter(key: param.name ?? key.stringValue, value: param.wrappedValue)
-
+        case let param as RequestPathParameterProtocol:
+            encoder.setPathParameter(key: param.name ?? key.stringValue,
+                                     value:param.untypedValue.serialized)
         case let path as RequestPath:
             encoder.setPath(path.wrappedValue)
         case let method as RequestHTTPMethod:

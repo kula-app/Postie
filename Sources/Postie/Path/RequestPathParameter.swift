@@ -1,3 +1,14 @@
+/// Protocol used for untyped access to the embedded value
+internal protocol RequestPathParameterProtocol {
+
+    /// Custom name of the path parameter, can be nil
+    var name: String? { get }
+
+    /// Path parameter value which should be rserialized and inserted into the path
+    var untypedValue: RequestPathParameterValue { get }
+
+}
+
 @propertyWrapper
 public struct RequestPathParameter<T> where T: RequestPathParameterValue {
 
@@ -11,6 +22,17 @@ public struct RequestPathParameter<T> where T: RequestPathParameterValue {
     public init(name: String?, defaultValue: T) {
         self.name = name
         self.wrappedValue = defaultValue
+    }
+
+    public static func getParameterType() -> Any.Type {
+        return T.self
+    }
+}
+
+extension RequestPathParameter: RequestPathParameterProtocol {
+
+    internal var untypedValue: RequestPathParameterValue {
+        wrappedValue
     }
 }
 

@@ -101,6 +101,88 @@ class RequestPathParameterCodingTests: XCTestCase {
         XCTAssertEqual(urlRequest.url?.path, "/some%20name")
     }
 
+    func testEncoding_stringParameterCustomNaming_shouldUseCustomName() {
+        struct Request: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestPath var path = "/{another_name}"
+            @RequestPathParameter(name: "another_name") var name: String
+
+        }
+        var request = Request()
+        request.name = "some name"
+        guard let urlRequest = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url?.path, "/some%20name")
+    }
+
+    func testEncoding_intParameterCustomNaming_shouldUseCustomName() {
+        struct Request: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestPath var path = "/{my_id}"
+            @RequestPathParameter(name: "my_id") var id: Int
+
+        }
+        var request = Request()
+        request.id = 123
+        guard let urlRequest = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url?.path, "/123")
+    }
+
+    func testEncoding_stringParameterCustomNamingDefaultValue_shouldUseDefaultValue() {
+        struct Request: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestPath var path = "/{another_name}"
+            @RequestPathParameter(name: "another_name", defaultValue: "default") var name: String
+
+        }
+        let request = Request()
+        guard let urlRequest = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url?.path, "/default")
+    }
+
+    func testEncoding_optionalStringParameter_shouldBeReplacedWithLiteralNil() {
+        struct Request: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestPath var path = "/{name}"
+            @RequestPathParameter var name: String?
+
+        }
+        let request = Request()
+        guard let urlRequest = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url?.path, "/nil")
+    }
+
+    func testEncoding_optionalIntParameter_shouldBeReplacedWithLiteralNil() {
+        struct Request: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestPath var path = "/{id}"
+            @RequestPathParameter var id: Int?
+
+        }
+        let request = Request()
+        guard let urlRequest = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url?.path, "/nil")
+    }
+
     internal func encodeRequest<T: Encodable>(request: T, file: StaticString = #filePath, line: UInt = #line) -> URLRequest? {
         let encoder = RequestEncoder(baseURL: baseURL)
         let encoded: URLRequest

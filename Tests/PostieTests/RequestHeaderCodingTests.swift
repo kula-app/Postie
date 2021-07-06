@@ -54,6 +54,40 @@ class RequestHeaderCodingTests: XCTestCase {
         XCTAssertEqual(items["optionalText"], "optional")
     }
 
+    func testEncoding_defaultValueHeaderIsGiven_shouldBeUsedIfNoneIsSet() {
+        struct Foo: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestHeader(defaultValue: "some value")
+            var defaultText: String?
+        }
+
+        let request = Foo()
+        guard let items = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(items.count, 1)
+        XCTAssertEqual(items["defaultText"], "some value")
+    }
+
+    func testEncoding_namedHeaderWithDefaultValueIsGiven_shouldBeUsedIfNoneIsSet() {
+        struct Foo: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestHeader(name: "some key", defaultValue: "some value")
+            var namedDefaultText: String?
+        }
+
+        let request = Foo()
+        guard let items = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(items.count, 1)
+        XCTAssertEqual(items["some key"], "some value")
+    }
+
     internal func encodeRequest<T: Encodable>(request: T, file: StaticString = #filePath, line: UInt = #line) -> [String: String]? {
         let encoder = RequestEncoder(baseURL: baseURL)
         let encoded: URLRequest
