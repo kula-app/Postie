@@ -16,8 +16,8 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
 
     // swiftlint:disable cyclomatic_complexity function_body_length
     func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
-        let type = type(of: value)
-        if type is RequestPathParameterProtocol.Type {
+        let valueType = type(of: value)
+        if valueType is RequestPathParameterProtocol.Type {
             guard let param = value as? RequestPathParameterProtocol else {
                 preconditionFailure()
             }
