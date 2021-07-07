@@ -170,8 +170,8 @@ struct Request: Encodable {
     typealias Response = EmptyResponse
 
     @RequestPath var path = "/app/{id}/contacts/{cid}"
-    @RequestParameter var id: Int
-    @RequestParameter(name: "cid") var contactId: String
+    @RequestPathParameter var id: Int
+    @RequestPathParameter(name: "cid") var contactId: String
 
 }
 

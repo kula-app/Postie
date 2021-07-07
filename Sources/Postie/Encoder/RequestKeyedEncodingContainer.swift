@@ -28,10 +28,6 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
             } else if let itemValue = queryItemValue.serializedQueryItem {
                 encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: itemValue)
             }
-        case let queryItem as QueryItem<[String]>:
-            for value in queryItem.wrappedValue {
-                encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value)
-            }
         case let header as RequestHeader<String>:
             encoder.setHeader(name: header.name ?? key.stringValue, value: header.wrappedValue)
         case let header as RequestHeader<Int>:
