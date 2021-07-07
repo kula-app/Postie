@@ -14,42 +14,26 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
         encoder.addQueryItem(name: key.stringValue, value: nil)
     }
 
-    // swiftlint:disable cyclomatic_complexity function_body_length
+    // swiftlint:disable cyclomatic_complexity
     func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
         switch value {
-        case let queryItem as QueryItemProtocol:
-            let queryItemValue = queryItem.untypedValue
-            if queryItemValue.isCollection {
-                queryItemValue.iterateCollection { item in
-                    if let value = item.serializedQueryItem {
-                        encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value)
-                    }
+        case let queryItem as QueryItemProtocol where queryItem.untypedValue.isCollection:
+            queryItem.untypedValue.iterateCollection { item in
+                if let value = item.serializedQueryItem {
+                    encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value)
                 }
-            } else if let itemValue = queryItemValue.serializedQueryItem {
+            }
+        case let queryItem as QueryItemProtocol where !queryItem.untypedValue.isCollection:
+            if let itemValue = queryItem.untypedValue.serializedQueryItem {
                 encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: itemValue)
             }
-        case let header as RequestHeader<String>:
-            encoder.setHeader(name: header.name ?? key.stringValue, value: header.wrappedValue)
-        case let header as RequestHeader<Int>:
-            encoder.setHeader(name: header.name ?? key.stringValue, value: header.wrappedValue.description)
-        case let header as RequestHeader<Bool>:
-            encoder.setHeader(name: header.name ?? key.stringValue, value: header.wrappedValue ? "true" : "false")
-        case let header as RequestHeader<String?>:
-            if let value = header.wrappedValue {
-                encoder.setHeader(name: header.name ?? key.stringValue, value: value)
+        case let header as RequestHeaderProtocol:
+            if let serializedHeaderValue = header.untypedValue.serializedHeaderValue {
+                encoder.setHeader(name: header.name ?? key.stringValue, value: serializedHeaderValue)
             }
-        case let header as RequestHeader<Int?>:
-            if let value = header.wrappedValue {
-                encoder.setHeader(name: header.name ?? key.stringValue, value: value.description)
-            }
-        case let header as RequestHeader<Bool?>:
-            if let value = header.wrappedValue {
-                encoder.setHeader(name: header.name ?? key.stringValue, value: value ? "true" : "false")
-            }
-
         case let param as RequestPathParameterProtocol:
             encoder.setPathParameter(key: param.name ?? key.stringValue,
-                                     value:param.untypedValue.serialized)
+                                     value: param.untypedValue.serialized)
         case let path as RequestPath:
             encoder.setPath(path.wrappedValue)
         case let method as RequestHTTPMethod:

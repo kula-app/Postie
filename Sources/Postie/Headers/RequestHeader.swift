@@ -1,3 +1,13 @@
+internal protocol RequestHeaderProtocol {
+
+    /// Custom name of the header item, can be nil
+    var name: String? { get }
+
+    /// Header value which should be serialized
+    var untypedValue: RequestHeaderValue { get }
+
+}
+
 @propertyWrapper
 public struct RequestHeader<T> where T: RequestHeaderValue {
 
@@ -27,3 +37,12 @@ extension RequestHeader where T == String {
 }
 
 extension RequestHeader: Encodable where T: Encodable {}
+
+// MARK: - RequestHeaderProtocol
+
+extension RequestHeader: RequestHeaderProtocol {
+
+    var untypedValue: RequestHeaderValue {
+        wrappedValue
+    }
+}

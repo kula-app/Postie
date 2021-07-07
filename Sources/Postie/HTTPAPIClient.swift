@@ -53,7 +53,7 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, callback: callback)
     }
 
-    open func send<Request: FormURLEncodedRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void){
+    open func send<Request: FormURLEncodedRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: url)
         // Encode request
