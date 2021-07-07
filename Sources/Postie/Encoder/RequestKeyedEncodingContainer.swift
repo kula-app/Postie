@@ -16,44 +16,21 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
 
     // swiftlint:disable cyclomatic_complexity function_body_length
     func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
-        let valueType = type(of: value)
-        if valueType is RequestPathParameterProtocol.Type {
-            guard let param = value as? RequestPathParameterProtocol else {
-                preconditionFailure()
-            }
-            encoder.setPathParameter(key: param.name ?? key.stringValue,
-                                     value:param.untypedValue.serialized)
-        }
         switch value {
-        case let queryItem as QueryItem<String>:
-            encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: queryItem.wrappedValue)
-        case let queryItem as QueryItem<Int>:
-            encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: queryItem.wrappedValue.description)
-        case let queryItem as QueryItem<Bool>:
-            encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: queryItem.wrappedValue ? "true" : "false")
+        case let queryItem as QueryItemProtocol:
+            let queryItemValue = queryItem.untypedValue
+            if queryItemValue.isCollection {
+                queryItemValue.iterateCollection { item in
+                    if let value = item.serializedQueryItem {
+                        encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value)
+                    }
+                }
+            } else if let itemValue = queryItemValue.serializedQueryItem {
+                encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: itemValue)
+            }
         case let queryItem as QueryItem<[String]>:
             for value in queryItem.wrappedValue {
                 encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value)
-            }
-        case let queryItem as QueryItem<[Int]>:
-            for value in queryItem.wrappedValue {
-                encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value.description)
-            }
-        case let queryItem as QueryItem<[Bool]>:
-            for value in queryItem.wrappedValue {
-                encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value  ? "true" : "false")
-            }
-        case let queryItem as QueryItem<String?>:
-            if let value = queryItem.wrappedValue {
-                encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value)
-            }
-        case let queryItem as QueryItem<Int?>:
-            if let value = queryItem.wrappedValue {
-                encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value.description)
-            }
-        case let queryItem as QueryItem<Bool?>:
-            if let value = queryItem.wrappedValue {
-                encoder.addQueryItem(name: queryItem.name ?? key.stringValue, value: value ? "true" : "false")
             }
         case let header as RequestHeader<String>:
             encoder.setHeader(name: header.name ?? key.stringValue, value: header.wrappedValue)

@@ -4,7 +4,7 @@ internal protocol RequestPathParameterProtocol {
     /// Custom name of the path parameter, can be nil
     var name: String? { get }
 
-    /// Path parameter value which should be rserialized and inserted into the path
+    /// Path parameter value which should be serialized and inserted into the path
     var untypedValue: RequestPathParameterValue { get }
 
 }
