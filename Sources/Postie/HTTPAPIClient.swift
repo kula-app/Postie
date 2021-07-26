@@ -18,7 +18,7 @@ open class HTTPAPIClient {
 
     // MARK: - Callbacks
 
-    open func send<R: Request>(_ request: R, callback: @escaping (Result<R.Response, Error>) -> Void) {
+    open func send<R: Request>(_ request: R, failsOnEmptyData: Bool = true, callback: @escaping (Result<R.Response, Error>) -> Void) {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: url)
         // Encode request
@@ -30,10 +30,10 @@ open class HTTPAPIClient {
             return callback(.failure(error))
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest, callback: callback)
+        return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest, failsOnEmptyData: failsOnEmptyData, callback: callback)
     }
 
-    open func send<Request: JSONRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: JSONRequest>(_ request: Request, failsOnEmptyData: Bool = true, callback: @escaping (Result<Request.Response, Error>) -> Void) {
         var baseURL = url
         // Append the path prefix if given
         if let prefix = pathPrefix {
@@ -50,10 +50,10 @@ open class HTTPAPIClient {
             return callback(.failure(error))
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, callback: callback)
+        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, failsOnEmptyData: failsOnEmptyData, callback: callback)
     }
 
-    open func send<Request: FormURLEncodedRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: FormURLEncodedRequest>(_ request: Request, failsOnEmptyData: Bool = true, callback: @escaping (Result<Request.Response, Error>) -> Void) {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: url)
         // Encode request
@@ -65,10 +65,10 @@ open class HTTPAPIClient {
             return callback(.failure(error))
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, callback: callback)
+        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, failsOnEmptyData: failsOnEmptyData, callback: callback)
     }
 
-    open func send<Request: PlainRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: PlainRequest>(_ request: Request, failsOnEmptyData: Bool = true, callback: @escaping (Result<Request.Response, Error>) -> Void) {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: url)
         // Encode request
@@ -80,10 +80,10 @@ open class HTTPAPIClient {
             return callback(.failure(error))
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, callback: callback)
+      return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, failsOnEmptyData: failsOnEmptyData, callback: callback)
     }
 
-    private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest, callback: @escaping (Result<Response, Error>) -> Void) {
+  private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest, failsOnEmptyData: Bool = true, callback: @escaping (Result<Response, Error>) -> Void) {
         // Send request using the given URL session provider
         session.dataTask(with: urlRequest, completion: { data, response, error in
             guard let response = response as? HTTPURLResponse, let data = data else {
@@ -91,7 +91,7 @@ open class HTTPAPIClient {
             }
             do {
                 let decoder = ResponseDecoder()
-                let decoded = try decoder.decode(Response.self, from: (data: data, response: response))
+              let decoded = try decoder.decode(Response.self, from: (data: data, response: response, failsOnEmptyData: failsOnEmptyData))
                 callback(.success(decoded))
             } catch {
                 callback(.failure(error))
@@ -101,7 +101,7 @@ open class HTTPAPIClient {
 
     // MARK: - Combine
 
-    open func send<R: Request>(_ request: R) -> AnyPublisher<R.Response, Error> {
+    open func send<R: Request>(_ request: R, failsOnEmptyData: Bool = true) -> AnyPublisher<R.Response, Error> {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: url)
         // Encode request
@@ -113,10 +113,10 @@ open class HTTPAPIClient {
             return Fail(error: error).eraseToAnyPublisher()
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest)
+        return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest, failsOnEmptyData: failsOnEmptyData)
     }
 
-    open func send<Request: JSONRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
+    open func send<Request: JSONRequest>(_ request: Request, failsOnEmptyData: Bool = true) -> AnyPublisher<Request.Response, Error> {
         var baseURL = url
         // Append the path prefix if given
         if let prefix = pathPrefix {
@@ -133,10 +133,10 @@ open class HTTPAPIClient {
             return Fail(error: error).eraseToAnyPublisher()
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
+        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, failsOnEmptyData: failsOnEmptyData)
     }
 
-    open func send<Request: FormURLEncodedRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
+    open func send<Request: FormURLEncodedRequest>(_ request: Request, failsOnEmptyData: Bool = true) -> AnyPublisher<Request.Response, Error> {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: url)
         // Encode request
@@ -148,10 +148,10 @@ open class HTTPAPIClient {
             return Fail(error: error).eraseToAnyPublisher()
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
+      return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, failsOnEmptyData: failsOnEmptyData)
     }
 
-    open func send<Request: PlainRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
+    open func send<Request: PlainRequest>(_ request: Request, failsOnEmptyData: Bool = true) -> AnyPublisher<Request.Response, Error> {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: url)
         // Encode request
@@ -163,10 +163,10 @@ open class HTTPAPIClient {
             return Fail(error: error).eraseToAnyPublisher()
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
+      return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, failsOnEmptyData: failsOnEmptyData)
     }
 
-    private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest) -> AnyPublisher<Response, Error> {
+    private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest, failsOnEmptyData: Bool = true) -> AnyPublisher<Response, Error> {
         // Send request using the given URL session provider
         return session
             .send(urlRequest: urlRequest)
@@ -174,7 +174,7 @@ open class HTTPAPIClient {
                 guard let response = response as? HTTPURLResponse else {
                     throw APIError.invalidResponse
                 }
-                return (data: data, response: response)
+              return (data: data, response: response, failsOnEmptyData: failsOnEmptyData)
             }
             .decode(type: Response.self, decoder: ResponseDecoder())
             .eraseToAnyPublisher()

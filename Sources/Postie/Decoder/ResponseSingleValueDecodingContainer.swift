@@ -4,10 +4,12 @@ class ResponseSingleValueDecodingContainer: SingleValueDecodingContainer {
 
     let decoder: ResponseDecoding
     var codingPath: [CodingKey]
+    var failsOnEmptyData: Bool
 
-    init(decoder: ResponseDecoding, codingPath: [CodingKey]) {
+    init(decoder: ResponseDecoding, codingPath: [CodingKey], failsOnEmptyData: Bool) {
         self.decoder = decoder
         self.codingPath = codingPath
+        self.failsOnEmptyData = failsOnEmptyData
     }
 
     func decodeNil() -> Bool {
@@ -21,7 +23,7 @@ class ResponseSingleValueDecodingContainer: SingleValueDecodingContainer {
             }
             return response
         }
-        let decoding = ResponseDecoding(response: decoder.response, data: decoder.data, codingPath: codingPath)
+        let decoding = ResponseDecoding(response: decoder.response, data: decoder.data, codingPath: codingPath, failsOnEmptyData: failsOnEmptyData)
         return try T(from: decoding)
     }
 }

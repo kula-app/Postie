@@ -8,15 +8,17 @@ internal struct ResponseDecoding: Decoder {
     var userInfo: [CodingUserInfoKey: Any] = [:]
     var response: HTTPURLResponse
     var data: Data
+    var failsOnEmptyData: Bool = true
 
-    init(response: HTTPURLResponse, data: Data, codingPath: [CodingKey] = []) {
+    init(response: HTTPURLResponse, data: Data, codingPath: [CodingKey] = [], failsOnEmptyData: Bool) {
         self.response = response
         self.data = data
         self.codingPath = codingPath
+        self.failsOnEmptyData = failsOnEmptyData
     }
 
     func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> where Key: CodingKey {
-        let container = ResponseKeyedDecodingContainer(decoder: self, keyedBy: type, codingPath: codingPath)
+        let container = ResponseKeyedDecodingContainer(decoder: self, keyedBy: type, codingPath: codingPath, failsOnEmptyData: failsOnEmptyData)
         return KeyedDecodingContainer(container)
     }
 
@@ -25,7 +27,7 @@ internal struct ResponseDecoding: Decoder {
     }
 
     func singleValueContainer() throws -> SingleValueDecodingContainer {
-        ResponseSingleValueDecodingContainer(decoder: self, codingPath: codingPath)
+        ResponseSingleValueDecodingContainer(decoder: self, codingPath: codingPath, failsOnEmptyData: failsOnEmptyData)
     }
 
     func valueForHeaderCaseInsensitive(_ header: String) -> String? {
@@ -50,7 +52,7 @@ internal struct ResponseDecoding: Decoder {
         response.value(forHTTPHeaderField: header)
     }
 
-    func decodeBody<E: Decodable>(to type: Array<E>.Type) throws -> [E] {
+    func decodeBody<E: Decodable>(to type: [E].Type) throws -> [E] {
         fatalError()
     }
 
@@ -67,7 +69,7 @@ internal struct ResponseDecoding: Decoder {
 
         if type is CollectionProtocol.Type {
             guard let collectionType = type as? CollectionProtocol.Type else {
-                preconditionFailure("this cast should not fail, contact the developers!")
+              preconditionFailure("this cast should not fail, contact the developers!")
             }
             let elementType = collectionType.getElementType()
 
