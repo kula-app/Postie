@@ -23,6 +23,10 @@ extension ResponseBody: Decodable {
             self.wrappedValue = nil
             return
         }
+        if !responseDecoder.failsOnEmptyData, responseDecoder.data.isEmpty {
+          self.wrappedValue = nil
+          return
+        }
         self.wrappedValue = try responseDecoder.decodeBody(to: Body.self)
     }
 }
