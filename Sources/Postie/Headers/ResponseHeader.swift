@@ -11,7 +11,7 @@ public struct ResponseHeader<DecodingStrategy: ResponseHeaderDecodingStrategy> {
 extension ResponseHeader: Decodable where DecodingStrategy.RawValue: Decodable {
 
     public init(from decoder: Decoder) throws {
-        self.wrappedValue = try DecodingStrategy.decode(decoder: decoder)
+        wrappedValue = try DecodingStrategy.decode(decoder: decoder)
     }
 }
 
@@ -21,46 +21,30 @@ public protocol ResponseHeaderDecodingStrategy {
     static func decode(decoder: Decoder) throws -> RawValue
 }
 
-public struct DefaultStrategy: ResponseHeaderDecodingStrategy {
-
-    public typealias RawValue = String
-
-    public static func decode(decoder: Decoder) throws -> RawValue {
-        guard let key = decoder.codingPath.last?.stringValue else {
-            throw ResponeHeaderDecodingError.missingCodingKey
-        }
-        // Check if the decoder is response decoder, otherwise fall back to default decoding logic
-        guard let responseDecoding = decoder as? ResponseDecoding else {
-            return try RawValue(from: decoder)
-        }
-        // Transform dash separator to camelCase
-        guard let value = responseDecoding.valueForHeaderCaseInsensitive(key) else {
-            throw DecodingError.valueNotFound(RawValue.self, DecodingError.Context(
-                codingPath: decoder.codingPath,
-                debugDescription: "Missing value for case-insensitive header key: \(key)")
-            )
-        }
-        return value
-    }
-}
-
-public struct DefaultStrategyOptional: ResponseHeaderDecodingStrategy {
-
-    public typealias RawValue = String?
-
-    public static func decode(decoder: Decoder) throws -> RawValue {
-        guard let key = decoder.codingPath.last?.stringValue else {
-            throw ResponeHeaderDecodingError.missingCodingKey
-        }
-        // Check if the decoder is response decoder, otherwise fall back to default decoding logic
-        guard let responseDecoding = decoder as? ResponseDecoding else {
-            return try RawValue(from: decoder)
-        }
-        // Transform dash separator to camelCase
-        return responseDecoding.valueForHeaderCaseInsensitive(key)
-    }
-}
-
-enum ResponeHeaderDecodingError: Error {
+enum ResponseHeaderDecodingError: Error {
     case missingCodingKey
+}
+
+public protocol ResponseBodyDecodingStrategy {
+
+    ///
+    /// Use this property in a custom strategy implementation (example below) to check against the response's `statusCode` and determine wether or not it should fail when receiving empty data.
+    ///
+    /// ```swift
+    /// public class SpecificStatusCodeDecodingStrategy:ResponseBodyDecodingStrategy {
+    ///
+    ///     public static var statusCode: Int?
+    ///
+    ///     public static var allowsEmptyBody: Bool {
+    ///         guard let statusCode = statusCode else {
+    ///             return false
+    ///         }
+    ///         return statusCode == // some statusCode value
+    ///     }
+    /// }
+    ///
+    static var statusCode: Int? { get set }
+
+    /// Indicates wether the decoding should fail on empty body or not.
+    static var allowsEmptyBody: Bool { get }
 }
