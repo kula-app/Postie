@@ -1,4 +1,3 @@
-
 @propertyWrapper
 public struct ResponseBodyWrapper<Body: Decodable, DecodingStrategy: ResponseBodyDecodingStrategy> {
 

@@ -102,6 +102,25 @@ class ResponseBodyCodingTests: XCTestCase {
         XCTAssertEqual(decoded.body?.value, "asdf")
     }
 
+    func testFormURLEncodedResponseBodyDecoding_emptyBodyAllowed_shouldDecodeNil() {
+        struct Response: Decodable {
+            
+            struct Body: FormURLEncodedDecodable {
+                var value: String
+            }
+            
+            @ResponseBody<Body>.EmptyBodyAllowed var body
+            
+        }
+        let response = HTTPURLResponse(url: baseURL, statusCode: 204, httpVersion: nil, headerFields: nil)!
+        let data = Data()
+        let decoder = ResponseDecoder()
+        guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
+            return
+        }
+        XCTAssertNil(decoded.body)
+    }
+    
     func testFormURLEncodedResponseBodyDecoding_invalidStatusCode_shouldNotDecodeData() {
         struct Response: Decodable {
 
@@ -144,17 +163,17 @@ class ResponseBodyCodingTests: XCTestCase {
         XCTAssertEqual(decoded.body, responseBody)
     }
 
-    func testJSONEncodedResponseBodyDecoding_emptyDataAndAcceptEmptyAsNil_shouldDecodeNil() {
+    func testJSONEncodedResponseBodyDecoding_emptyBodyAllowed_shouldDecodeNil() {
         struct Response: Decodable {
 
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
 
-            @ResponseBody<Body>.AcceptEmptyAsNil var body
+            @ResponseBody<Body>.EmptyBodyAllowed var body
 
         }
-        let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        let response = HTTPURLResponse(url: baseURL, statusCode: 204, httpVersion: nil, headerFields: nil)!
         let data = Data()
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
@@ -162,5 +181,26 @@ class ResponseBodyCodingTests: XCTestCase {
         }
         XCTAssertNil(decoded.body)
     }
-
+    
+    func testJSONEncodedResponseBodyDecoding_valueInData_emptyBodyAllowed_shouldDecodeFromData() {
+        struct Response: Decodable {
+            
+            struct Body: FormURLEncodedDecodable {
+                var value: String
+            }
+            
+            @ResponseBody<Body>.EmptyBodyAllowed var body
+            
+        }
+        let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        let data = """
+        value=asdf
+        """.data(using: .utf8)!
+        let decoder = ResponseDecoder()
+        guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
+            return
+        }
+        XCTAssertNotNil(decoded.body)
+        XCTAssertEqual(decoded.body?.value, "asdf")
+    }
 }
