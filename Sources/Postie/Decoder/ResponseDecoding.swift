@@ -8,17 +8,15 @@ internal struct ResponseDecoding: Decoder {
     var userInfo: [CodingUserInfoKey: Any] = [:]
     var response: HTTPURLResponse
     var data: Data
-    var failsOnEmptyData: Bool = true
 
-    init(response: HTTPURLResponse, data: Data, codingPath: [CodingKey] = [], failsOnEmptyData: Bool) {
+    init(response: HTTPURLResponse, data: Data, codingPath: [CodingKey] = []) {
         self.response = response
         self.data = data
         self.codingPath = codingPath
-        self.failsOnEmptyData = failsOnEmptyData
     }
 
     func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> where Key: CodingKey {
-        let container = ResponseKeyedDecodingContainer(decoder: self, keyedBy: type, codingPath: codingPath, failsOnEmptyData: failsOnEmptyData)
+        let container = ResponseKeyedDecodingContainer(decoder: self, keyedBy: type, codingPath: codingPath)
         return KeyedDecodingContainer(container)
     }
 
@@ -27,7 +25,7 @@ internal struct ResponseDecoding: Decoder {
     }
 
     func singleValueContainer() throws -> SingleValueDecodingContainer {
-        ResponseSingleValueDecodingContainer(decoder: self, codingPath: codingPath, failsOnEmptyData: failsOnEmptyData)
+        ResponseSingleValueDecodingContainer(decoder: self, codingPath: codingPath)
     }
 
     func valueForHeaderCaseInsensitive(_ header: String) -> String? {
@@ -69,7 +67,7 @@ internal struct ResponseDecoding: Decoder {
 
         if type is CollectionProtocol.Type {
             guard let collectionType = type as? CollectionProtocol.Type else {
-              preconditionFailure("this cast should not fail, contact the developers!")
+                preconditionFailure("this cast should not fail, contact the developers!")
             }
             let elementType = collectionType.getElementType()
 
@@ -110,7 +108,8 @@ internal struct ResponseDecoding: Decoder {
         guard let value = String(data: data, encoding: encoding) as? T else {
             throw DecodingError.dataCorrupted(DecodingError.Context(
                 codingPath: codingPath,
-                debugDescription: "Failed to decode using encoding: \(encoding)")
+                debugDescription: "Failed to decode using encoding: \(encoding)"
+            )
             )
         }
         return value
