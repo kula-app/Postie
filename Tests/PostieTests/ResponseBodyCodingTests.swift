@@ -143,4 +143,24 @@ class ResponseBodyCodingTests: XCTestCase {
         XCTAssertNotNil(decoded.body)
         XCTAssertEqual(decoded.body, responseBody)
     }
+
+    func testJSONEncodedResponseBodyDecoding_emptyDataAndAcceptEmptyAsNil_shouldDecodeNil() {
+        struct Response: Decodable {
+
+            struct Body: FormURLEncodedDecodable {
+                var value: String
+            }
+
+            @ResponseBody<Body>.AcceptEmptyAsNil var body
+
+        }
+        let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        let data = Data()
+        let decoder = ResponseDecoder()
+        guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
+            return
+        }
+        XCTAssertNil(decoded.body)
+    }
+
 }
