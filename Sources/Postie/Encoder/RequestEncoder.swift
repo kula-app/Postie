@@ -1,8 +1,10 @@
 import Foundation
 import URLEncodedFormCoding
+#if canImport(Combine)
 import Combine
+#endif
 
-public class RequestEncoder: TopLevelEncoder {
+public class RequestEncoder {
 
     let baseURL: URL
 
@@ -106,3 +108,7 @@ public class RequestEncoder: TopLevelEncoder {
         return request
     }
 }
+
+#if canImport(Combine)
+extension RequestEncoder: TopLevelEncoder {}
+#endif

@@ -1,9 +1,10 @@
 /* swiftlint:disable line_length */
 import Foundation
+#if canImport(Combine)
 import Combine
+#endif
 import os.log
 
-@available(iOS 13.0, *)
 open class HTTPAPIClient {
 
     public private(set) var session: URLSessionProvider
@@ -19,8 +20,13 @@ open class HTTPAPIClient {
     // MARK: - Callbacks
 
     open func send<R: Request>(_ request: R, callback: @escaping (Result<R.Response, Error>) -> Void) {
+        var baseURL = url
+        // Append the path prefix if given
+        if let prefix = pathPrefix {
+            baseURL.appendPathComponent(prefix)
+        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: url)
+        let encoder = RequestEncoder(baseURL: baseURL)
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -54,8 +60,13 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: FormURLEncodedRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+        var baseURL = url
+        // Append the path prefix if given
+        if let prefix = pathPrefix {
+            baseURL.appendPathComponent(prefix)
+        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: url)
+        let encoder = RequestEncoder(baseURL: baseURL)
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -69,8 +80,13 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: PlainRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+        var baseURL = url
+        // Append the path prefix if given
+        if let prefix = pathPrefix {
+            baseURL.appendPathComponent(prefix)
+        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: url)
+        let encoder = RequestEncoder(baseURL: baseURL)
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -85,7 +101,7 @@ open class HTTPAPIClient {
 
     private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest, callback: @escaping (Result<Response, Error>) -> Void) {
         // Send request using the given URL session provider
-        session.dataTask(with: urlRequest, completion: { data, response, error in
+        session.send(urlRequest: urlRequest, completion: { data, response, error in
             guard let response = response as? HTTPURLResponse, let data = data else {
                 return callback(.failure(APIError.invalidResponse))
             }
@@ -101,9 +117,15 @@ open class HTTPAPIClient {
 
     // MARK: - Combine
 
+    @available(iOS 13.0, *)
     open func send<R: Request>(_ request: R) -> AnyPublisher<R.Response, Error> {
+        var baseURL = url
+        // Append the path prefix if given
+        if let prefix = pathPrefix {
+            baseURL.appendPathComponent(prefix)
+        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: url)
+        let encoder = RequestEncoder(baseURL: baseURL)
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -116,6 +138,7 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest)
     }
 
+    @available(iOS 13.0, *)
     open func send<Request: JSONRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
         var baseURL = url
         // Append the path prefix if given
@@ -136,9 +159,15 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
     }
 
+    @available(iOS 13.0, *)
     open func send<Request: FormURLEncodedRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
+        var baseURL = url
+        // Append the path prefix if given
+        if let prefix = pathPrefix {
+            baseURL.appendPathComponent(prefix)
+        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: url)
+        let encoder = RequestEncoder(baseURL: baseURL)
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -151,9 +180,15 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
     }
 
+    @available(iOS 13.0, *)
     open func send<Request: PlainRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
+        var baseURL = url
+        // Append the path prefix if given
+        if let prefix = pathPrefix {
+            baseURL.appendPathComponent(prefix)
+        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: url)
+        let encoder = RequestEncoder(baseURL: baseURL)
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -166,6 +201,7 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
     }
 
+    @available(iOS 13.0, *)
     private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest) -> AnyPublisher<Response, Error> {
         // Send request using the given URL session provider
         return session
@@ -182,6 +218,7 @@ open class HTTPAPIClient {
 
     // MARK: - Response Handling
 
+    @available(iOS 13.0, *)
     private func processResponse<Body: Decodable, Decoder: TopLevelDecoder>(body: Body.Type, data: Data, response: URLResponse, urlRequest: URLRequest, decoder: Decoder) throws -> (headers: [AnyHashable: Any], body: Body) where Decoder.Input == Data {
         // Log the request
         self.log(urlRequest: urlRequest, response: response, data: data)

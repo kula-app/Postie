@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "Postie",
     platforms: [
-        .macOS(.v10_15), .iOS(.v13)
+        .macOS(.v10_15), .iOS(.v12)
     ],
     products: [
         .library(name: "Postie", targets: ["Postie"]),

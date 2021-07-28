@@ -12,7 +12,11 @@ class ResponseKeyedDecodingContainer<Key>: KeyedDecodingContainerProtocol where 
     }
 
     func contains(_ key: Key) -> Bool {
-        decoder.response.value(forHTTPHeaderField: key.stringValue) != nil
+        if #available(iOS 13.0, *) {
+            return decoder.response.value(forHTTPHeaderField: key.stringValue) != nil
+        } else {
+            return decoder.response.allHeaderFields[key.stringValue] != nil
+        }
     }
 
     func decodeNil(forKey key: Key) throws -> Bool {

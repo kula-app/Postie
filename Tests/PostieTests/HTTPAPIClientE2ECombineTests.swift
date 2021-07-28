@@ -1,8 +1,11 @@
 import XCTest
 import Postie
+#if canImport(Combine)
 import Combine
+#endif
 import PostieMock
 
+@available(iOS 13.0, *)
 class HTTPAPIClientE2ECombineTests: XCTestCase {
 
     var cancellables: Set<AnyCancellable>!
@@ -17,7 +20,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         struct Request: Postie.Request {
             struct Response: Decodable {}
 
-            @QueryItem(name: "custom_name") var name
+            @QueryItem(name: "custom_name") var name: String
             @QueryItem var value: Int
             @QueryItem var optionalGivenValue: Bool?
             @QueryItem var optionalNilValue: Bool?
@@ -28,7 +31,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         )
 
         var requestedURL: URL?
-        let stubSession = URLSessionStub(response: stubResponse) { request in
+        let stubSession = URLSessionCombineStub(response: stubResponse) { request in
             requestedURL = request.url
         }
 
@@ -60,7 +63,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         )
 
         var requestHeaders: [String: String]?
-        let stubSession = URLSessionStub(response: stubResponse) { request in
+        let stubSession = URLSessionCombineStub(response: stubResponse) { request in
             requestHeaders = request.allHTTPHeaderFields
         }
 
@@ -95,7 +98,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         )
 
         var requestBody: Data?
-        let stubSession = URLSessionStub(response: stubResponse) { request in
+        let stubSession = URLSessionCombineStub(response: stubResponse) { request in
             requestBody = request.httpBody
         }
 
@@ -124,7 +127,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionStub(response: stubResponse)
+        let stubSession = URLSessionCombineStub(response: stubResponse)
 
         // Send request
         let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
@@ -162,7 +165,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionStub(response: stubResponse)
+        let stubSession = URLSessionCombineStub(response: stubResponse)
 
         // Send request
         let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
@@ -208,7 +211,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionStub(response: stubResponse)
+        let stubSession = URLSessionCombineStub(response: stubResponse)
 
         // Send request
         let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
@@ -239,7 +242,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
             data: Data(),
             response: URLResponse(url: baseURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
         )
-        let stubSession = URLSessionStub(response: stubResponse)
+        let stubSession = URLSessionCombineStub(response: stubResponse)
         let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
             client.send(request)
         }
@@ -257,9 +260,10 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
     }
 }
 
+@available(iOS 13.0, *)
 extension HTTPAPIClientE2ECombineTests {
 
-    func sendTesting<Request: Postie.Request>(request: Request, stubbed: URLSessionStub, _ send: (HTTPAPIClient, Request) -> AnyPublisher<Request.Response, Error>) -> (response: Request.Response?, error: Error?) {
+    func sendTesting<Request: Postie.Request>(request: Request, stubbed: URLSessionCombineStub, _ send: (HTTPAPIClient, Request) -> AnyPublisher<Request.Response, Error>) -> (response: Request.Response?, error: Error?) {
         sendTesting(request: request, client: HTTPAPIClient(url: baseURL, session: stubbed), send)
     }
 
