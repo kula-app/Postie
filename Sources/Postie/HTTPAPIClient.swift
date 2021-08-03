@@ -19,7 +19,7 @@ open class HTTPAPIClient {
 
     // MARK: - Callbacks
 
-    open func send<R: Request>(_ request: R, callback: @escaping (Result<R.Response, Error>) -> Void) {
+    open func send<R: Request>(_ request: R, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<R.Response, Error>) -> Void) {
         var baseURL = url
         // Append the path prefix if given
         if let prefix = pathPrefix {
@@ -36,10 +36,10 @@ open class HTTPAPIClient {
             return callback(.failure(error))
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest, callback: callback)
+        return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest, receiveOn: queue, callback: callback)
     }
 
-    open func send<Request: JSONRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: JSONRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
         var baseURL = url
         // Append the path prefix if given
         if let prefix = pathPrefix {
@@ -56,10 +56,10 @@ open class HTTPAPIClient {
             return callback(.failure(error))
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, callback: callback)
+        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, receiveOn: queue, callback: callback)
     }
 
-    open func send<Request: FormURLEncodedRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: FormURLEncodedRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
         var baseURL = url
         // Append the path prefix if given
         if let prefix = pathPrefix {
@@ -76,10 +76,10 @@ open class HTTPAPIClient {
             return callback(.failure(error))
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, callback: callback)
+        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, receiveOn: queue, callback: callback)
     }
 
-    open func send<Request: PlainRequest>(_ request: Request, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: PlainRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
         var baseURL = url
         // Append the path prefix if given
         if let prefix = pathPrefix {
@@ -96,21 +96,31 @@ open class HTTPAPIClient {
             return callback(.failure(error))
         }
         log(request: request, urlRequest)
-        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, callback: callback)
+        return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, receiveOn: queue, callback: callback)
     }
 
-    private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest, callback: @escaping (Result<Response, Error>) -> Void) {
+    private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest, receiveOn queue: DispatchQueue?, callback: @escaping (Result<Response, Error>) -> Void) {
         // Send request using the given URL session provider
         session.send(urlRequest: urlRequest, completion: { data, response, error in
             guard let response = response as? HTTPURLResponse, let data = data else {
                 return callback(.failure(APIError.invalidResponse))
             }
+            var syncBlock: () -> Void
             do {
                 let decoder = ResponseDecoder()
                 let decoded = try decoder.decode(Response.self, from: (data: data, response: response))
-                callback(.success(decoded))
+                syncBlock = {
+                    callback(.success(decoded))
+                }
             } catch {
-                callback(.failure(error))
+                syncBlock = {
+                    callback(.failure(error))
+                }
+            }
+            if let queue = queue {
+                queue.async(execute: syncBlock)
+            } else {
+                syncBlock()
             }
         })
     }
