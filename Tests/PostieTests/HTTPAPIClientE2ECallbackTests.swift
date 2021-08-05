@@ -10,7 +10,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         struct Request: Postie.Request {
             struct Response: Decodable {}
 
-            @QueryItem(name: "custom_name") var name
+            @QueryItem(name: "custom_name") var name: String
             @QueryItem var value: Int
             @QueryItem var optionalGivenValue: Bool?
             @QueryItem var optionalNilValue: Bool?
@@ -22,7 +22,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         )
 
         var requestedURL: URL?
-        let stubSession = URLSessionStub(response: stubResponse) { request in
+        let stubSession = URLSessionCallbackStub(response: stubResponse) { request in
             requestedURL = request.url
         }
 
@@ -54,7 +54,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         )
 
         var requestHeaders: [String: String]?
-        let stubSession = URLSessionStub(response:stubResponse) { request in
+        let stubSession = URLSessionCallbackStub(response:stubResponse) { request in
             requestHeaders = request.allHTTPHeaderFields
         }
 
@@ -89,7 +89,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         )
 
         var requestBody: Data?
-        let stubSession = URLSessionStub(response:stubResponse) { request in
+        let stubSession = URLSessionCallbackStub(response:stubResponse) { request in
             requestBody = request.httpBody
         }
 
@@ -118,7 +118,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionStub(response:stubResponse)
+        let stubSession = URLSessionCallbackStub(response:stubResponse)
 
         // Send request
         let (receivedResponse, receivedError) = self.sendTesting(request: Request(), session: stubSession) { client, request, callback in
@@ -156,7 +156,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionStub(response:stubResponse)
+        let stubSession = URLSessionCallbackStub(response:stubResponse)
 
         // Send request
         let (receivedResponse, receivedError) = self.sendTesting(request: Request(), session: stubSession) { client, request, callback in
@@ -202,7 +202,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionStub(response:stubResponse)
+        let stubSession = URLSessionCallbackStub(response:stubResponse)
 
         // Send request
         let (receivedResponse, receivedError) = self.sendTesting(request: Request(), session: stubSession) { client, request, callback in
@@ -233,7 +233,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             data: Data(),
             response: URLResponse(url: baseURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
         )
-        let stubSession = URLSessionStub(response:stubResponse)
+        let stubSession = URLSessionCallbackStub(response:stubResponse)
         let (receivedResponse, receivedError) = self.sendTesting(request: Request(), session: stubSession) { client, request, callback in
             client.send(request, callback: callback)
         }
