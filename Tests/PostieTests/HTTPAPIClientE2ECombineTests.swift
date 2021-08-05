@@ -1,8 +1,6 @@
 import XCTest
 import Postie
-#if canImport(Combine)
 import Combine
-#endif
 import PostieMock
 
 @available(iOS 13.0, *)

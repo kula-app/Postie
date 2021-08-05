@@ -1,7 +1,5 @@
 import Foundation
-#if canImport(Combine)
 import Combine
-#endif
 import PostieUtils
 
 public final class URLEncodedFormDecoder: TopLevelDecoder {

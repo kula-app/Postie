@@ -1,7 +1,5 @@
 import Foundation
-#if canImport(Combine)
 import Combine
-#endif
 import Postie
 
 @available(iOS 13.0, *)
