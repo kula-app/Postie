@@ -57,7 +57,6 @@ public class URLSessionCallbackStub: URLSessionProvider {
         completion(result.data, result.response, result.error)
     }
 
-    @available(iOS 13.0, *)
     public func send(urlRequest request: URLRequest) -> AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure> {
         fatalError("not available")
     }

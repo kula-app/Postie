@@ -125,7 +125,6 @@ open class HTTPAPIClient {
 
     // MARK: - Combine
 
-    @available(iOS 13.0, *)
     open func send<R: Request>(_ request: R) -> AnyPublisher<R.Response, Error> {
         var baseURL = url
         // Append the path prefix if given
@@ -146,7 +145,6 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest)
     }
 
-    @available(iOS 13.0, *)
     open func send<Request: JSONRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
         var baseURL = url
         // Append the path prefix if given
@@ -167,7 +165,6 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
     }
 
-    @available(iOS 13.0, *)
     open func send<Request: FormURLEncodedRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
         var baseURL = url
         // Append the path prefix if given
@@ -188,7 +185,6 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
     }
 
-    @available(iOS 13.0, *)
     open func send<Request: PlainRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
         var baseURL = url
         // Append the path prefix if given
@@ -209,7 +205,6 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
     }
 
-    @available(iOS 13.0, *)
     private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest) -> AnyPublisher<Response, Error> {
         // Send request using the given URL session provider
         return session
@@ -226,7 +221,6 @@ open class HTTPAPIClient {
 
     // MARK: - Response Handling
 
-    @available(iOS 13.0, *)
     private func processResponse<Body: Decodable, Decoder: TopLevelDecoder>(body: Body.Type, data: Data, response: URLResponse, urlRequest: URLRequest, decoder: Decoder) throws -> (headers: [AnyHashable: Any], body: Body) where Decoder.Input == Data {
         // Log the request
         self.log(urlRequest: urlRequest, response: response, data: data)
