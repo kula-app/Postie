@@ -18,13 +18,8 @@ open class HTTPAPIClient {
     // MARK: - Callbacks
 
     open func send<R: Request>(_ request: R, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<R.Response, Error>) -> Void) {
-        var baseURL = url
-        // Append the path prefix if given
-        if let prefix = pathPrefix {
-            baseURL.appendPathComponent(prefix)
-        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -38,13 +33,8 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: JSONRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
-        var baseURL = url
-        // Append the path prefix if given
-        if let prefix = pathPrefix {
-            baseURL.appendPathComponent(prefix)
-        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -58,13 +48,8 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: FormURLEncodedRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
-        var baseURL = url
-        // Append the path prefix if given
-        if let prefix = pathPrefix {
-            baseURL.appendPathComponent(prefix)
-        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -78,13 +63,8 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: PlainRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
-        var baseURL = url
-        // Append the path prefix if given
-        if let prefix = pathPrefix {
-            baseURL.appendPathComponent(prefix)
-        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -126,13 +106,8 @@ open class HTTPAPIClient {
     // MARK: - Combine
 
     open func send<R: Request>(_ request: R) -> AnyPublisher<R.Response, Error> {
-        var baseURL = url
-        // Append the path prefix if given
-        if let prefix = pathPrefix {
-            baseURL.appendPathComponent(prefix)
-        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -146,13 +121,8 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: JSONRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
-        var baseURL = url
-        // Append the path prefix if given
-        if let prefix = pathPrefix {
-            baseURL.appendPathComponent(prefix)
-        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -166,13 +136,8 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: FormURLEncodedRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
-        var baseURL = url
-        // Append the path prefix if given
-        if let prefix = pathPrefix {
-            baseURL.appendPathComponent(prefix)
-        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -186,13 +151,8 @@ open class HTTPAPIClient {
     }
 
     open func send<Request: PlainRequest>(_ request: Request) -> AnyPublisher<Request.Response, Error> {
-        var baseURL = url
-        // Append the path prefix if given
-        if let prefix = pathPrefix {
-            baseURL.appendPathComponent(prefix)
-        }
         // Create a request encoder
-        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
         let urlRequest: URLRequest
         do {
@@ -301,4 +261,14 @@ open class HTTPAPIClient {
         return headers
     }
 
+    /// Prepares the URL by applying relevant transformations
+    ///
+    /// - Returns: Transformed URL
+    private func prepareURL() -> URL {
+        // Append the path prefix if given
+        guard let prefix = pathPrefix else {
+            return url
+        }
+        return url.appendingPathComponent(prefix)
+    }
 }
