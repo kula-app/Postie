@@ -1,8 +1,6 @@
 import Foundation
 import URLEncodedFormCoding
-#if canImport(Combine)
 import Combine
-#endif
 
 public class RequestEncoder {
 
@@ -109,6 +107,4 @@ public class RequestEncoder {
     }
 }
 
-#if canImport(Combine)
 extension RequestEncoder: TopLevelEncoder {}
-#endif
