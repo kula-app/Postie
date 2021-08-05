@@ -3,7 +3,6 @@ import Postie
 import Combine
 import PostieMock
 
-@available(iOS 13.0, *)
 class HTTPAPIClientE2ECombineTests: XCTestCase {
 
     var cancellables: Set<AnyCancellable>!
@@ -258,7 +257,6 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
     }
 }
 
-@available(iOS 13.0, *)
 extension HTTPAPIClientE2ECombineTests {
 
     func sendTesting<Request: Postie.Request>(request: Request, stubbed: URLSessionCombineStub, _ send: (HTTPAPIClient, Request) -> AnyPublisher<Request.Response, Error>) -> (response: Request.Response?, error: Error?) {
