@@ -47,11 +47,7 @@ internal struct ResponseDecoding: Decoder {
     }
 
     func valueForHeaderCaseSensitive(_ header: String) -> String? {
-        if #available(iOS 13.0, *) {
-            return response.value(forHTTPHeaderField: header)
-        } else {
-            return response.allHeaderFields[header] as? String
-        }
+        response.value(forHTTPHeaderField: header)
     }
 
     func decodeBody<E: Decodable>(to type: Array<E>.Type) throws -> [E] {
