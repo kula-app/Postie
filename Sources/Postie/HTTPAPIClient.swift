@@ -1,8 +1,6 @@
 /* swiftlint:disable line_length */
 import Foundation
-#if canImport(Combine)
 import Combine
-#endif
 import os.log
 
 open class HTTPAPIClient {
