@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import Postie
 
-public class URLSessionStub: URLSessionProvider {
+public class URLSessionCombineStub: URLSessionProvider {
 
     private var result: Result<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>
     private var urlRequestHandler: (URLRequest) -> Void
@@ -29,13 +29,7 @@ public class URLSessionStub: URLSessionProvider {
         }.eraseToAnyPublisher()
     }
 
-    public func dataTask(with request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        urlRequestHandler(request)
-        switch self.result {
-        case .success(let output):
-            completion(output.data, output.response, nil)
-        case .failure(let error):
-            completion(nil, nil, error)
-        }
+    public func send(urlRequest request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        fatalError("not available")
     }
 }
