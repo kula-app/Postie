@@ -1,8 +1,6 @@
 public class OptionalContentStrategy: ResponseBodyDecodingStrategy {
 
-    public static var allowsEmptyContent: Bool {
+    public static func allowsEmptyContent(for statusCode: Int?) -> Bool {
         return statusCode == 204
     }
-
-    public static var statusCode: Int?
 }

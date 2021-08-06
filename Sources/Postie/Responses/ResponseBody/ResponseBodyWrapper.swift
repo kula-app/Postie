@@ -23,9 +23,7 @@ extension ResponseBodyWrapper: Decodable {
             wrappedValue = nil
             return
         }
-        BodyStrategy.statusCode = responseDecoder.response.statusCode
-
-        if BodyStrategy.allowsEmptyContent, responseDecoder.data.isEmpty {
+        if BodyStrategy.allowsEmptyContent(for: responseDecoder.response.statusCode), responseDecoder.data.isEmpty {
             wrappedValue = nil
             return
         }
