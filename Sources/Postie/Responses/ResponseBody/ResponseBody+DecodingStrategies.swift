@@ -1,4 +1,4 @@
 public extension ResponseBody {
 
-  typealias EmptyBodyAllowed = ResponseBodyWrapper<Body, EmptyBodyAllowedStrategy>
+    typealias OptionalContent = ResponseBodyWrapper<Body, DefaultHeaderStrategy, OptionalContentStrategy>
 }

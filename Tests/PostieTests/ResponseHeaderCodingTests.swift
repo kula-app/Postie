@@ -3,21 +3,21 @@ import XCTest
 
 fileprivate struct Response: Decodable {
 
-    @ResponseHeader<DefaultStrategy>
+    @ResponseHeader<DefaultHeaderStrategy>
     var authorization: String
 
-    @ResponseHeader<DefaultStrategy>
+    @ResponseHeader<DefaultHeaderStrategy>
     var length: String
 
-    @ResponseHeader<DefaultStrategy>
+    @ResponseHeader<DefaultHeaderStrategy>
     var contentType: String
 
-    @ResponseHeader<DefaultStrategyOptional>
+    @ResponseHeader<DefaultHeaderStrategyOptional>
     var optionalValue: String?
 
 }
 
-class ReponseHeaderCodingTests: XCTestCase {
+class ResponseHeaderCodingTests: XCTestCase {
 
     let response = HTTPURLResponse(url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil, headerFields: [
         "authorization": "Bearer Token",

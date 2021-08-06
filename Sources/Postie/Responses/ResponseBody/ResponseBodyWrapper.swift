@@ -1,5 +1,5 @@
 @propertyWrapper
-public struct ResponseBodyWrapper<Body: Decodable, DecodingStrategy: ResponseBodyDecodingStrategy> {
+public struct ResponseBodyWrapper<Body: Decodable, HeaderStrategy: ResponseHeaderDecodingStrategy, BodyStrategy: ResponseBodyDecodingStrategy> {
 
     public var wrappedValue: Body?
 
@@ -23,9 +23,9 @@ extension ResponseBodyWrapper: Decodable {
             wrappedValue = nil
             return
         }
-        DecodingStrategy.statusCode = responseDecoder.response.statusCode
+        BodyStrategy.statusCode = responseDecoder.response.statusCode
 
-        if DecodingStrategy.allowsEmptyBody, responseDecoder.data.isEmpty {
+        if BodyStrategy.allowsEmptyContent, responseDecoder.data.isEmpty {
             wrappedValue = nil
             return
         }

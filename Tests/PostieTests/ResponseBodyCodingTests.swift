@@ -1,17 +1,16 @@
-import XCTest
 @testable import Postie
+import XCTest
 
 class ResponseBodyCodingTests: XCTestCase {
 
     let baseURL = URL(string: "https://test.local")!
-    
+
     func testJSONResponseBodyDecoding_shouldDecodeEmptyBody() {
         struct Response: Decodable {
 
             struct Body: JSONDecodable {}
 
             @ResponseBody<Body> var body
-
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let data = "{}".data(using: .utf8)!
@@ -27,7 +26,6 @@ class ResponseBodyCodingTests: XCTestCase {
             }
 
             @ResponseBody<Body> var body
-
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let data = """
@@ -51,7 +49,6 @@ class ResponseBodyCodingTests: XCTestCase {
             }
 
             @ResponseBody<Body> var body
-
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 401, httpVersion: nil, headerFields: nil)!
         let data = """
@@ -72,7 +69,6 @@ class ResponseBodyCodingTests: XCTestCase {
             struct Body: FormURLEncodedDecodable {}
 
             @ResponseBody<Body> var body
-
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let data = "".data(using: .utf8)!
@@ -88,7 +84,6 @@ class ResponseBodyCodingTests: XCTestCase {
             }
 
             @ResponseBody<Body> var body
-
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let data = """
@@ -102,15 +97,14 @@ class ResponseBodyCodingTests: XCTestCase {
         XCTAssertEqual(decoded.body?.value, "asdf")
     }
 
-    func testFormURLEncodedResponseBodyDecoding_emptyBodyAllowed_shouldDecodeNil() {
+    func testFormURLEncodedResponseBodyDecoding_optionalContent_shouldDecodeNil() {
         struct Response: Decodable {
-            
+
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
-            
-            @ResponseBody<Body>.EmptyBodyAllowed var body
-            
+
+            @ResponseBody<Body>.OptionalContent var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 204, httpVersion: nil, headerFields: nil)!
         let data = Data()
@@ -120,7 +114,7 @@ class ResponseBodyCodingTests: XCTestCase {
         }
         XCTAssertNil(decoded.body)
     }
-    
+
     func testFormURLEncodedResponseBodyDecoding_invalidStatusCode_shouldNotDecodeData() {
         struct Response: Decodable {
 
@@ -129,7 +123,6 @@ class ResponseBodyCodingTests: XCTestCase {
             }
 
             @ResponseBody<Body> var body
-
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 401, httpVersion: nil, headerFields: nil)!
         let data = """
@@ -146,7 +139,6 @@ class ResponseBodyCodingTests: XCTestCase {
         struct Response: Decodable {
 
             @ResponseBody<PlainDecodable> var body
-
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let responseBody = """
@@ -163,15 +155,14 @@ class ResponseBodyCodingTests: XCTestCase {
         XCTAssertEqual(decoded.body, responseBody)
     }
 
-    func testJSONEncodedResponseBodyDecoding_emptyBodyAllowed_shouldDecodeNil() {
+    func testJSONEncodedResponseBodyDecoding_optionalContent_shouldDecodeNil() {
         struct Response: Decodable {
 
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
 
-            @ResponseBody<Body>.EmptyBodyAllowed var body
-
+            @ResponseBody<Body>.OptionalContent var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 204, httpVersion: nil, headerFields: nil)!
         let data = Data()
@@ -181,16 +172,15 @@ class ResponseBodyCodingTests: XCTestCase {
         }
         XCTAssertNil(decoded.body)
     }
-    
-    func testJSONEncodedResponseBodyDecoding_valueInData_emptyBodyAllowed_shouldDecodeFromData() {
+
+    func testJSONEncodedResponseBodyDecoding_valueInData_optionalContent_shouldDecodeFromData() {
         struct Response: Decodable {
-            
+
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
-            
-            @ResponseBody<Body>.EmptyBodyAllowed var body
-            
+
+            @ResponseBody<Body>.OptionalContent var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let data = """

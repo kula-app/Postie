@@ -1,7 +1,7 @@
 import XCTest
 @testable import Postie
 
-class ReponseStatusCodeCodingTests: XCTestCase {
+class ResponseStatusCodeCodingTests: XCTestCase {
 
     func testDecoding_noStatusCodeVariable_shouldDecodeWithoutStatusCode() {
         struct Response: Decodable {}

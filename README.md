@@ -368,29 +368,29 @@ Use the property wrapper `@ResponseHeader<Strategy>` inside the response type.
 
 In the moment, the following decoding strategies are implemented:
 
-- `DefaultStategy`
+- `DefaultHeaderStrategy`
 
 Converts the property name into camel-case format (e.g. `Content-Type` becomes `contentType`) and compares case-insensitive (e.g. `Authorization` equals `authorization`)
 This strategy expects the response header to be set, otherwise an error will be thrown.
 
 Response from URL requests are always of type `String` and no casting will be performed. Therefore the only valid property type is `String`.
 
-- `DefaultOptionalStategy`
+- `DefaultHeaderOptionalStrategy`
 
-Same as `DefaultStrategy` but won't fail if the header can not be found.
+Same as `DefaultHeaderStrategy` but won't fail if the header can not be found.
 
 **Example:**
 
 ```swift
 struct Response: Decodable {
 
-    @ResponseHeader<DefaultStrategy>
+    @ResponseHeader<DefaultHeaderStrategy>
     var authorization: String
 
-    @ResponseHeader<DefaultStrategy>
+    @ResponseHeader<DefaultHeaderStrategy>
     var contentType: String
 
-    @ResponseHeader<DefaultStrategyOptional>
+    @ResponseHeader<DefaultHeaderStrategyOptional>
     var optionalValue: String?
 
 }
