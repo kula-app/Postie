@@ -2,12 +2,109 @@
 
 # Postie - The Next-Level HTTP API Client using Combine
 
-[![CI](https://github.com/philprime/Postie/workflows/Build,%20Lint%20&%20Test/badge.svg)](https://github.com/philprime/Postie/actions)
-[![Documentation](https://raw.githubusercontent.com/philprime/Postie/gh-pages/badge.svg)](https://philprime.github.io/Postie/)
-[![codecov](https://codecov.io/gh/philprime/Postie/branch/main/graph/badge.svg)](https://codecov.io/gh/philprime/Postie)
+<div align="center">
+	<a href="https://github.com/philprime/Postie/actions">
+		<img src="https://github.com/philprime/Postie/workflows/Build,%20Lint%20&%20Test/badge.svg" alt="GitHub Actions">
+	</a>
+	<a href="https://philprime.github.io/Postie/">
+		<img src="https://raw.githubusercontent.com/philprime/Postie/gh-pages/badge.svg"/>
+	</a>
+	<a href="https://codecov.io/gh/kula-app/Postie">
+		<img src="https://codecov.io/gh/philprime/Postie/branch/main/graph/badge.svg" alt="codecov">
+	</a>
+</div>
+
+<p align="center">
+    <sub>Created and maintained by <a href="https://kula.app">kula.app</a> and all the amazing <a href="https://github.com/kula-app/Postie/graphs/contributors">contributors</a>.</sub>
+</p>
 
 Postie is a pure Swift library for building URLRequests using property wrappers.
 
+## Example
+
+Checkout this full example starting at defining the request and the expected response, up to creating a client and sending it to the remote endpoint.
+
+```swift
+import Foundation
+import Postie
+
+// Request contains body data encoded as a JSON
+struct MyRequest: JSONRequest {
+
+    // The request body is strongly typed defined
+    struct RequestBody: Encodable {
+        var someNumberValue: Int
+    }
+
+    // Define the response directly inside the request, so every
+    // Request-Response are isolated.
+    // Also directly define, that the response body shall be decoded
+    // from Form-URL-Encoding
+    struct Response: FormURLEncodedDecodable {
+
+        // The expected response body structure
+        struct Body: Decodable {
+            var someNumberValue: Int
+        }
+
+        // The expected response body structure, in case we did something wrong
+        struct ErrorBody: Decodable {
+            var message: String
+        }
+
+        // Property wrappers define the purpose
+        @ResponseBody<Body> var body
+        @ResponseErrorBody<ErrorBody> var errorBody
+
+        // Access specific response headers
+        @ResponseHeader<DefaultStrategy> var contentType: String
+
+        // Status codes also have convenience utilities
+        @ResponseStatusCode var statusCode
+    }
+
+    // This property holds the data which will be encoded
+    var body: RequestBody
+
+    // Location of our resource with template string
+    @RequestPath var path = "/profile/{user_id}"
+
+    // Parameter to replace in the template string
+    @RequestPathParameter(name: "userId") var userId: String
+
+    // HTTP method that shall be used
+    @RequestHTTPMethod var method = .post
+
+    // Set request headers using the property naming
+    @RequestHeader var authorization: String?
+}
+
+// Create a request
+var request = MyRequest(body: MyRequest.RequestBody(someNumberValue: 42),
+                        userId: "my-user-id")
+request.authorization = "Bearer my-oauth-token"
+
+// Create a client
+let client = HTTPAPIClient(url: URL(string: "https://example.org")!)
+
+// Send the request
+client.send(request)
+    .sink { result in
+        switch result {
+        case .failure(let error):
+            print("Oh no something went wrong :(")
+            print(error)
+        case .finished:
+            print("Everything worked fine :)")
+        }
+    } receiveValue: { response in
+        // The single response object contains all the interesting data
+        print(response.statusCode)
+        print(response.body)
+        print(response.errorBody)
+        print(response.contentType)
+    }
+```
 
 ## Core Concept
 
@@ -526,3 +623,10 @@ return session
     })
 ```
 
+# Articles & Stories
+
+Here is a list of relevant articles and stories regarding Postie 🥳
+
+(Please let us know if you found more.)
+
+- [Installing Xcode with “not enough disk space available”](https://philprime.medium.com/installing-xcode-with-not-enough-disk-space-available-b96c8f17115b) - by Philip Niedertscheider
