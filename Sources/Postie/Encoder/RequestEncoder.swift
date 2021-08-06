@@ -2,7 +2,7 @@ import Foundation
 import URLEncodedFormCoding
 import Combine
 
-public class RequestEncoder: TopLevelEncoder {
+public class RequestEncoder {
 
     let baseURL: URL
 
@@ -106,3 +106,5 @@ public class RequestEncoder: TopLevelEncoder {
         return request
     }
 }
+
+extension RequestEncoder: TopLevelEncoder {}

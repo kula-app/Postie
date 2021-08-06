@@ -43,4 +43,20 @@ extension QueryItem where T == String {
     }
 }
 
+extension QueryItem where T == String? {
+
+    public init(name: String?) {
+        self.name = name
+        self.wrappedValue = nil
+    }
+}
+
+extension QueryItem where T == Int? {
+
+    public init(name: String?) {
+        self.name = name
+        self.wrappedValue = nil
+    }
+}
+
 extension QueryItem: Encodable where T: Encodable {}
