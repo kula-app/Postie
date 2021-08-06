@@ -1,5 +1,5 @@
 @propertyWrapper
-public struct ResponseErrorBody<Body: Decodable> {
+public struct ResponseBodyWrapper<Body: Decodable, HeaderStrategy: ResponseHeaderDecodingStrategy, BodyStrategy: ResponseBodyDecodingStrategy> {
 
     public var wrappedValue: Body?
 
@@ -12,14 +12,18 @@ public struct ResponseErrorBody<Body: Decodable> {
     }
 }
 
-extension ResponseErrorBody: Decodable {
+extension ResponseBodyWrapper: Decodable {
 
     public init(from decoder: Decoder) throws {
         guard let responseDecoder = decoder as? ResponseDecoding else {
             wrappedValue = try Body(from: decoder)
             return
         }
-        if (HTTPStatusCode.continue ..< HTTPStatusCode.badRequest) ~= responseDecoder.response.statusCode {
+        guard HTTPStatusCode.ok ..< HTTPStatusCode.multipleChoices ~= responseDecoder.response.statusCode else {
+            wrappedValue = nil
+            return
+        }
+        if BodyStrategy.allowsEmptyContent(for: responseDecoder.response.statusCode), responseDecoder.data.isEmpty {
             wrappedValue = nil
             return
         }

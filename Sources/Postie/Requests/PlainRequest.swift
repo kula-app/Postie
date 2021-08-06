@@ -1,2 +1,2 @@
-/// Protocol indiciating a given request should be encoded into a JSON request
+/// Protocol indicating a given request should be encoded into a JSON request
 public typealias PlainRequest = Request & PlainEncodable

@@ -50,7 +50,7 @@ internal struct ResponseDecoding: Decoder {
         response.value(forHTTPHeaderField: header)
     }
 
-    func decodeBody<E: Decodable>(to type: Array<E>.Type) throws -> [E] {
+    func decodeBody<E: Decodable>(to type: [E].Type) throws -> [E] {
         fatalError()
     }
 
@@ -108,7 +108,8 @@ internal struct ResponseDecoding: Decoder {
         guard let value = String(data: data, encoding: encoding) as? T else {
             throw DecodingError.dataCorrupted(DecodingError.Context(
                 codingPath: codingPath,
-                debugDescription: "Failed to decode using encoding: \(encoding)")
+                debugDescription: "Failed to decode using encoding: \(encoding)"
+            )
             )
         }
         return value

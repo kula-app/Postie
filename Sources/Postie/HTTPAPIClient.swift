@@ -1,6 +1,6 @@
 /* swiftlint:disable line_length */
-import Foundation
 import Combine
+import Foundation
 import os.log
 
 open class HTTPAPIClient {
@@ -183,9 +183,9 @@ open class HTTPAPIClient {
 
     private func processResponse<Body: Decodable, Decoder: TopLevelDecoder>(body: Body.Type, data: Data, response: URLResponse, urlRequest: URLRequest, decoder: Decoder) throws -> (headers: [AnyHashable: Any], body: Body) where Decoder.Input == Data {
         // Log the request
-        self.log(urlRequest: urlRequest, response: response, data: data)
-        // Check if response is an HTTP resposne ,and if the status code is valid
-        guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
+        log(urlRequest: urlRequest, response: response, data: data)
+        // Check if response is an HTTP response ,and if the status code is valid
+        guard let httpResponse = response as? HTTPURLResponse, 200 ... 299 ~= httpResponse.statusCode else {
             throw APIError.responseError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 500, data: data)
         }
         let decoded = try decoder.decode(Body.self, from: data)
