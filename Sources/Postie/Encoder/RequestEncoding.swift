@@ -35,7 +35,7 @@ internal class RequestEncoding: Encoder {
         if let parent = parent {
             parent.setCustomUrl(url: url)
         } else {
-            self.customUrl = url
+            customUrl = url
         }
     }
 
@@ -75,7 +75,7 @@ internal class RequestEncoding: Encoder {
         if let parent = parent {
             parent.setPathParameter(key: key, value: value)
         } else {
-            self.pathParameters[key] = value
+            pathParameters[key] = value
         }
     }
 
@@ -83,6 +83,7 @@ internal class RequestEncoding: Encoder {
 
     func resolvedPath() throws -> String {
         let resolvedPath = NSMutableString(string: path)
+
         for (key, value) in pathParameters {
             let regex: NSRegularExpression
             do {
@@ -93,7 +94,7 @@ internal class RequestEncoding: Encoder {
             let replacement = value.serialized.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? value.serialized
             regex.replaceMatches(in: resolvedPath,
                                  options: [],
-                                 range: NSRange(location: 0, length: path.count),
+                                 range: NSRange(location: .zero, length: resolvedPath.length),
                                  withTemplate: replacement)
         }
         return resolvedPath as String
