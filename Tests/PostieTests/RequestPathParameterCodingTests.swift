@@ -1,5 +1,5 @@
-import XCTest
 @testable import Postie
+import XCTest
 
 class RequestPathParameterCodingTests: XCTestCase {
 
@@ -11,7 +11,6 @@ class RequestPathParameterCodingTests: XCTestCase {
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/some-path/{unknown_id}/more-path"
-
         }
         let request = Request()
         guard let urlRequest = encodeRequest(request: request) else {
@@ -27,7 +26,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
             @RequestPath var path = "/some-path/{id}/more-path"
             @RequestPathParameter var id: Int
-
         }
         let request = Request(id: 123)
         guard let urlRequest = encodeRequest(request: request) else {
@@ -52,14 +50,28 @@ class RequestPathParameterCodingTests: XCTestCase {
         XCTAssertEqual(urlRequest.url?.path, "/some-path/456/more-path")
     }
 
-    func testEncoding_multipleOccurencesSameKey_shouldReplaceAllOccurencesInPath() {
+    func testEncoding_multipleNamedParameters_shouldFailWithRangeOutOfBoundsIfAnyRegression() {
+        struct Request: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestPath var path = "/some-path/{some_id}/{id}"
+            @RequestPathParameter(name: "some_id") var someID: Int
+            @RequestPathParameter var id: Int
+        }
+        let request = Request(someID: 123, id: 456)
+
+        // Only fails if regression was made.
+        XCTAssert(encodeRequest(request: request) != nil, "Range out of bounds")
+    }
+
+    func testEncoding_multipleOccurrencesSameKey_shouldReplaceAllOccurrencesInPath() {
         struct Request: Encodable {
 
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/some/{id}/and/more/{id}/later"
             @RequestPathParameter var id: Int
-
         }
         let request = Request(id: 123)
         guard let urlRequest = encodeRequest(request: request) else {
@@ -92,7 +104,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
             @RequestPath var path = "/{name}"
             @RequestPathParameter var name: String
-
         }
         let request = Request(name: "some name")
         guard let urlRequest = encodeRequest(request: request) else {
@@ -108,7 +119,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
             @RequestPath var path = "/{another_name}"
             @RequestPathParameter(name: "another_name") var name: String
-
         }
         var request = Request()
         request.name = "some name"
@@ -125,7 +135,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
             @RequestPath var path = "/{my_id}"
             @RequestPathParameter(name: "my_id") var id: Int
-
         }
         var request = Request()
         request.id = 123
@@ -142,7 +151,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
             @RequestPath var path = "/{another_name}"
             @RequestPathParameter(name: "another_name", defaultValue: "default") var name: String
-
         }
         let request = Request()
         guard let urlRequest = encodeRequest(request: request) else {
@@ -158,7 +166,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
             @RequestPath var path = "/{name}"
             @RequestPathParameter var name: String?
-
         }
         let request = Request()
         guard let urlRequest = encodeRequest(request: request) else {
@@ -174,7 +181,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
             @RequestPath var path = "/{id}"
             @RequestPathParameter var id: Int?
-
         }
         let request = Request()
         guard let urlRequest = encodeRequest(request: request) else {
@@ -190,7 +196,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
             @RequestPath var path = "/{id}"
             @RequestPathParameter var id: Int?
-
         }
         var request = Request()
         request.id = 321
