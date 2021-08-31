@@ -15,7 +15,7 @@
 </div>
 
 <p align="center">
-    <sub>Created and maintained by <a href="https://kula.app">kula.app</a> and all the amazing <a href="https://github.com/kula-app/Postie/graphs/contributors">contributors</a>.</sub>
+    <sub>Created and maintained by <a href="https://github.com/philprime">Philip Niedertscheider</a> at <a href="https://kula.app">kula.app</a> and all the amazing <a href="https://github.com/kula-app/Postie/graphs/contributors">contributors</a>.</sub>
 </p>
 
 Postie is a pure Swift library for building URLRequests using property wrappers.
