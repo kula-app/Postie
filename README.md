@@ -172,9 +172,10 @@ If you want to include payload data, use one of the following ones:
 - `PlainRequest`
 - `JSONRequest`
 - `FormURLEncodedRequest`
+- `XMLRequest`
 
 All of these expect a `body` instance variable. 
-For `JSONRequest` and `FormURLEncodedRequest` the type of `body` is generic but needs to implement the `Encodable` protocol.
+For `JSONRequest`, `FormURLEncodedRequest` and `XMLRequest` the type of `body` is generic but needs to implement the `Encodable` protocol.
 
 **Example:**
 
@@ -189,6 +190,15 @@ struct Foo: JSONRequest {
 }
 
 struct Bar: FormURLEncodedRequest {
+
+    struct Body: Encodable {}
+    typealias Response = EmptyResponse
+
+    var body: Body
+    
+}
+
+struct Bar: XMLRequest {
 
     struct Body: Encodable {}
     typealias Response = EmptyResponse
@@ -397,9 +407,10 @@ To indicate the decoding system which response data format should be expected, c
 
 - `PlainDecodable`
 - `JSONDecodable`
+- `XMLDecodable`
 - `FormURLEncodedDecodable`
 
-For `JSONDecodable` and `FormURLEncodedDecodable` the type of `body` is generic but needs to implement the `Decodable` protocol.
+For `JSONDecodable`, `FormURLEncodedDecodable` and `XMLDecodable` the type of `body` is generic but needs to implement the `Decodable` protocol.
 
 **Example:**
 
@@ -417,6 +428,16 @@ struct Request: Postie.Request {
 struct Request: Postie.Request {
     struct Response: Decodable {
         struct Body: FormURLEncodedDecodable {
+            var value: String
+        }
+
+        @ResponseBody<Body> var body
+    }
+}
+
+struct Request: Postie.Request {
+    struct Response: Decodable {
+        struct Body: XMLDecodable {
             var value: String
         }
 
