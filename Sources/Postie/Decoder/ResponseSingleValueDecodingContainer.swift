@@ -11,7 +11,7 @@ class ResponseSingleValueDecodingContainer: SingleValueDecodingContainer {
     }
 
     func decodeNil() -> Bool {
-        fatalError()
+        fatalError("not implemented")
     }
 
     func decode<T>(_ type: T.Type) throws -> T where T: Decodable {

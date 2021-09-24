@@ -1,6 +1,7 @@
 import Foundation
 import PostieUtils
 import URLEncodedFormCoding
+import XMLCoder
 
 internal struct ResponseDecoding: Decoder {
 
@@ -21,7 +22,7 @@ internal struct ResponseDecoding: Decoder {
     }
 
     func unkeyedContainer() throws -> UnkeyedDecodingContainer {
-        fatalError()
+        fatalError("not implemented")
     }
 
     func singleValueContainer() throws -> SingleValueDecodingContainer {
@@ -51,7 +52,7 @@ internal struct ResponseDecoding: Decoder {
     }
 
     func decodeBody<E: Decodable>(to type: [E].Type) throws -> [E] {
-        fatalError()
+        fatalError("not implemented")
     }
 
     func decodeBody<T: Decodable>(to type: T.Type) throws -> T {
@@ -63,6 +64,9 @@ internal struct ResponseDecoding: Decoder {
         }
         if type is JSONDecodable.Type {
             return try createJSONDecoder().decode(type, from: data)
+        }
+        if type is XMLDecodable.Type {
+            return try createXMLDecoder().decode(type, from: data)
         }
 
         if type is CollectionProtocol.Type {
@@ -80,6 +84,9 @@ internal struct ResponseDecoding: Decoder {
             if elementType is JSONDecodable.Type {
                 return try createJSONDecoder().decode(type, from: data)
             }
+            if elementType is XMLDecodable.Type {
+                return try createXMLDecoder().decode(type, from: data)
+            }
         }
         fatalError("Unsupported body type: \(type)")
     }
@@ -87,12 +94,6 @@ internal struct ResponseDecoding: Decoder {
     private func createJSONDecoder() -> JSONDecoder {
         let decoder = LoggingJSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        //        switch dateFormat {
-        //        case .iso8601:
-        //            decoder.dateDecodingStrategy = .iso8601
-        //        case .iso8601Full:
-        //            decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
-        //        }
         return decoder
     }
 
@@ -113,5 +114,11 @@ internal struct ResponseDecoding: Decoder {
             )
         }
         return value
+    }
+
+    private func createXMLDecoder() -> XMLDecoder {
+        let decoder = XMLDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
     }
 }

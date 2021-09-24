@@ -196,4 +196,79 @@ class RequestBodyCodingTests: XCTestCase {
         }
         XCTAssertEqual(encoded.httpBody, "some string".data(using: .utf16)!)
     }
+
+    // MARK: - XML
+
+    func testEncoding_emptyXMLBody_shouldEncodeToSingleClosedXMLTagAndSetContentTypeHeader() {
+        struct Foo: XMLEncodable {
+
+            struct Body: Encodable {}
+            typealias Response = EmptyResponse
+
+            var body: Body
+
+        }
+
+        let request = Foo(body: Foo.Body())
+        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoded: URLRequest
+        do {
+            encoded = try encoder.encodeXML(request: request)
+        } catch {
+            XCTFail("Failed to encode: " + error.localizedDescription)
+            return
+        }
+        XCTAssertEqual(encoded.httpBody, "<Body />".data(using: .utf8)!)
+        XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "text/xml")
+    }
+
+    func testEncoding_customXMLContentTypeHeader_shouldUseCustomHeader() {
+        struct Foo: XMLEncodable {
+
+            struct Body: Encodable {}
+            typealias Response = EmptyResponse
+
+            var body: Body
+
+            @RequestHeader(name: "Content-Type") var customContentTypeHeader
+        }
+
+        var request = Foo(body: Foo.Body())
+        request.customContentTypeHeader = "postie-test"
+        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoded: URLRequest
+        do {
+            encoded = try encoder.encodeXML(request: request)
+        } catch {
+            XCTFail("Failed to encode: " + error.localizedDescription)
+            return
+        }
+        XCTAssertEqual(encoded.httpBody, "<Body />".data(using: .utf8)!)
+        XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "postie-test")
+    }
+
+    func testEncoding_nonEmptyXMLBody_shouldEncodeToValidXMLAndSetContentTypeHeader() {
+        struct Foo: XMLEncodable {
+
+            struct Body: Encodable {
+                var value: Int
+            }
+            typealias Response = EmptyResponse
+
+            var body: Body
+
+        }
+
+        let request = Foo(body: Foo.Body(value: 123))
+        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoded: URLRequest
+        do {
+            encoded = try encoder.encodeXML(request: request)
+        } catch {
+            XCTFail("Failed to encode: " + error.localizedDescription)
+            return
+        }
+        XCTAssertEqual(encoded.httpBody, "<Body><value>123</value></Body>".data(using: .utf8)!)
+        XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "text/xml")
+    }
 }

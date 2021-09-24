@@ -193,4 +193,47 @@ class ResponseBodyCodingTests: XCTestCase {
         XCTAssertNotNil(decoded.body)
         XCTAssertEqual(decoded.body?.value, "asdf")
     }
+
+    // MARK: - XML
+
+    func testXMLResponseBodyDecoding_optionalContent_shouldDecodeNil() {
+        struct Response: Decodable {
+
+            struct Body: XMLDecodable {
+                var value: String
+            }
+
+            @ResponseBody<Body>.OptionalContent var body
+        }
+        let response = HTTPURLResponse(url: baseURL, statusCode: 204, httpVersion: nil, headerFields: nil)!
+        let data = Data()
+        let decoder = ResponseDecoder()
+        guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
+            return
+        }
+        XCTAssertNil(decoded.body)
+    }
+
+    func testXMLResponseBodyDecoding_valueInData_optionalContent_shouldDecodeFromData() {
+        struct Response: Decodable {
+
+            struct Body: XMLDecodable {
+                var value: String
+            }
+
+            @ResponseBody<Body>.OptionalContent var body
+        }
+        let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        let data = """
+        <body>
+            <value>asdf</value>
+        </body>
+        """.data(using: .utf8)!
+        let decoder = ResponseDecoder()
+        guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response)), "Failed to decode response") else {
+            return
+        }
+        XCTAssertNotNil(decoded.body)
+        XCTAssertEqual(decoded.body?.value, "asdf")
+    }
 }
