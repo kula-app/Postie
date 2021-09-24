@@ -1,5 +1,5 @@
 public protocol RequestPathParameterValue {
-  
+
     var serialized: String { get }
 }
 

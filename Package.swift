@@ -11,8 +11,15 @@ let package = Package(
         .library(name: "Postie", targets: ["Postie"]),
         .library(name: "PostieMock", targets: ["PostieMock"])
     ],
+    dependencies: [
+        .package(url: "https://github.com/MaxDesiatov/XMLCoder", .upToNextMajor(from: "0.1.3"))
+    ],
     targets: [
-        .target(name: "Postie", dependencies: ["URLEncodedFormCoding", "PostieUtils"]),
+        .target(name: "Postie", dependencies: [
+            "URLEncodedFormCoding",
+            "PostieUtils",
+            "XMLCoder"
+        ]),
         .testTarget(name: "PostieTests", dependencies: ["Postie", "PostieMock"]),
 
         .target(name: "PostieMock", dependencies: ["Postie"]),
