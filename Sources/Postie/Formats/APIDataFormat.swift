@@ -4,5 +4,5 @@ public enum APIDataFormat {
     case json
     case formURLEncoded
     case xml
-    
+
 }

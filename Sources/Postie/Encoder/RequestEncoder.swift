@@ -82,7 +82,6 @@ public class RequestEncoder {
         return try encoder.encode(body)
     }
 
-
     // MARK: - Shared
 
     private func encodeToBaseURLRequest<Request: Encodable>(_ request: Request) throws -> URLRequest {
