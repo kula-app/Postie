@@ -532,6 +532,33 @@ struct Response: Decodable {
 
 Multiple properties can be declared with this property wrapper. All of them will have the value set.
 
+#### Nested Responses
+
+To support inheritance, which can be especially usefule for pagination, use the property wrapper `@NestedResponse` to add nested responses.
+
+While decoding the flat HTTP response will be applied recursively to all nested responses, therefore it is possible, that different nested responses access different values of the original HTTP response.
+
+**Example:**
+
+```swift
+struct PaginatedResponse<NestedRequest: Request>: Decodable {
+
+    /// Header which indicates how many more elements are available
+    @ResponseHeader<DefaultHeaderStrategy> var totalElements
+
+    @NestedResponse var nested: NestedRequest
+}
+
+struct ListRequest: Request {
+
+    typealias Response = PaginatedResponse<ListResponse>
+
+    struct ListResponse: Decodable {
+        // see other examples
+    }
+}
+```
+
 ### HTTP API Client
 
 The easiest way of sending Postie requests, is using the `HTTPAPIClient` which takes care of encoding requests, and decoding responses.
