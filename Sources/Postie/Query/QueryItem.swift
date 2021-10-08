@@ -59,4 +59,27 @@ extension QueryItem where T == Int? {
     }
 }
 
+extension QueryItem where T == Bool? {
+
+    public init(name: String?) {
+        self.name = name
+        self.wrappedValue = nil
+    }
+}
+
 extension QueryItem: Encodable where T: Encodable {}
+
+public protocol OptionalType {
+    associatedtype Wrapped
+    static var none: Self { get }
+}
+
+extension Optional: OptionalType {}
+
+extension QueryItem where T: OptionalType, T.Wrapped: RawRepresentable {
+
+    public init(name: String?) {
+        self.init(defaultValue: .none)
+        self.name = name
+    }
+}

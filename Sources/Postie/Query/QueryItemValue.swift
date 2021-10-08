@@ -78,3 +78,33 @@ extension Array: QueryItemValue where Element: QueryItemValue {
         forEach(iterator)
     }
 }
+
+extension Set: QueryItemValue where Element: QueryItemValue {
+
+    public var serializedQueryItem: String? {
+        fatalError("This method should not be called. Multiple query items should be added to the query individually")
+    }
+
+    public var isCollection: Bool {
+        return true
+    }
+
+    public func iterateCollection(_ iterator: (QueryItemValue) -> Void) {
+        forEach(iterator)
+    }
+}
+
+extension QueryItemValue where Self: RawRepresentable, RawValue: QueryItemValue {
+
+    public var serializedQueryItem: String? {
+        self.rawValue.serializedQueryItem
+    }
+
+    public var isCollection: Bool {
+        self.rawValue.isCollection
+    }
+
+    public func iterateCollection(_ iterator: (QueryItemValue) -> Void) {
+        self.rawValue.iterateCollection(iterator)
+    }
+}
