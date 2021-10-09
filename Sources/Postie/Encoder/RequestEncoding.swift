@@ -85,7 +85,7 @@ internal class RequestEncoding: Encoder {
         return pathParameters.reduce(path) { partialResult, parameter in
             let key = parameter.key
             let value = parameter.value
-            let replacement = value.serialized.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? value.serialized
+            let replacement = value.serialized
 
             return partialResult.replacingOccurrences(of: "{\(key)}", with: replacement)
         }

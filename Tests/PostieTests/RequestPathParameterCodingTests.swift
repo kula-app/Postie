@@ -109,7 +109,7 @@ class RequestPathParameterCodingTests: XCTestCase {
         guard let urlRequest = encodeRequest(request: request) else {
             return
         }
-        XCTAssertEqual(urlRequest.url?.path, "/some%20name")
+        XCTAssertEqual(urlRequest.url?.absoluteString, "https://local.url/some%20name")
     }
 
     func testEncoding_stringParameterCustomNaming_shouldUseCustomName() {
@@ -125,7 +125,7 @@ class RequestPathParameterCodingTests: XCTestCase {
         guard let urlRequest = encodeRequest(request: request) else {
             return
         }
-        XCTAssertEqual(urlRequest.url?.path, "/some%20name")
+        XCTAssertEqual(urlRequest.url?.absoluteString, "https://local.url/some%20name")
     }
 
     func testEncoding_intParameterCustomNaming_shouldUseCustomName() {
@@ -203,6 +203,22 @@ class RequestPathParameterCodingTests: XCTestCase {
             return
         }
         XCTAssertEqual(urlRequest.url?.path, "/321")
+    }
+
+    func testEncoding_paramValueContainsUnescapedCharacters_shouldEscapeCharacters() {
+        struct Request: Encodable {
+
+            typealias Response = EmptyResponse
+
+            @RequestPath var path = "/{id}"
+            @RequestPathParameter var id: String?
+        }
+        var request = Request()
+        request.id = "{ABC}"
+        guard let urlRequest = encodeRequest(request: request) else {
+            return
+        }
+        XCTAssertEqual(urlRequest.url?.absoluteString, "https://local.url/%7BABC%7D")
     }
 
     internal func encodeRequest<T: Encodable>(request: T, file: StaticString = #filePath, line: UInt = #line) -> URLRequest? {
