@@ -98,7 +98,7 @@ internal struct ResponseDecoding: Decoder {
     }
 
     private func createFormURLEncodedDecoder() -> URLEncodedFormDecoder {
-        let decoder = URLEncodedFormDecoder()
+        let decoder = LoggingURLEncodedFormDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }

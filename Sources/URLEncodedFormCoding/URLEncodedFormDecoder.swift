@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import PostieUtils
 
-public final class URLEncodedFormDecoder: TopLevelDecoder {
+open class URLEncodedFormDecoder: TopLevelDecoder {
 
     public enum DecodingError: Error {
         case invalidData
@@ -17,7 +17,7 @@ public final class URLEncodedFormDecoder: TopLevelDecoder {
 
     public init() {}
 
-    public func decode<D>(_ decodable: D.Type, from data: Data) throws -> D where D: Decodable {
+    open func decode<D>(_ decodable: D.Type, from data: Data) throws -> D where D: Decodable {
         let urlEncodedFormData = String(data: data, encoding: .utf8) ?? ""
         let context = URLEncodedFormDataContext()
 

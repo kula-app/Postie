@@ -12,3 +12,4 @@ class LoggingJSONDecoder: JSONDecoder {
         }
     }
 }
+
