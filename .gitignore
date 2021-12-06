@@ -9,3 +9,11 @@ xcuserdata/
 
 # Ruby Gems
 vendor
+
+# Release Output
+Postie.xcframework
+Postie.sha256
+Postie.zip
+PostieMock.xcframework
+PostieMock.sha256
+PostieMock.zip
