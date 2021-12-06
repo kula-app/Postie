@@ -2,9 +2,8 @@ name: Publish Release
 
 on:
   push:
-    branches:
-      - "automatic-releases"
     tags:
+      - "v*"
 
 jobs:
   create_release:
