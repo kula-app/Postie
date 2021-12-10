@@ -1,20 +1,19 @@
-import XCTest
 @testable import Postie
+import XCTest
 
-fileprivate struct Response: Decodable {
+private struct Response: Decodable {
 
     @ResponseHeader<DefaultHeaderStrategy>
     var authorization: String
 
     @ResponseHeader<DefaultHeaderStrategy>
-    var length: String
+    var length: Int
 
     @ResponseHeader<DefaultHeaderStrategy>
     var contentType: String
 
     @ResponseHeader<DefaultHeaderStrategyOptional>
     var optionalValue: String?
-
 }
 
 class ResponseHeaderCodingTests: XCTestCase {
@@ -32,7 +31,7 @@ class ResponseHeaderCodingTests: XCTestCase {
             return
         }
         XCTAssertEqual(decoded.authorization, "Bearer Token")
-        XCTAssertEqual(decoded.length, "123")
+        XCTAssertEqual(decoded.length, 123)
     }
 
     func testDecoding_defaultStrategySeparatorInName_shouldDecodeToCamelCase() {
