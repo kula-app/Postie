@@ -13,10 +13,6 @@ public struct QueryItem<T> where T: QueryItemValue {
     public var name: String?
     public var wrappedValue: T
 
-    public init(wrappedValue: T) {
-        self.wrappedValue = wrappedValue
-    }
-
     public init(name: String? = nil, defaultValue: T) {
         self.name = name
         wrappedValue = defaultValue
@@ -38,7 +34,7 @@ extension QueryItem: QueryItemProtocol {
 
 public extension QueryItem where T == Bool {
 
-    init(name: String?) {
+    init(name: String? = nil) {
         self.name = name
         wrappedValue = false
     }
@@ -99,7 +95,7 @@ public protocol OptionalType {
     static var none: Self { get }
 }
 
-// MARK: - Optional + OptionalType
+// MARK: - OptionalType
 
 extension Optional: OptionalType {}
 
