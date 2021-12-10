@@ -5,7 +5,6 @@ internal protocol QueryItemProtocol {
 
     /// Path parameter value which should be serialized and appended to the URL
     var untypedValue: QueryItemValue { get }
-
 }
 
 @propertyWrapper
@@ -14,71 +13,95 @@ public struct QueryItem<T> where T: QueryItemValue {
     public var name: String?
     public var wrappedValue: T
 
-    public init(wrappedValue: T) {
-        self.wrappedValue = wrappedValue
-    }
-
-    public init(defaultValue: T) {
-        self.wrappedValue = defaultValue
-    }
-
-    public init(name: String?, defaultValue: T) {
+    public init(name: String? = nil, defaultValue: T) {
         self.name = name
-        self.wrappedValue = defaultValue
+        wrappedValue = defaultValue
     }
 }
+
+// MARK: - Encodable
+
+extension QueryItem: Encodable where T: Encodable {}
+
+// MARK: - QueryItemProtocol
 
 extension QueryItem: QueryItemProtocol {
 
     var untypedValue: QueryItemValue {
-        self.wrappedValue
+        wrappedValue
     }
 }
 
-extension QueryItem where T == String {
+public extension QueryItem where T == Bool {
 
-    public init(name: String?) {
+    init(name: String?) {
         self.name = name
-        self.wrappedValue = ""
+        wrappedValue = false
     }
 }
 
-extension QueryItem where T == String? {
+public extension QueryItem where T == Bool? {
 
-    public init(name: String?) {
+    init(name: String?) {
         self.name = name
-        self.wrappedValue = nil
+        wrappedValue = nil
     }
 }
 
-extension QueryItem where T == Int? {
+public extension QueryItem where T == Double {
 
-    public init(name: String?) {
+    init(name: String?) {
         self.name = name
-        self.wrappedValue = nil
+        wrappedValue = .zero
     }
 }
 
-extension QueryItem where T == Bool? {
+public extension QueryItem where T == Double? {
 
-    public init(name: String?) {
+    init(name: String?) {
         self.name = name
-        self.wrappedValue = nil
+        wrappedValue = nil
     }
 }
 
-extension QueryItem: Encodable where T: Encodable {}
+public extension QueryItem where T == Int? {
+
+    init(name: String?) {
+        self.name = name
+        wrappedValue = nil
+    }
+}
+
+public extension QueryItem where T == String {
+
+    init(name: String?) {
+        self.name = name
+        wrappedValue = ""
+    }
+}
+
+public extension QueryItem where T == String? {
+
+    init(name: String?) {
+        self.name = name
+        wrappedValue = nil
+    }
+}
+
+// MARK: - OptionalType
 
 public protocol OptionalType {
     associatedtype Wrapped
     static var none: Self { get }
 }
 
+// MARK: - Optional + OptionalType
+
 extension Optional: OptionalType {}
 
-extension QueryItem where T: OptionalType, T.Wrapped: RawRepresentable {
+public extension QueryItem where T: OptionalType, T.Wrapped: RawRepresentable {
 
-    public init(name: String?) {
+    init(name: String?) {
         self.init(defaultValue: .none)
         self.name = name
     }
