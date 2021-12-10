@@ -13,6 +13,10 @@ public struct QueryItem<T> where T: QueryItemValue {
     public var name: String?
     public var wrappedValue: T
 
+    public init(wrappedValue: T) {
+        self.wrappedValue = wrappedValue
+    }
+
     public init(name: String? = nil, defaultValue: T) {
         self.name = name
         wrappedValue = defaultValue
