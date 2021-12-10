@@ -1,6 +1,6 @@
+import Combine
 import Foundation
 import URLEncodedFormCoding
-import Combine
 import XMLCoder
 
 public class RequestEncoder {
@@ -19,16 +19,18 @@ public class RequestEncoder {
 
     public func encodeJson<Request>(request: Request) throws -> URLRequest where Request: JSONEncodable {
         var urlRequest = try encodeToBaseURLRequest(request)
-        urlRequest.httpBody = try encodeJsonBody(request.body)
+        urlRequest.httpBody = try encodeJsonBody(request.body, keyEncodingStrategy: request.keyEncodingStrategy)
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         return urlRequest
     }
 
-    private func encodeJsonBody<Body: Encodable>(_ body: Body) throws -> Data {
+    private func encodeJsonBody<Body: Encodable>(_ body: Body,
+                                                 keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy) throws -> Data {
+
         let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.keyEncodingStrategy = keyEncodingStrategy
         return try encoder.encode(body)
     }
 
@@ -90,7 +92,7 @@ public class RequestEncoder {
 
         var components: URLComponents
         // If a customURL got defined, use that one and append query items
-        if let url = encoder.customUrl {
+        if let url = encoder.customURL {
             guard let comps = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
                 throw RequestEncodingError.invalidCustomURL(url)
             }
@@ -123,5 +125,7 @@ public class RequestEncoder {
         return request
     }
 }
+
+// MARK: - TopLevelEncoder
 
 extension RequestEncoder: TopLevelEncoder {}
