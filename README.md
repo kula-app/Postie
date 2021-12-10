@@ -677,4 +677,4 @@ Here is a list of relevant articles and stories regarding Postie 🥳
 
 (Please let us know if you found more.)
 
-- [Installing Xcode with “not enough disk space available”](https://philprime.medium.com/installing-xcode-with-not-enough-disk-space-available-b96c8f17115b) - by Philip Niedertscheider
+- [Upgrading Swift HTTP APIs to the Next Level using Postie](https://itnext.io/upgrading-swift-http-apis-to-the-next-level-using-postie-942ec33f7a24) - by Philip Niedertscheider
