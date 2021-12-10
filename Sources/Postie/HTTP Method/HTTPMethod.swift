@@ -28,6 +28,6 @@ public enum HTTPMethod: String, Encodable {
     case trace = "TRACE"
 
     /// The `PATCH` method is used to apply partial modifications to a resource.
-    case path = "PATCH"
+    case patch = "PATCH"
 
 }
