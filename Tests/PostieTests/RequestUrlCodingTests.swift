@@ -1,15 +1,14 @@
-import XCTest
 @testable import Postie
+import XCTest
 
-fileprivate struct Request: Encodable {
+private struct Request: Encodable {
 
     typealias Response = EmptyResponse
 
-    @RequestUrl var url
-
+    @RequestURL var url
 }
 
-class RequestUrlCodingTests: XCTestCase {
+class RequestURLCodingTests: XCTestCase {
 
     let baseURL = URL(string: "https://postie.local/")!
 
@@ -21,14 +20,14 @@ class RequestUrlCodingTests: XCTestCase {
         XCTAssertEqual(urlRequest.url, baseURL)
     }
 
-    func testEncoding_nonEmptyUrl_shouldSetURL() {
-        let testUrl = URL(string: "https://postie2.local/customUrl")!
+    func testEncoding_nonEmptyURL_shouldSetURL() {
+        let testURL = URL(string: "https://postie2.local/customUrl")!
         var request = Request()
-        request.url = testUrl
+        request.url = testURL
         guard let urlRequest = encodeRequest(request: request) else {
             return
         }
-        XCTAssertEqual(urlRequest.url, testUrl)
+        XCTAssertEqual(urlRequest.url, testURL)
     }
 
     internal func encodeRequest<T: Encodable>(request: T, file: StaticString = #filePath, line: UInt = #line) -> URLRequest? {

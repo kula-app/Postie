@@ -1,5 +1,5 @@
-import XCTest
 @testable import Postie
+import XCTest
 
 class RequestBodyCodingTests: XCTestCase {
 
@@ -12,7 +12,6 @@ class RequestBodyCodingTests: XCTestCase {
             typealias Response = EmptyResponse
 
             var body: Body
-
         }
 
         let request = Foo(body: Foo.Body())
@@ -59,10 +58,10 @@ class RequestBodyCodingTests: XCTestCase {
             struct Body: Encodable {
                 var value: Int
             }
+
             typealias Response = EmptyResponse
 
             var body: Body
-
         }
 
         let request = Foo(body: Foo.Body(value: 123))
@@ -74,7 +73,63 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, "{\"value\":123}".data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, #"{"value":123}"#.data(using: .utf8)!)
+        XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/json")
+    }
+
+    func testEncoding_nonEmptyJSONBody_shouldEncodeToValidSnakeCaseJSON() {
+        struct Foo: JSONEncodable {
+
+            struct Body: Encodable {
+                var someValue: Int
+                var someOtherValue: String
+            }
+
+            typealias Response = EmptyResponse
+
+            var body: Body
+        }
+
+        let request = Foo(body: Foo.Body(someValue: 123, someOtherValue: "Bar"))
+        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoded: URLRequest
+        do {
+            encoded = try encoder.encodeJson(request: request)
+        } catch {
+            XCTFail("Failed to encode: " + error.localizedDescription)
+            return
+        }
+        XCTAssertEqual(encoded.httpBody, #"{"some_other_value":"Bar","some_value":123}"#.data(using: .utf8)!)
+        XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/json")
+    }
+
+    func testEncoding_nonEmptyJSONBody_shouldEncodeToValidCamelCaseJSON() {
+        struct Foo: JSONEncodable {
+
+            struct Body: Encodable {
+                var someValue: Int
+                var someOtherValue: String
+            }
+
+            typealias Response = EmptyResponse
+
+            var keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy {
+                return .useDefaultKeys
+            }
+
+            var body: Body
+        }
+
+        let request = Foo(body: Foo.Body(someValue: 123, someOtherValue: "Bar"))
+        let encoder = RequestEncoder(baseURL: baseURL)
+        let encoded: URLRequest
+        do {
+            encoded = try encoder.encodeJson(request: request)
+        } catch {
+            XCTFail("Failed to encode: " + error.localizedDescription)
+            return
+        }
+        XCTAssertEqual(encoded.httpBody, #"{"someValue":123,"someOtherValue":"Bar"}"#.data(using: .utf8)!)
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/json")
     }
 
@@ -85,7 +140,6 @@ class RequestBodyCodingTests: XCTestCase {
             typealias Response = EmptyResponse
 
             var body: Body
-
         }
 
         let request = Foo(body: Foo.Body())
@@ -135,10 +189,10 @@ class RequestBodyCodingTests: XCTestCase {
                 var value: Int
                 var others: String
             }
+
             typealias Response = EmptyResponse
 
             var body: Body
-
         }
 
         let request = Foo(body: Foo.Body(value: 123, others: "This escaped string"))
@@ -160,7 +214,6 @@ class RequestBodyCodingTests: XCTestCase {
             typealias Response = EmptyResponse
 
             var body: String
-
         }
 
         let request = Foo(body: "some string")
@@ -182,7 +235,6 @@ class RequestBodyCodingTests: XCTestCase {
 
             var body: String
             var encoding: String.Encoding = .utf16
-
         }
 
         let request = Foo(body: "some string")
@@ -206,7 +258,6 @@ class RequestBodyCodingTests: XCTestCase {
             typealias Response = EmptyResponse
 
             var body: Body
-
         }
 
         let request = Foo(body: Foo.Body())
@@ -253,10 +304,10 @@ class RequestBodyCodingTests: XCTestCase {
             struct Body: Encodable {
                 var value: Int
             }
+
             typealias Response = EmptyResponse
 
             var body: Body
-
         }
 
         let request = Foo(body: Foo.Body(value: 123))
