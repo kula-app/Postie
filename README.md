@@ -62,6 +62,13 @@ struct MyRequest: JSONRequest {
         // Status codes also have convenience utilities
         @ResponseStatusCode var statusCode
     }
+    
+    // The `keyEncodingStrategy` determines how to encode a type’s coding keys as JSON keys.
+    // The default value return `.convertToSnakeCase` but you can optionally choose to return `.useDefaultKeys` by implementing JSONRequest's protocol requirement as follow:
+    // var keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy {
+    //     .useDefaultKeys
+    // }
+
 
     // This property holds the data which will be encoded
     var body: RequestBody
@@ -534,7 +541,7 @@ Multiple properties can be declared with this property wrapper. All of them will
 
 #### Nested Responses
 
-To support inheritance, which can be especially usefule for pagination, use the property wrapper `@NestedResponse` to add nested responses.
+To support inheritance, which can be especially useful for pagination, use the property wrapper `@NestedResponse` to add nested responses.
 
 While decoding the flat HTTP response will be applied recursively to all nested responses, therefore it is possible, that different nested responses access different values of the original HTTP response.
 
