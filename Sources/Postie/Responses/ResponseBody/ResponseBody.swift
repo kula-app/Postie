@@ -1,1 +1,1 @@
-public typealias ResponseBody<Body: Decodable> = ResponseBodyWrapper<Body, DefaultHeaderStrategy, DefaultBodyStrategy>
+public typealias ResponseBody<Body: Decodable> = ResponseBodyWrapper<Body, DefaultBodyStrategy>

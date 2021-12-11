@@ -29,7 +29,7 @@ internal struct ResponseDecoding: Decoder {
         ResponseSingleValueDecodingContainer(decoder: self, codingPath: codingPath)
     }
 
-    func valueForHeaderCaseInsensitive(_ header: String) -> String? {
+    func valueForHeaderCaseInsensitive<T>(_ header: String) -> T? {
         // Find case insensitive
         for (key, value) in response.allHeaderFields {
             guard let key = key.base as? String else {
@@ -39,9 +39,19 @@ internal struct ResponseDecoding: Decoder {
                 .split(separator: "-")
                 .map(\.uppercasingFirst)
                 .joined()
-                .lowercasingFirst
-            if existingKey.lowercased() == header.lowercased() {
-                return value as? String
+                .lowercased()
+
+            if let value = value as? String, existingKey == header.lowercased() {
+                switch T.self {
+                case is String.Type:
+                    return value as? T
+
+                case is Int.Type:
+                    return Int(value) as? T
+
+                default:
+                    return value as? T
+                }
             }
         }
         return nil

@@ -5,7 +5,6 @@ internal protocol RequestHeaderProtocol {
 
     /// Header value which should be serialized
     var untypedValue: RequestHeaderValue { get }
-
 }
 
 @propertyWrapper
@@ -18,23 +17,29 @@ public struct RequestHeader<T> where T: RequestHeaderValue {
         self.wrappedValue = wrappedValue
     }
 
-    public init(name: String?, defaultValue: T) {
+    public init(name: String? = nil, defaultValue: T) {
         self.name = name
-        self.wrappedValue = defaultValue
-    }
-
-    public init(defaultValue: T) {
-        self.init(name: nil, defaultValue: defaultValue)
+        wrappedValue = defaultValue
     }
 }
 
-extension RequestHeader where T == String {
+public extension RequestHeader where T == String {
 
-    public init(name: String?) {
+    init(name: String?) {
         self.name = name
-        self.wrappedValue = ""
+        wrappedValue = ""
     }
 }
+
+public extension RequestHeader where T == String? {
+
+    init(name: String?) {
+        self.name = name
+        wrappedValue = nil
+    }
+}
+
+// MARK: - Encodable
 
 extension RequestHeader: Encodable where T: Encodable {}
 
