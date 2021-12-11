@@ -1,5 +1,5 @@
 @propertyWrapper
-public struct ResponseBodyWrapper<Body: Decodable, HeaderStrategy: ResponseHeaderDecodingStrategy, BodyStrategy: ResponseBodyDecodingStrategy> {
+public struct ResponseBodyWrapper<Body: Decodable, BodyStrategy: ResponseBodyDecodingStrategy> {
 
     public var wrappedValue: Body?
 
