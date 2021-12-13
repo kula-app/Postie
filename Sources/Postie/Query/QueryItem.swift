@@ -38,7 +38,7 @@ extension QueryItem: QueryItemProtocol {
 
 public extension QueryItem where T == Bool {
 
-    init(name: String? = nil) {
+    init(name: String?) {
         self.name = name
         wrappedValue = false
     }
@@ -99,7 +99,7 @@ public protocol OptionalType {
     static var none: Self { get }
 }
 
-// MARK: - OptionalType
+// MARK: - Optional + OptionalType
 
 extension Optional: OptionalType {}
 
