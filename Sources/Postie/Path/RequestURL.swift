@@ -1,7 +1,7 @@
 import Foundation
 
 @propertyWrapper
-public struct RequestUrl: Encodable {
+public struct RequestURL: Encodable {
 
     public var wrappedValue: URL?
 

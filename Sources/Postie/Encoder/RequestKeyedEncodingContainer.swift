@@ -38,20 +38,21 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
             encoder.setPath(path.wrappedValue)
         case let method as RequestHTTPMethod:
             encoder.setHttpMethod(method.wrappedValue)
-        case let url as RequestUrl:
-            guard let customUrl = url.wrappedValue else {
+        case let url as RequestURL:
+            guard let customURL = url.wrappedValue else {
                 break
             }
-            encoder.setCustomUrl(url: customUrl)
+            encoder.setCustomURL(url: customURL)
         default:
             // ignore any other values
             break
         }
     }
+
     // swiftlint:enable cyclomatic_complexity function_body_length
 
     func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: Key)
-        -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
+    -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
         RequestEncoding(parent: encoder, codingPath: [key]).container(keyedBy: keyType)
     }
 
@@ -71,6 +72,8 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
 private protocol AnyOptional {
     var isNil: Bool { get }
 }
+
+// MARK: - Optional + AnyOptional
 
 extension Optional: AnyOptional {
     fileprivate var isNil: Bool {
