@@ -1,6 +1,8 @@
 {
   "scanSettings": {
-    "baseBranches": []
+    "baseBranches": [
+        "main"
+    ]
   },
   "checkRunSettings": {
     "vulnerableCheckRunConclusionLevel": "failure",
