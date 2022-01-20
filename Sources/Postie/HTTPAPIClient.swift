@@ -179,35 +179,6 @@ open class HTTPAPIClient {
             .eraseToAnyPublisher()
     }
 
-    // MARK: - Response Handling
-
-    private func processResponse<Body: Decodable, Decoder: TopLevelDecoder>(body: Body.Type, data: Data, response: URLResponse, urlRequest: URLRequest, decoder: Decoder) throws -> (headers: [AnyHashable: Any], body: Body) where Decoder.Input == Data {
-        // Log the request
-        log(urlRequest: urlRequest, response: response, data: data)
-        // Check if response is an HTTP response ,and if the status code is valid
-        guard let httpResponse = response as? HTTPURLResponse, 200 ... 299 ~= httpResponse.statusCode else {
-            throw APIError.responseError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 500, data: data)
-        }
-        let decoded = try decoder.decode(Body.self, from: data)
-        return (httpResponse.allHeaderFields, decoded)
-    }
-
-    // MARK: - Error Handling
-
-    private static func processResponse(error: Error, urlRequest: URLRequest) -> APIError {
-        switch error {
-        case let urlError as URLError:
-            return .urlError(urlError)
-        case let decodingError as DecodingError:
-            os_log("Failed to decode object of request: %@, reason: %@", urlRequest.debugDescription, String(describing: decodingError))
-            return .decodingError(decodingError)
-        case let apiError as APIError:
-            return apiError
-        default:
-            return .unknown(error: error)
-        }
-    }
-
     // MARK: - Logging
 
     /// Logs an `Request` and the generated `URLRequest`
