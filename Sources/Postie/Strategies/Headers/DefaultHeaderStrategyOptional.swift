@@ -1,10 +1,8 @@
 import Foundation
 
-public struct DefaultHeaderStrategyOptional: ResponseHeaderDecodingStrategy {
+public struct DefaultHeaderStrategyOptional<RawValue>: ResponseHeaderDecodingStrategy where RawValue: Codable {
 
-    public typealias RawValue = String?
-
-    public static func decode(decoder: Decoder) throws -> RawValue {
+    public static func decode(decoder: Decoder) throws -> RawValue? {
         guard let key = decoder.codingPath.last?.stringValue else {
             throw ResponseHeaderDecodingError.missingCodingKey
         }
@@ -13,6 +11,9 @@ public struct DefaultHeaderStrategyOptional: ResponseHeaderDecodingStrategy {
             return try RawValue(from: decoder)
         }
         // Transform dash separator to camelCase
-        return responseDecoding.valueForHeaderCaseInsensitive(key)
+        guard let value: RawValue? = responseDecoding.valueForHeaderCaseInsensitive(key) else {
+            return nil
+        }
+        return value
     }
 }
