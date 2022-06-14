@@ -13,7 +13,10 @@ private struct Response: Decodable {
     var contentType: String
 
     @ResponseHeader<DefaultHeaderStrategyOptional>
-    var optionalValue: String?
+    var optionalStringValue: String?
+
+    @ResponseHeader<DefaultHeaderStrategyOptional>
+    var optionalIntValue: Int?
 }
 
 class ResponseHeaderCodingTests: XCTestCase {
@@ -22,7 +25,7 @@ class ResponseHeaderCodingTests: XCTestCase {
         "authorization": "Bearer Token",
         "LENGTH": "123",
         "Content-Type": "application/json",
-        "X-CUSTOM-HEADER": "second custom header"
+        "X-CUSTOM-HEADER": "second custom header",
     ])!
 
     func testDecoding_defaultStrategy_shouldDecodeCaseInSensitiveResponseHeaders() {
@@ -42,26 +45,49 @@ class ResponseHeaderCodingTests: XCTestCase {
         XCTAssertEqual(decoded.contentType, "application/json")
     }
 
-    func testDecoding_optionalValueNotGiven_shouldDecodeToNil() {
+    func testDecoding_optionalStringValueNotGiven_shouldDecodeToNil() {
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (Data(), response))) else {
             return
         }
-        XCTAssertNil(decoded.optionalValue)
+        XCTAssertNil(decoded.optionalStringValue)
     }
 
-    func testDecoding_optionalValueGiven_shouldDecodeToValue() {
+    func testDecoding_optionalIntValueNotGiven_shouldDecodeToNil() {
+        let decoder = ResponseDecoder()
+        guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (Data(), response))) else {
+            return
+        }
+        XCTAssertNil(decoded.optionalIntValue)
+    }
+
+    func testDecoding_optionalStringValueGiven_shouldDecodeToValue() {
         let response = HTTPURLResponse(url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil, headerFields: [
             "authorization": "Bearer Token",
             "LENGTH": "123",
             "Content-Type": "application/json",
             "X-Custom-Header": "a custom value",
-            "optionalValue": "value"
+            "optionalStringValue": "value",
         ])!
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (Data(), response))) else {
             return
         }
-        XCTAssertEqual(decoded.optionalValue, "value")
+        XCTAssertEqual(decoded.optionalStringValue, "value")
+    }
+
+    func testDecoding_optionalIntValueGiven_shouldDecodeToValue() {
+        let response = HTTPURLResponse(url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil, headerFields: [
+            "authorization": "Bearer Token",
+            "LENGTH": "123",
+            "Content-Type": "application/json",
+            "X-Custom-Header": "a custom value",
+            "optionalIntValue": "10",
+        ])!
+        let decoder = ResponseDecoder()
+        guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (Data(), response))) else {
+            return
+        }
+        XCTAssertEqual(decoded.optionalIntValue, 10)
     }
 }
