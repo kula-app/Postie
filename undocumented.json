@@ -1,0 +1,1398 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/APIError.swift",
+      "line": 3,
+      "symbol": "APIError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/APIError.swift",
+      "line": 5,
+      "symbol": "APIError.responseError(statusCode:data:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/APIError.swift",
+      "line": 6,
+      "symbol": "APIError.invalidResponse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/APIError.swift",
+      "line": 7,
+      "symbol": "APIError.urlError(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/APIError.swift",
+      "line": 8,
+      "symbol": "APIError.decodingError(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/APIError.swift",
+      "line": 9,
+      "symbol": "APIError.failedToEncodePlainText(encoding:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/APIError.swift",
+      "line": 10,
+      "symbol": "APIError.unknown(error:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Decoder/ResponseDecoder.swift",
+      "line": 4,
+      "symbol": "ResponseDecoder",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Decoder/ResponseDecoder.swift",
+      "line": 12,
+      "symbol": "ResponseDecoder",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/FormURLEncodedEncodable.swift",
+      "line": 4,
+      "symbol": "FormURLEncodedBodyProvider",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/FormURLEncodedEncodable.swift",
+      "line": 6,
+      "symbol": "FormURLEncodedBodyProvider.Body",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/FormURLEncodedEncodable.swift",
+      "line": 8,
+      "symbol": "FormURLEncodedBodyProvider.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/JSONEncodable.swift",
+      "line": 6,
+      "symbol": "JSONBodyProvider",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/JSONEncodable.swift",
+      "line": 8,
+      "symbol": "JSONBodyProvider.Body",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/JSONEncodable.swift",
+      "line": 10,
+      "symbol": "JSONBodyProvider.keyEncodingStrategy",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/JSONEncodable.swift",
+      "line": 11,
+      "symbol": "JSONBodyProvider.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/JSONEncodable.swift",
+      "line": 14,
+      "symbol": "JSONBodyProvider",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/JSONEncodable.swift",
+      "line": 16,
+      "symbol": "JSONBodyProvider.keyEncodingStrategy",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/PlainEncodable.swift",
+      "line": 4,
+      "symbol": "PlainBodyProvider",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/PlainEncodable.swift",
+      "line": 6,
+      "symbol": "PlainBodyProvider.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/PlainEncodable.swift",
+      "line": 7,
+      "symbol": "PlainBodyProvider.encoding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/PlainEncodable.swift",
+      "line": 11,
+      "symbol": "PlainBodyProvider",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/PlainEncodable.swift",
+      "line": 13,
+      "symbol": "PlainBodyProvider.encoding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/XMLEncodable.swift",
+      "line": 4,
+      "symbol": "XMLBodyProvider",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/XMLEncodable.swift",
+      "line": 6,
+      "symbol": "XMLBodyProvider.Body",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/Encodables/XMLEncodable.swift",
+      "line": 8,
+      "symbol": "XMLBodyProvider.body",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/RequestEncoder.swift",
+      "line": 6,
+      "symbol": "RequestEncoder",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/RequestEncoder.swift",
+      "line": 10,
+      "symbol": "RequestEncoder.init(baseURL:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/RequestEncoder.swift",
+      "line": 20,
+      "symbol": "RequestEncoder.encodeJson(request:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/RequestEncoder.swift",
+      "line": 39,
+      "symbol": "RequestEncoder.encodeFormURLEncoded(request:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/RequestEncoder.swift",
+      "line": 55,
+      "symbol": "RequestEncoder.encodePlain(request:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/RequestEncoder.swift",
+      "line": 73,
+      "symbol": "RequestEncoder.encodeXML(request:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Encoder/RequestEncoder.swift",
+      "line": 131,
+      "symbol": "RequestEncoder",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Formats/APIDataFormat.swift",
+      "line": 1,
+      "symbol": "APIDataFormat",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Formats/APIDataFormat.swift",
+      "line": 3,
+      "symbol": "APIDataFormat.plain",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Formats/APIDataFormat.swift",
+      "line": 4,
+      "symbol": "APIDataFormat.json",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Formats/APIDataFormat.swift",
+      "line": 5,
+      "symbol": "APIDataFormat.formURLEncoded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Formats/APIDataFormat.swift",
+      "line": 6,
+      "symbol": "APIDataFormat.xml",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTP Method/RequestHTTPMethod.swift",
+      "line": 2,
+      "symbol": "RequestHTTPMethod",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTP Method/RequestHTTPMethod.swift",
+      "line": 4,
+      "symbol": "RequestHTTPMethod.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTP Method/RequestHTTPMethod.swift",
+      "line": 6,
+      "symbol": "RequestHTTPMethod.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 6,
+      "symbol": "HTTPAPIClient",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 8,
+      "symbol": "HTTPAPIClient.session",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 9,
+      "symbol": "HTTPAPIClient.url",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 10,
+      "symbol": "HTTPAPIClient.pathPrefix",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 12,
+      "symbol": "HTTPAPIClient.init(url:pathPrefix:session:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 20,
+      "symbol": "HTTPAPIClient.send(_:receiveOn:callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 35,
+      "symbol": "HTTPAPIClient.send(_:receiveOn:callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 50,
+      "symbol": "HTTPAPIClient.send(_:receiveOn:callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 65,
+      "symbol": "HTTPAPIClient.send(_:receiveOn:callback:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 108,
+      "symbol": "HTTPAPIClient.send(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 123,
+      "symbol": "HTTPAPIClient.send(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 138,
+      "symbol": "HTTPAPIClient.send(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/HTTPAPIClient.swift",
+      "line": 153,
+      "symbol": "HTTPAPIClient.send(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 11,
+      "symbol": "RequestHeader",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 14,
+      "symbol": "RequestHeader.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 16,
+      "symbol": "RequestHeader.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 20,
+      "symbol": "RequestHeader.init(name:defaultValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 26,
+      "symbol": "RequestHeader",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 28,
+      "symbol": "RequestHeader.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 34,
+      "symbol": "RequestHeader",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 36,
+      "symbol": "RequestHeader.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeader.swift",
+      "line": 44,
+      "symbol": "RequestHeader",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeaderValue.swift",
+      "line": 1,
+      "symbol": "RequestHeaderValue",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeaderValue.swift",
+      "line": 3,
+      "symbol": "RequestHeaderValue.serializedHeaderValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeaderValue.swift",
+      "line": 9,
+      "symbol": "String.serializedHeaderValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeaderValue.swift",
+      "line": 16,
+      "symbol": "Int.serializedHeaderValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeaderValue.swift",
+      "line": 23,
+      "symbol": "Bool.serializedHeaderValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/RequestHeaderValue.swift",
+      "line": 30,
+      "symbol": "Optional.serializedHeaderValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/ResponseHeader.swift",
+      "line": 2,
+      "symbol": "ResponseHeader",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/ResponseHeader.swift",
+      "line": 4,
+      "symbol": "ResponseHeader.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/ResponseHeader.swift",
+      "line": 6,
+      "symbol": "ResponseHeader.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Headers/ResponseHeader.swift",
+      "line": 11,
+      "symbol": "ResponseHeader",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Networking/URLSessionProvider.swift",
+      "line": 4,
+      "symbol": "URLSessionProvider",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Networking/URLSessionProvider.swift",
+      "line": 6,
+      "symbol": "URLSessionProvider.send(urlRequest:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Networking/URLSessionProvider.swift",
+      "line": 8,
+      "symbol": "URLSessionProvider.send(urlRequest:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Networking/URLSessionProvider.swift",
+      "line": 14,
+      "symbol": "URLSession.send(urlRequest:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Networking/URLSessionProvider.swift",
+      "line": 18,
+      "symbol": "URLSession.send(urlRequest:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPath.swift",
+      "line": 2,
+      "symbol": "RequestPath",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPath.swift",
+      "line": 4,
+      "symbol": "RequestPath.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPath.swift",
+      "line": 6,
+      "symbol": "RequestPath.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPath.swift",
+      "line": 11,
+      "symbol": "RequestPath",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 13,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 16,
+      "symbol": "RequestPathParameter.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 18,
+      "symbol": "RequestPathParameter.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 22,
+      "symbol": "RequestPathParameter.init(name:defaultValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 27,
+      "symbol": "RequestPathParameter.getParameterType()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 39,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 41,
+      "symbol": "RequestPathParameter.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 47,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 49,
+      "symbol": "RequestPathParameter.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 55,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 57,
+      "symbol": "RequestPathParameter.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 63,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 65,
+      "symbol": "RequestPathParameter.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 71,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 73,
+      "symbol": "RequestPathParameter.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 79,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 81,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 88,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameter.swift",
+      "line": 101,
+      "symbol": "RequestPathParameter",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameterValue.swift",
+      "line": 1,
+      "symbol": "RequestPathParameterValue",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameterValue.swift",
+      "line": 3,
+      "symbol": "RequestPathParameterValue.serialized",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameterValue.swift",
+      "line": 7,
+      "symbol": "String.serialized",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameterValue.swift",
+      "line": 11,
+      "symbol": "Int.serialized",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameterValue.swift",
+      "line": 15,
+      "symbol": "Int16.serialized",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameterValue.swift",
+      "line": 19,
+      "symbol": "Int32.serialized",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameterValue.swift",
+      "line": 23,
+      "symbol": "Int64.serialized",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestPathParameterValue.swift",
+      "line": 27,
+      "symbol": "Optional.serialized",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestURL.swift",
+      "line": 4,
+      "symbol": "RequestURL",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestURL.swift",
+      "line": 6,
+      "symbol": "RequestURL.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Path/RequestURL.swift",
+      "line": 8,
+      "symbol": "RequestURL.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 11,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 14,
+      "symbol": "QueryItem.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 16,
+      "symbol": "QueryItem.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 20,
+      "symbol": "QueryItem.init(name:defaultValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 28,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 39,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 41,
+      "symbol": "QueryItem.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 47,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 49,
+      "symbol": "QueryItem.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 55,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 57,
+      "symbol": "QueryItem.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 63,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 65,
+      "symbol": "QueryItem.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 71,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 73,
+      "symbol": "QueryItem.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 79,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 81,
+      "symbol": "QueryItem.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 87,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 89,
+      "symbol": "QueryItem.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 97,
+      "symbol": "OptionalType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 98,
+      "symbol": "OptionalType.Wrapped",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 99,
+      "symbol": "OptionalType.none",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 106,
+      "symbol": "QueryItem",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItem.swift",
+      "line": 108,
+      "symbol": "QueryItem.init(name:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 1,
+      "symbol": "QueryItemValue",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 3,
+      "symbol": "QueryItemValue.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 5,
+      "symbol": "QueryItemValue.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 7,
+      "symbol": "QueryItemValue.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 14,
+      "symbol": "Array.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 18,
+      "symbol": "Array.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 22,
+      "symbol": "Array.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 31,
+      "symbol": "Bool.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 35,
+      "symbol": "Bool.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 37,
+      "symbol": "Bool.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 46,
+      "symbol": "Double.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 50,
+      "symbol": "Double.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 52,
+      "symbol": "Double.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 61,
+      "symbol": "Int.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 65,
+      "symbol": "Int.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 67,
+      "symbol": "Int.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 76,
+      "symbol": "String.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 80,
+      "symbol": "String.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 82,
+      "symbol": "String.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 91,
+      "symbol": "Optional.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 98,
+      "symbol": "Optional.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 105,
+      "symbol": "Optional.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 117,
+      "symbol": "Set.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 121,
+      "symbol": "Set.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 125,
+      "symbol": "Set.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 130,
+      "symbol": "QueryItemValue",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 132,
+      "symbol": "QueryItemValue.serializedQueryItem",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 136,
+      "symbol": "QueryItemValue.isCollection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Query/QueryItemValue.swift",
+      "line": 140,
+      "symbol": "QueryItemValue.iterateCollection(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Requests/Request.swift",
+      "line": 4,
+      "symbol": "Request.Response",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/EmptyResponse.swift",
+      "line": 1,
+      "symbol": "EmptyResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/NestedResponse.swift",
+      "line": 2,
+      "symbol": "NestedResponse",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/NestedResponse.swift",
+      "line": 4,
+      "symbol": "NestedResponse.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/NestedResponse.swift",
+      "line": 6,
+      "symbol": "NestedResponse.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/NestedResponse.swift",
+      "line": 11,
+      "symbol": "NestedResponse",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseBody/ResponseBody+DecodingStrategies.swift",
+      "line": 3,
+      "symbol": "ResponseBody.OptionalContent",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseBody/ResponseBody.swift",
+      "line": 1,
+      "symbol": "ResponseBody",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseBody/ResponseBody.swift",
+      "line": 1,
+      "symbol": "ResponseBody",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseBody/ResponseBodyWrapper.swift",
+      "line": 2,
+      "symbol": "ResponseBodyWrapper",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseBody/ResponseBodyWrapper.swift",
+      "line": 4,
+      "symbol": "ResponseBodyWrapper.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseBody/ResponseBodyWrapper.swift",
+      "line": 6,
+      "symbol": "ResponseBodyWrapper.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseBody/ResponseBodyWrapper.swift",
+      "line": 10,
+      "symbol": "ResponseBodyWrapper.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseBody/ResponseBodyWrapper.swift",
+      "line": 15,
+      "symbol": "ResponseBodyWrapper",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseErrorBody.swift",
+      "line": 2,
+      "symbol": "ResponseErrorBody",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseErrorBody.swift",
+      "line": 4,
+      "symbol": "ResponseErrorBody.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseErrorBody.swift",
+      "line": 6,
+      "symbol": "ResponseErrorBody.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseErrorBody.swift",
+      "line": 10,
+      "symbol": "ResponseErrorBody.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Responses/ResponseErrorBody.swift",
+      "line": 15,
+      "symbol": "ResponseErrorBody",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Status Codes/ResponseStatusCode.swift",
+      "line": 4,
+      "symbol": "ResponseStatusCode",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Status Codes/ResponseStatusCode.swift",
+      "line": 6,
+      "symbol": "ResponseStatusCode.wrappedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Status Codes/ResponseStatusCode.swift",
+      "line": 8,
+      "symbol": "ResponseStatusCode.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Status Codes/ResponseStatusCode.swift",
+      "line": 12,
+      "symbol": "ResponseStatusCode.init(wrappedValue:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Status Codes/ResponseStatusCode.swift",
+      "line": 16,
+      "symbol": "ResponseStatusCode.projectedValue",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Body/DefaultBodyStrategy.swift",
+      "line": 1,
+      "symbol": "DefaultBodyStrategy",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Body/OptionalContentStrategy.swift",
+      "line": 1,
+      "symbol": "OptionalContentStrategy",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Body/ResponseBodyDecodingStrategy.swift",
+      "line": 1,
+      "symbol": "ResponseBodyDecodingStrategy",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Headers/DefaultHeaderStrategy.swift",
+      "line": 3,
+      "symbol": "DefaultHeaderStrategy",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Headers/DefaultHeaderStrategy.swift",
+      "line": 5,
+      "symbol": "DefaultHeaderStrategy.decode(decoder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Headers/DefaultHeaderStrategyOptional.swift",
+      "line": 3,
+      "symbol": "DefaultHeaderStrategyOptional",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Headers/DefaultHeaderStrategyOptional.swift",
+      "line": 5,
+      "symbol": "DefaultHeaderStrategyOptional.decode(decoder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Headers/ResponseHeaderDecodingStrategy.swift",
+      "line": 1,
+      "symbol": "ResponseHeaderDecodingStrategy",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Headers/ResponseHeaderDecodingStrategy.swift",
+      "line": 2,
+      "symbol": "ResponseHeaderDecodingStrategy.RawValue",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Postie/Postie/Sources/Postie/Strategies/Headers/ResponseHeaderDecodingStrategy.swift",
+      "line": 4,
+      "symbol": "ResponseHeaderDecodingStrategy.decode(decoder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/work/Postie/Postie"
+}
