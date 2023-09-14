@@ -12,7 +12,7 @@ let package = Package(
         .library(name: "PostieMock", targets: ["PostieMock"])
     ],
     dependencies: [
-        .package(url: "https://github.com/MaxDesiatov/XMLCoder", .upToNextMajor(from: "0.16.0"))
+        .package(url: "https://github.com/MaxDesiatov/XMLCoder", .upToNextMajor(from: "0.17.1"))
     ],
     targets: [
         .target(name: "Postie", dependencies: [
