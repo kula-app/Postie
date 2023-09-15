@@ -3,6 +3,9 @@ import Foundation
 
 let danger = Danger()
 
+let allSourceFiles = danger.git.modifiedFiles + danger.git.createdFiles
+let sourceChanges = allSourceFiles.contains { $0.hasPrefix("Source") }
+
 // Ensure no copyright header
 let swiftFilesWithCopyright = allSourceFiles.filter {
     $0.contains("Copyright") && ($0.fileType == .swift  || $0.fileType == .m)
