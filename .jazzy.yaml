@@ -1,0 +1,42 @@
+# Name of module being documented
+module: Postie
+# Limit the included files to the main package
+include: Sources/Postie/**
+# Folder to output the HTML docs to
+output: docs
+
+# Name of author to attribute in docs
+author: kula app GmbH, Philip Niedertscheider
+# Author URL of this project
+author_url: https://github.com/kula-app
+# Copyright markdown rendered at the bottom of the docs page
+copyright: "© 2023 [kula app GmbH](https://kula.app), [Philip Niedertscheider](https://philprime.dev). All rights reserved."
+# URL to link from the source host's logo.
+source_host_url: https://github.com/kula-app/Postie
+
+# Which theme to use. Specify either 'apple' (default), one of the other built-in theme names, or the
+# path to your mustache templates and other assets for a custom theme.
+theme: fullwidth
+# Title to display at the top of each page, overriding the default generated from module name and version.
+title: Postie
+
+# Control whether Jazzy uses Swift Package Manager, xcodebuild, or swift-symbolgraph to build the module to be documented.
+# By default it uses xcodebuild if there is a .xcodeproj file in the source directory.
+swift_build_tool: spm
+# Arguments to forward to xcodebuild, swift build, or sourcekitten.
+build_tool_arguments: []
+# The base URL on the source host of the project's files, to link from individual declarations.
+# For example https://github.com/realm/realm-cocoa/tree/v0.87.1
+# source_host_files_url: ''
+# minimum access control level to document
+min_acl: public
+# Don't document declarations that have no documentation comments.
+skip_undocumented: false
+# Default text for undocumented symbols. The default is "Undocumented", put "" if no text is required
+undocumented_text: Undocumented
+# Replace unsafe characters in filenames with an encoded representation.
+# This will reduce human readability of some URLs, but may be necessary for projects that
+# expose filename-unfriendly functions such as /(_:_:)
+use_safe_filenames: true
+# Create separate pages for all global declarations (classes, structures, enums etc.) even if they don't have children.
+separate_global_declarations: true
