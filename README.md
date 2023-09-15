@@ -1,21 +1,21 @@
 ![Postie](Resources/header.jpg)
 
-# Postie - The Next-Level HTTP API Client using Combine
+# Postie - The next-level structured HTTP API Client
 
 <div align="center">
-	<a href="https://github.com/philprime/Postie/actions">
-		<img src="https://github.com/philprime/Postie/workflows/Build,%20Lint%20&%20Test/badge.svg" alt="GitHub Actions">
+	<a href="https://github.com/kula-app/Postie/actions">
+		<img src="https://github.com/kula-app/Postie/workflows/Build,%20Lint%20&%20Test/badge.svg" alt="GitHub Actions">
 	</a>
-	<a href="https://philprime.github.io/Postie/">
-		<img src="https://raw.githubusercontent.com/philprime/Postie/gh-pages/badge.svg"/>
+	<a href="https://kula-app.github.io/Postie/">
+		<img src="https://raw.githubusercontent.com/kula-app/Postie/gh-pages/badge.svg"/>
 	</a>
 	<a href="https://codecov.io/gh/kula-app/Postie">
-		<img src="https://codecov.io/gh/philprime/Postie/branch/main/graph/badge.svg" alt="codecov">
+		<img src="https://codecov.io/gh/kula-app/Postie/branch/main/graph/badge.svg" alt="codecov">
 	</a>
 </div>
 
 <p align="center">
-    <sub>Created and maintained by <a href="https://github.com/philprime">Philip Niedertscheider</a> at <a href="https://kula.app">kula.app</a> and all the amazing <a href="https://github.com/kula-app/Postie/graphs/contributors">contributors</a>.</sub>
+    <sub>Created and maintained by <a href="https://github.com/philprime">Philip Niedertscheider</a> at <a href="https://github.com/kula-app">kula.app</a> and all the amazing <a href="https://github.com/kula-app/Postie/graphs/contributors">contributors</a>.</sub>
 </p>
 
 Postie is a pure Swift library for building URLRequests using property wrappers.
