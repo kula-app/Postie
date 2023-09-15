@@ -1,4 +1,4 @@
-name: Build, Lint & Test
+name: Build & Test
 
 on:
   push:
@@ -9,7 +9,8 @@ on:
       - main
 
 jobs:
-  run-macos:
+  build-test:
+    name: Build & Test
     runs-on: macos-latest
 
     steps:
