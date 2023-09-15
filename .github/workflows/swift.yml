@@ -30,6 +30,7 @@ jobs:
 
       - name: Generate Code Coverage
         run: |
+          mkdir -p coverage
           xcrun llvm-cov export \
             .build/debug/PostiePackageTests.xctest/Contents/MacOS/PostiePackageTests \
             -instr-profile .build/debug/codecov/default.profdata \
