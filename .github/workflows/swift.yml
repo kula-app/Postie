@@ -35,7 +35,7 @@ jobs:
             -instr-profile .build/debug/codecov/default.profdata \
             --format="lcov" \
             --ignore-filename-regex "\\.build" \
-            --ignore-filename-regex "Tests" > info.lcov
+            --ignore-filename-regex "Tests" > ./coverage/coverage.lcov
 
       - name: Upload code coverage to Codecov
         uses: codecov/codecov-action@v3
