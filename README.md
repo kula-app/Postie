@@ -62,7 +62,7 @@ struct MyRequest: JSONRequest {
         // Status codes also have convenience utilities
         @ResponseStatusCode var statusCode
     }
-    
+
     // The `keyEncodingStrategy` determines how to encode a type’s coding keys as JSON keys.
     // The default value return `.convertToSnakeCase` but you can optionally choose to return `.useDefaultKeys` by implementing JSONRequest's protocol requirement as follow:
     // var keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy {
@@ -115,7 +115,7 @@ client.send(request)
 
 ## Core Concept
 
-The networking layer of `Foundation` (and with `Combine`) is already quite advanced. 
+The networking layer of `Foundation` (and with `Combine`) is already quite advanced.
 Using `URLRequest` you can set many different configuration values, e.g. the HTTP Method or Headers.
 
 Unfortunately you still need to manually serialize your payload into `Foundation.Data` and set it as the request body.
@@ -126,8 +126,8 @@ Also the response needs to be decoded, and even if a few decoders are included, 
 Even worse when the response structure differs in case of an error, e.g. instead of
 
 ```json
-{ 
-    "some": "data"
+{
+  "some": "data"
 }
 ```
 
@@ -135,9 +135,9 @@ an error object is returned:
 
 ```json
 {
-    "error":  {
-        "message": "Something went wrong!"
-    }
+  "error": {
+    "message": "Something went wrong!"
+  }
 }
 ```
 
@@ -181,7 +181,7 @@ If you want to include payload data, use one of the following ones:
 - `FormURLEncodedRequest`
 - `XMLRequest`
 
-All of these expect a `body` instance variable. 
+All of these expect a `body` instance variable.
 For `JSONRequest`, `FormURLEncodedRequest` and `XMLRequest` the type of `body` is generic but needs to implement the `Encodable` protocol.
 
 **Example:**
@@ -193,7 +193,7 @@ struct Foo: JSONRequest {
     typealias Response = EmptyResponse
 
     var body: Body
-    
+
 }
 
 struct Bar: FormURLEncodedRequest {
@@ -202,7 +202,7 @@ struct Bar: FormURLEncodedRequest {
     typealias Response = EmptyResponse
 
     var body: Body
-    
+
 }
 
 struct Bar: XMLRequest {
@@ -211,7 +211,7 @@ struct Bar: XMLRequest {
     typealias Response = EmptyResponse
 
     var body: Body
-    
+
 }
 ```
 
@@ -226,7 +226,7 @@ struct Foo: PlainRequest {
 
     var body: String
     var encoding: String.Encoding = .utf16 // default: .utf8
-    
+
 }
 ```
 
@@ -252,7 +252,7 @@ request.method = .post
 
 **Note:**
 
-As the property name is ignored, it is possible to have multiple properties with this property wrapper, but only the *last* one will be used.
+As the property name is ignored, it is possible to have multiple properties with this property wrapper, but only the _last_ one will be used.
 
 #### Setting the request URL path
 
@@ -275,7 +275,7 @@ let request = Request(path: "/some-detail-path")
 
 Additionally the request path can contain variables using the mustache syntax, e.g. `/path/with/{variable_name}/inside`.
 
-To set the variable value, add a new instance property using the `@RequestPathParameter` property wrapper. 
+To set the variable value, add a new instance property using the `@RequestPathParameter` property wrapper.
 By default the encoder uses the variable name for encoding, but you can also define a custom name:
 
 ```swift
@@ -293,13 +293,13 @@ struct Request: Encodable {
 var request = Request(id: 123)
 request.contactId = "ABC456"
 
-// Result: 
+// Result:
 https://postie.local/app/123/contacts/ABC456
 ```
 
 **Note:**
 
-As the property name is ignored, it is possible to have multiple properties with this property wrapper, but only the *last* one will be used.
+As the property name is ignored, it is possible to have multiple properties with this property wrapper, but only the _last_ one will be used.
 Also you need to require a leading forward slash (`/`) in the path.
 
 #### Adding query items to the URL
@@ -338,12 +338,12 @@ Supported query value types can be found in [`QueryItemValue.swift`](https://git
 
 **Note:**
 
-When using an `Array` as the query item type, every value in the array is appended using the same `name`. 
+When using an `Array` as the query item type, every value in the array is appended using the same `name`.
 The remote server is then responsible to collect all query items with the same name and merge them into an array.
 
 Example: `[1, 2, 3]` with name `values` becomes `?values=1&values=2&values=3`
 
-As multiple query items can use the same custom name, they will all be appended to the query. 
+As multiple query items can use the same custom name, they will all be appended to the query.
 This does not apply to synthesized names, as a Swift type can not have more than one property with the exact same name.
 
 #### Adding Headers to the request
@@ -382,12 +382,12 @@ Supported header values types can be found in [`RequestHeaderValue.swift`](https
 
 **Note:**
 
-As multiple query items can use the same custom name, the *last* one will be used. 
+As multiple query items can use the same custom name, the _last_ one will be used.
 This does not apply to synthesized names, as a Swift type can not have more than one property with the exact same name.
 
 ### Defining the response
 
-Every struct implementing `Request` expects to have an associated `Response` type implementing the `Decodable` protocol. 
+Every struct implementing `Request` expects to have an associated `Response` type implementing the `Decodable` protocol.
 In the examples above the `EmptyResponse` convenience type (which is an empty, decodable type) has been used.
 
 The response structure will be populated with data from either the response body data or metadata.
@@ -470,7 +470,7 @@ struct Request: Postie.Request {
 As mentioned in [Core Concept](#core-concept) Postie allows defining a body response type when receiving an invalid status code (>=400).
 
 It's usage is exactly the same as with `@ResponseBody`, but instead you need to use the property wrapper `@ResponseErrorBody`.
-Either the `@ResponseBody` or the `@ResponseErrorBody` is set, never both at the same time. 
+Either the `@ResponseBody` or the `@ResponseErrorBody` is set, never both at the same time.
 
 The error response body gets set if the response status code is neither a 2XX nor a 3XX status code.
 
@@ -489,7 +489,7 @@ struct Request: Postie.Request {
 
 #### Response headers
 
-Use the property wrapper `@ResponseHeader<Strategy>` inside the response type. 
+Use the property wrapper `@ResponseHeader<Strategy>` inside the response type.
 
 In the moment, the following decoding strategies are implemented:
 
@@ -570,10 +570,31 @@ struct ListRequest: Request {
 
 The easiest way of sending Postie requests, is using the `HTTPAPIClient` which takes care of encoding requests, and decoding responses.
 
-All it takes to create a client, is the URL which is used as a base for all requests. Afterwards you can just send the requests, using the Combine publishers.
+All it takes to create a client, is the URL which is used as a base for all requests. Afterwards you can just send the requests, either using Async-Await, Combine publishers, or classic callbacks.
 
 Additionally the `HTTPAPIClient` provides the option of setting a `session` provider, which encapsulates the default `URLSession` by a protocol.
 This allows to create networking clients which can be mocked (perfect for unit testing).
+
+#### Async Await
+
+**Example:**
+
+```swift
+let url: URL = ...
+let client = HTTPAPIClient(baseURL: url)
+
+// ... create request ...
+
+try {
+    let response = try await client.send(request)
+    // process response
+    print(response)
+} catch {
+    // handle error
+}
+```
+
+#### Combine
 
 **Example:**
 
@@ -597,7 +618,28 @@ client.send(request)
         print(response)
     })
     .store(in: &cancellables)
-//
+```
+
+#### Callback
+
+**Example:**
+
+```swift
+let url: URL = ...
+let client = HTTPAPIClient(baseURL: url)
+
+// ... create request ...
+
+client.send(request) { result in
+    switch result {
+    case .failure(let error):
+        // handle error
+        break
+    case .finished(let response):
+        // process response
+        break
+    }
+}
 ```
 
 ### Encoding & Decoding
@@ -638,7 +680,7 @@ let data: Data = ...
 // Create decoder
 let decoder = ResponseDecoder()
 do {
-    let decoded = try decoder.decode(Response.self, from: (data, response))) 
+    let decoded = try decoder.decode(Response.self, from: (data, response)))
     // continue with decoded response
     ...
 } catch{
