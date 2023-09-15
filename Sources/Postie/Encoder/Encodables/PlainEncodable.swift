@@ -1,3 +1,5 @@
+import Foundation
+
 /// A type that should encode itself to a JSON representation.
 public typealias PlainEncodable = Encodable & PlainFormatProvider & PlainBodyProvider
 

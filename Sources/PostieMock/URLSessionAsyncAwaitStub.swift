@@ -2,7 +2,7 @@ import Combine
 import Foundation
 import Postie
 
-public class URLSessionCombineStub: URLSessionProvider {
+public class URLSessionAsyncAwaitStub: URLSessionProvider {
     private var result: Result<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>
     private var urlRequestHandler: (URLRequest) -> Void
 
@@ -16,23 +16,21 @@ public class URLSessionCombineStub: URLSessionProvider {
         self.urlRequestHandler = urlRequestHandler
     }
 
-    public func send(urlRequest request: URLRequest) -> AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure> {
+    public func send(urlRequest request: URLRequest) async throws -> (Data, URLResponse) {
         urlRequestHandler(request)
-        return Future { promise in
-            switch self.result {
-            case let .success(output):
-                promise(.success(output))
-            case let .failure(error):
-                promise(.failure(error))
-            }
-        }.eraseToAnyPublisher()
+        switch result {
+        case let .success(output):
+            return output
+        case let .failure(error):
+            throw error
+        }
     }
 
     public func send(urlRequest _: URLRequest, completion _: @escaping (Data?, URLResponse?, Error?) -> Void) {
         fatalError("not available")
     }
 
-    public func send(urlRequest _: URLRequest) async throws -> (Data, URLResponse) {
+    public func send(urlRequest _: URLRequest) -> AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure> {
         fatalError("not available")
     }
 }
