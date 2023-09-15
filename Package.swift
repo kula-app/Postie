@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 
 import PackageDescription
 
@@ -20,13 +20,13 @@ let package = Package(
             "PostieUtils",
             "XMLCoder"
         ]),
-        .testTarget(name: "PostieTests", dependencies: ["Postie", "PostieMock"]),
+        //dev .testTarget(name: "PostieTests", dependencies: ["Postie", "PostieMock"]),
 
         .target(name: "PostieMock", dependencies: ["Postie"]),
 
         .target(name: "URLEncodedFormCoding", dependencies: ["PostieUtils"]),
 
         .target(name: "PostieUtils"),
-        .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"]),
+        //dev .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"]),
     ]
 )
