@@ -2,37 +2,46 @@ name: Build, Lint & Test
 
 on:
   push:
-    branches: [ main, develop ]
+    branches:
+      - main
   pull_request:
-    branches: [ main, develop ]
+    branches:
+      - main
 
 jobs:
   run-macos:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
-    - name: Build
-      run: swift build
-    - name: Run tests
-      run: swift test --enable-code-coverage
-    - name: Generate Code Coverage
-      run: |
-        xcrun llvm-cov export \
-          .build/debug/PostiePackageTests.xctest/Contents/MacOS/PostiePackageTests \
-          -instr-profile .build/debug/codecov/default.profdata \
-          --format="lcov" \
-          --ignore-filename-regex "\\.build" \
-          --ignore-filename-regex "Tests" > info.lcov
-    - name: Upload Code Coverage
-      run: |  
-        bash <(curl -s https://codecov.io/bash) \
-          -J 'Postie' \
-          -G info.lcov
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Set the fetch-depth > 1 or set to 0 for codecov upload detection
+          fetch-depth: 2
 
-  swiftlint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
-    - name: SwiftLint
-      uses: norio-nomura/action-swiftlint@3.2.1
+      - name: Enable development dependencies
+        run: sed -i.bak "s/\/\/dev//g" Package.swift
+
+      - name: Build
+        run: swift build
+
+      - name: Run tests
+        run: swift test --enable-code-coverage
+
+      - name: Generate Code Coverage
+        run: |
+          xcrun llvm-cov export \
+            .build/debug/PostiePackageTests.xctest/Contents/MacOS/PostiePackageTests \
+            -instr-profile .build/debug/codecov/default.profdata \
+            --format="lcov" \
+            --ignore-filename-regex "\\.build" \
+            --ignore-filename-regex "Tests" > info.lcov
+
+      - name: Upload code coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/coverage.lcov
+          name: codecov-umbrella
+          flags: unittests
+          fail_ci_if_error: true

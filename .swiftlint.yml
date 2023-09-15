@@ -1,5 +1,6 @@
 included:
   - Sources
+  - Dangerfile.swift
 
 # Rules
 identifier_name:
