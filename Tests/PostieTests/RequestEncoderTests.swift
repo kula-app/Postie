@@ -5,7 +5,7 @@ class RequestEncoderTests: XCTestCase {
 
     let baseURL = URL(string: "https://postie.local")!
 
-    func testEncodePlain_bodyHasInvalidCoding_shouldThrowError() {
+    func testEncodePlain_bodyHasInvalidCoding_shouldThrowError() async {
         struct Foo: PlainRequest {
             typealias Response = EmptyResponse
             var body: String
@@ -16,7 +16,7 @@ class RequestEncoderTests: XCTestCase {
         let encoding: String.Encoding = .ascii
         let request = Foo(body: "🔥")
         let encoder = RequestEncoder(baseURL: baseURL)
-        XCTAssertThrowsError(try encoder.encodePlain(request: request)) { error in
+        await XCTAssertThrowsError(try encoder.encodePlain(request: request)) { error in
             switch error {
             case APIError.failedToEncodePlainText(let failedEncoding):
                 XCTAssertEqual(failedEncoding, encoding)

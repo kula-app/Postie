@@ -103,6 +103,78 @@ open class HTTPAPIClient {
         })
     }
 
+    // MARK: - Async-Await
+
+    open func send<R: Request>(_ request: R) async throws -> R.Response {
+        // Create a request encoder
+        let encoder = RequestEncoder(baseURL: prepareURL())
+        // Encode request
+        let urlRequest: URLRequest
+        do {
+            urlRequest = try encoder.encode(request)
+        } catch {
+            // If encoding fails, exit immediately
+            throw error
+        }
+        log(request: request, urlRequest)
+        return try await sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest)
+    }
+
+    open func send<Request: JSONRequest>(_ request: Request) async throws -> Request.Response {
+        // Create a request encoder
+        let encoder = RequestEncoder(baseURL: prepareURL())
+        // Encode request
+        let urlRequest: URLRequest
+        do {
+            urlRequest = try encoder.encodeJson(request: request)
+        } catch {
+            // If encoding fails, exit immediately
+            throw error
+        }
+        log(request: request, urlRequest)
+        return try await sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
+    }
+
+    open func send<Request: FormURLEncodedRequest>(_ request: Request) async throws -> Request.Response {
+        // Create a request encoder
+        let encoder = RequestEncoder(baseURL: prepareURL())
+        // Encode request
+        let urlRequest: URLRequest
+        do {
+            urlRequest = try encoder.encodeFormURLEncoded(request: request)
+        } catch {
+            // If encoding fails, exit immediately
+            throw error
+        }
+        log(request: request, urlRequest)
+        return try await sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
+    }
+
+    open func send<Request: PlainRequest>(_ request: Request) async throws -> Request.Response {
+        // Create a request encoder
+        let encoder = RequestEncoder(baseURL: prepareURL())
+        // Encode request
+        let urlRequest: URLRequest
+        do {
+            urlRequest = try encoder.encodePlain(request: request)
+        } catch {
+            // If encoding fails, exit immediately
+            throw error
+        }
+        log(request: request, urlRequest)
+        return try await sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest)
+    }
+
+    private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest) async throws -> Response {
+        // Send request using the given URL session provider
+        let (data, response) = try await session.send(urlRequest: urlRequest)
+        guard let response = response as? HTTPURLResponse else {
+            throw APIError.invalidResponse
+        }
+        let decoder = ResponseDecoder()
+        return try decoder.decode(Response.self, from: (data: data, response: response))
+    }
+
     // MARK: - Combine
 
     open func send<R: Request>(_ request: R) -> AnyPublisher<R.Response, Error> {

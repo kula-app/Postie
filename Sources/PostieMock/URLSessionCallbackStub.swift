@@ -1,9 +1,8 @@
-import Foundation
 import Combine
+import Foundation
 import Postie
 
 public class URLSessionCallbackStub: URLSessionProvider {
-
     private var result: (data: Data?, response: URLResponse?, error: Error?)
     private var urlRequestHandler: (URLRequest) -> Void
 
@@ -22,7 +21,11 @@ public class URLSessionCallbackStub: URLSessionProvider {
         completion(result.data, result.response, result.error)
     }
 
-    public func send(urlRequest request: URLRequest) -> AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure> {
+    public func send(urlRequest _: URLRequest) -> AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure> {
+        fatalError("not available")
+    }
+
+    public func send(urlRequest _: URLRequest) async throws -> (Data, URLResponse) {
         fatalError("not available")
     }
 }
