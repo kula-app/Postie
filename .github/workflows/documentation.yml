@@ -21,7 +21,7 @@ jobs:
 
       - name: Generate Documentation
         run: |
-          sed  -i.bak "s/title:\(.*\)/title:\1 (${{ github.ref }})/g" .jazzy.yaml
+          sed  -i.bak "s/title:\(.*\)/title:\1 (${{ github.ref_name }})/g" .jazzy.yaml
           bundle exec jazzy
 
       - name: Fix Invalid URLs
