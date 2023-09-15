@@ -1,4 +1,4 @@
-![Postie](Resources/header.jpg)
+![Postie](https://raw.githubusercontent.com/kula-app/Postie/main/Resources/header.jpg)
 
 # Postie - The next-level structured HTTP API Client
 

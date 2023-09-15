@@ -13,6 +13,8 @@ author_url: https://github.com/kula-app
 copyright: "© 2023 [kula app GmbH](https://kula.app), [Philip Niedertscheider](https://philprime.dev). All rights reserved."
 # URL to link from the source host's logo.
 source_host_url: https://github.com/kula-app/Postie
+#  The base URL on the source host of the project's files, to link from individual declarations.
+source_host_files_url: https://github.com/kula-app/Postie/tree/main
 
 # Which theme to use. Specify either 'apple' (default), one of the other built-in theme names, or the
 # path to your mustache templates and other assets for a custom theme.
