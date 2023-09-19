@@ -113,8 +113,17 @@ public class RequestEncoder {
             }
             components = comps
         }
+
         if !encoder.queryItems.isEmpty {
-            components.queryItems = encoder.queryItems
+            // Existing URL query items should not be overwritten, as they might
+            // be set by the custom URL
+            if let existingItems = components.queryItems {
+                for item in encoder.queryItems where !existingItems.contains(where: { $0.name == item.name }) {
+                    components.queryItems = (components.queryItems ?? []) + [item]
+                }
+            } else {
+                components.queryItems = encoder.queryItems
+            }
         }
         guard let url = components.url else {
             throw RequestEncodingError.failedToCreateURL
