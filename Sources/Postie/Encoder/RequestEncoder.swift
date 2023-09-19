@@ -4,7 +4,6 @@ import URLEncodedFormCoding
 import XMLCoder
 
 public class RequestEncoder {
-
     let baseURL: URL
 
     public init(baseURL: URL) {
@@ -26,9 +25,10 @@ public class RequestEncoder {
         return urlRequest
     }
 
-    private func encodeJsonBody<Body: Encodable>(_ body: Body,
-                                                 keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy) throws -> Data {
-
+    private func encodeJsonBody<Body: Encodable>(
+        _ body: Body,
+        keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy
+    ) throws -> Data {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = keyEncodingStrategy
         return try encoder.encode(body)
@@ -135,6 +135,6 @@ public class RequestEncoder {
     }
 }
 
-// MARK: - TopLevelEncoder
+// MARK: TopLevelEncoder
 
 extension RequestEncoder: TopLevelEncoder {}
