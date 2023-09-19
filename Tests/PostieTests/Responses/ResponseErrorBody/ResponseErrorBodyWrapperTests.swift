@@ -1,3 +1,4 @@
+// swiftlint:disable nesting
 @testable import Postie
 import XCTest
 
@@ -66,7 +67,6 @@ class ResponseErrorBodyWrapperTests: XCTestCase {
         XCTAssertTrue(FooBodyStrategy.didCallIsError)
     }
 
-
     func testDecoding_nonResponseDecoder_shouldDirectlyDecodeBodyType() throws {
         // Arrange
         class FooBodyStrategy: ResponseErrorBodyDecodingStrategy {
@@ -91,3 +91,4 @@ class ResponseErrorBodyWrapperTests: XCTestCase {
         XCTAssertEqual(response.body, .init(foo: "value"))
     }
 }
+// swiftlint:enable nesting

@@ -1,3 +1,4 @@
+// swiftlint:disable nesting
 @testable import Postie
 import XCTest
 
@@ -79,7 +80,6 @@ class ResponseBodyWrapperTests: XCTestCase {
         XCTAssertFalse(FooBodyStrategy.didCallAllowsEmptyContent)
         XCTAssertTrue(FooBodyStrategy.didCallValidateStatus)
     }
-
 
     func testDecoding_nonResponseDecoder_shouldDirectlyDecodeBodyType() throws {
         // Arrange
@@ -186,10 +186,11 @@ class ResponseBodyWrapperTests: XCTestCase {
             case let DecodingError.dataCorrupted(context):
                 XCTAssertEqual((context.underlyingError as? NSError)?.code, 3840)
             default:
-                XCTFail()
+                XCTFail("Unexpected error")
             }
         }
         // Assert
         XCTAssertTrue(DisallowsEmptyBodyStrategy.didCallAllowsEmptyContent)
     }
 }
+// swiftlint:enable nesting

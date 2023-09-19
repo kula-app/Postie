@@ -1,5 +1,6 @@
 included:
   - Sources
+  - Tests
   - Dangerfile.swift
 
 # Rules
@@ -7,5 +8,6 @@ identifier_name:
   excluded:
     - or
     - op
+    - id
 
 line_length: 150

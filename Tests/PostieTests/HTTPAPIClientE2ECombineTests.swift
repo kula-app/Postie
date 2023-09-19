@@ -1,10 +1,10 @@
-import XCTest
-import Postie
 import Combine
+import Postie
 import PostieMock
+// swiftlint:disable nesting
+import XCTest
 
 class HTTPAPIClientE2ECombineTests: XCTestCase {
-
     var cancellables: Set<AnyCancellable>!
 
     let baseURL = URL(string: "https://local.test")!
@@ -36,12 +36,15 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         var request = Request(value: 321)
         request.name = "This custom name"
         request.optionalGivenValue = true
-        let _ = self.sendTesting(request: request, stubbed: stubSession) { client, request in
+        _ = sendTesting(request: request, stubbed: stubSession) { client, request in
             client.send(request)
         }
 
         // Assert request URL
-        XCTAssertEqual(requestedURL, URL(string: "?custom_name=This%20custom%20name&value=321&optionalGivenValue=true", relativeTo: baseURL)!.absoluteURL)
+        XCTAssertEqual(requestedURL, URL(
+            string: "?custom_name=This%20custom%20name&value=321&optionalGivenValue=true",
+            relativeTo: baseURL
+        )!.absoluteURL)
     }
 
     func testSending_requestHeader_shouldBeInRequestHeaders() {
@@ -52,7 +55,6 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
             @RequestHeader var value: Int
             @RequestHeader var optionalNilValue: Bool?
             @RequestHeader var optionalGivenValue: Bool?
-
         }
         let stubResponse: (data: Data, response: URLResponse) = (
             data: Data(),
@@ -68,7 +70,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         var request = Request(value: 321)
         request.name = "this custom name"
         request.optionalGivenValue = true
-        let _ = self.sendTesting(request: request, stubbed: stubSession) { client, request in
+        _ = sendTesting(request: request, stubbed: stubSession) { client, request in
             client.send(request)
         }
 
@@ -85,6 +87,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
             struct Body: Encodable {
                 var value: Int
             }
+
             struct Response: Decodable {}
 
             var body: Body
@@ -101,7 +104,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
 
         // Send request
         let request = Request(body: .init(value: 321))
-        let _ = self.sendTesting(request: request, stubbed: stubSession) { client, request in
+        _ = sendTesting(request: request, stubbed: stubSession) { client, request in
             client.send(request)
         }
 
@@ -127,7 +130,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         let stubSession = URLSessionCombineStub(response: stubResponse)
 
         // Send request
-        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
+        let (receivedResponse, receivedError) = sendTesting(request: Request(), stubbed: stubSession) { client, request in
             client.send(request)
         }
 
@@ -165,7 +168,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         let stubSession = URLSessionCombineStub(response: stubResponse)
 
         // Send request
-        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
+        let (receivedResponse, receivedError) = sendTesting(request: Request(), stubbed: stubSession) { client, request in
             client.send(request)
         }
 
@@ -211,7 +214,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         let stubSession = URLSessionCombineStub(response: stubResponse)
 
         // Send request
-        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
+        let (receivedResponse, receivedError) = sendTesting(request: Request(), stubbed: stubSession) { client, request in
             client.send(request)
         }
 
@@ -240,7 +243,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
             response: URLResponse(url: baseURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
         )
         let stubSession = URLSessionCombineStub(response: stubResponse)
-        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), stubbed: stubSession) { client, request in
+        let (receivedResponse, receivedError) = sendTesting(request: Request(), stubbed: stubSession) { client, request in
             client.send(request)
         }
         XCTAssertNil(receivedResponse)
@@ -258,12 +261,19 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
 }
 
 extension HTTPAPIClientE2ECombineTests {
-
-    func sendTesting<Request: Postie.Request>(request: Request, stubbed: URLSessionCombineStub, _ send: (HTTPAPIClient, Request) -> AnyPublisher<Request.Response, Error>) -> (response: Request.Response?, error: Error?) {
+    func sendTesting<Request: Postie.Request>(
+        request: Request,
+        stubbed: URLSessionCombineStub,
+        _ send: (HTTPAPIClient, Request) -> AnyPublisher<Request.Response, Error>
+    ) -> (response: Request.Response?, error: Error?) {
         sendTesting(request: request, client: HTTPAPIClient(url: baseURL, session: stubbed), send)
     }
 
-    func sendTesting<Request: Postie.Request>(request: Request, client: HTTPAPIClient, _ send: (HTTPAPIClient, Request) -> AnyPublisher<Request.Response, Error>) -> (response: Request.Response?, error: Error?) {
+    func sendTesting<Request: Postie.Request>(
+        request: Request,
+        client: HTTPAPIClient,
+        _ send: (HTTPAPIClient, Request) -> AnyPublisher<Request.Response, Error>
+    ) -> (response: Request.Response?, error: Error?) {
         // expectation to be fulfilled when we've received all expected values
         let resultExpectation = expectation(description: "all values received")
         var receivedResponse: Request.Response?
@@ -273,7 +283,7 @@ extension HTTPAPIClientE2ECombineTests {
         send(client, request)
             .sink(receiveCompletion: { completion in
                 switch completion {
-                case .failure(let error):
+                case let .failure(error):
                     receivedError = error
                 case .finished:
                     break
@@ -288,3 +298,4 @@ extension HTTPAPIClientE2ECombineTests {
     }
 }
 
+// swiftlint:enable nesting
