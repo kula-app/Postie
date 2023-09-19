@@ -4,7 +4,6 @@ import URLEncodedFormCoding
 import XMLCoder
 
 public class RequestEncoder {
-
     let baseURL: URL
 
     public init(baseURL: URL) {
@@ -26,9 +25,10 @@ public class RequestEncoder {
         return urlRequest
     }
 
-    private func encodeJsonBody<Body: Encodable>(_ body: Body,
-                                                 keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy) throws -> Data {
-
+    private func encodeJsonBody<Body: Encodable>(
+        _ body: Body,
+        keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy
+    ) throws -> Data {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = keyEncodingStrategy
         return try encoder.encode(body)
@@ -113,8 +113,17 @@ public class RequestEncoder {
             }
             components = comps
         }
+
         if !encoder.queryItems.isEmpty {
-            components.queryItems = encoder.queryItems
+            // Existing URL query items should not be overwritten, as they might
+            // be set by the custom URL
+            if let existingItems = components.queryItems {
+                for item in encoder.queryItems where !existingItems.contains(where: { $0.name == item.name }) {
+                    components.queryItems = (components.queryItems ?? []) + [item]
+                }
+            } else {
+                components.queryItems = encoder.queryItems
+            }
         }
         guard let url = components.url else {
             throw RequestEncodingError.failedToCreateURL
@@ -126,6 +135,6 @@ public class RequestEncoder {
     }
 }
 
-// MARK: - TopLevelEncoder
+// MARK: TopLevelEncoder
 
 extension RequestEncoder: TopLevelEncoder {}
