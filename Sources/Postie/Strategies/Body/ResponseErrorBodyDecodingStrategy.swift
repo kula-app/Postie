@@ -1,7 +1,8 @@
 public protocol ResponseErrorBodyDecodingStrategy {
     /// Using the `validate(statusCode:)` method, you can define HTTP code(s) that should handled as an error.
     ///
-    /// Use this property in a custom strategy implementation (example below) to check against the response's `statusCode` and determine wether or not it should fail when receiving empty data.
+    /// Use this property in a custom strategy implementation (example below) to check against the response's
+    /// `statusCode` and determine wether or not it should fail when receiving empty data.
     ///
     /// ```swift
     /// public class SpecificStatusCodeDecodingStrategy: ResponseErrorBodyDecodingStrategy {

@@ -3,6 +3,7 @@ import Foundation
 import Postie
 
 public class URLSessionCallbackStub: URLSessionProvider {
+    // swiftlint:disable:next large_tuple
     private var result: (data: Data?, response: URLResponse?, error: Error?)
     private var urlRequestHandler: (URLRequest) -> Void
 
