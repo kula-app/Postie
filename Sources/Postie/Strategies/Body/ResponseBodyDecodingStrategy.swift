@@ -13,5 +13,7 @@ public protocol ResponseBodyDecodingStrategy {
     ///
 
     /// Indicates wether the decoding should fail when no content is returned or not.
-    static func allowsEmptyContent(for statusCode: Int?) -> Bool
+    static func allowsEmptyContent(for statusCode: Int) -> Bool
+
+    static func validate(statusCode: Int) -> Bool
 }
