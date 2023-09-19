@@ -1,3 +1,4 @@
+// swiftlint:disable nesting
 import Postie
 import PostieMock
 import XCTest
@@ -28,12 +29,15 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
         var request = Request(value: 321)
         request.name = "This custom name"
         request.optionalGivenValue = true
-        let _ = try await sendTesting(request: request, session: stubSession) { client, request in
+        _ = try await sendTesting(request: request, session: stubSession) { client, request in
             try await client.send(request)
         }
 
         // Assert request URL
-        XCTAssertEqual(requestedURL, URL(string: "?custom_name=This%20custom%20name&value=321&optionalGivenValue=true", relativeTo: baseURL)!.absoluteURL)
+        XCTAssertEqual(requestedURL, URL(
+            string: "?custom_name=This%20custom%20name&value=321&optionalGivenValue=true",
+            relativeTo: baseURL
+        )!.absoluteURL)
     }
 
     func testSending_requestHeader_shouldBeInRequestHeaders() async throws {
@@ -59,7 +63,7 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
         var request = Request(value: 321)
         request.name = "this custom name"
         request.optionalGivenValue = true
-        let _ = try await sendTesting(request: request, session: stubSession) { client, request in
+        _ = try await sendTesting(request: request, session: stubSession) { client, request in
             try await client.send(request)
         }
 
@@ -67,7 +71,7 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
         XCTAssertEqual(requestHeaders, [
             "custom_name": "this custom name",
             "value": "321",
-            "optionalGivenValue": "true",
+            "optionalGivenValue": "true"
         ])
     }
 
@@ -92,7 +96,7 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
         }
 
         // Send request
-        let _ = try await sendTesting(request: Request(body: .init(value: 321)), session: stubSession) { client, request in
+        _ = try await sendTesting(request: Request(body: .init(value: 321)), session: stubSession) { client, request in
             try await client.send(request)
         }
 
@@ -220,12 +224,18 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
 }
 
 extension HTTPAPIClientE2EAsyncAwaitTests {
-    func sendTesting<Request: Postie.Request>(request: Request, session: URLSessionProvider, _ send: (HTTPAPIClient, Request) async throws -> Request.Response) async throws -> Request.Response {
+    func sendTesting<Request: Postie.Request>(
+        request: Request, session: URLSessionProvider,
+        _ send: (HTTPAPIClient, Request) async throws -> Request.Response
+    ) async throws -> Request.Response {
         let client = HTTPAPIClient(url: baseURL, session: session)
         return try await sendTesting(request: request, client: client, send)
     }
 
-    func sendTesting<Request: Postie.Request>(request: Request, client: HTTPAPIClient, _ send: (HTTPAPIClient, Request) async throws -> Request.Response) async throws -> Request.Response {
+    func sendTesting<Request: Postie.Request>(
+        request: Request, client: HTTPAPIClient,
+        _ send: (HTTPAPIClient, Request) async throws -> Request.Response
+    ) async throws -> Request.Response {
         return try await send(client, request)
     }
 }
@@ -246,3 +256,5 @@ extension XCTest {
         }
     }
 }
+
+// swiftlint:enable nesting

@@ -1,3 +1,4 @@
+// swiftlint:disable nesting type_body_length
 @testable import Postie
 import XCTest
 
@@ -323,3 +324,4 @@ class RequestBodyCodingTests: XCTestCase {
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "text/xml")
     }
 }
+// swiftlint:enable nesting type_body_length

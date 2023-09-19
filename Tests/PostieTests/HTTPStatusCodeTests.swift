@@ -1,3 +1,4 @@
+// swiftlint:disable type_body_length
 import XCTest
 @testable import Postie
 
@@ -342,3 +343,4 @@ class HTTPStatusCodeTests: XCTestCase {
         XCTAssertFalse(range ~= 1212)
     }
 }
+// swiftlint:enable type_body_length

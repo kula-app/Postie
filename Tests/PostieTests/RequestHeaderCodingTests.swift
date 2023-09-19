@@ -1,7 +1,8 @@
+// swiftlint:disable nesting
 import XCTest
 @testable import Postie
 
-fileprivate struct Foo: Encodable {
+private struct Foo: Encodable {
 
     typealias Response = EmptyResponse
 
@@ -100,3 +101,4 @@ class RequestHeaderCodingTests: XCTestCase {
         return encoded.allHTTPHeaderFields
     }
 }
+// swiftlint:enable nesting

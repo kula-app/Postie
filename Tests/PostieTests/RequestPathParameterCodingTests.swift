@@ -1,3 +1,4 @@
+// swiftlint:disable nesting
 @testable import Postie
 import XCTest
 
@@ -233,3 +234,4 @@ class RequestPathParameterCodingTests: XCTestCase {
         return encoded
     }
 }
+// swiftlint:enable nesting

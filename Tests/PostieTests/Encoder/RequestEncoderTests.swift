@@ -1,3 +1,4 @@
+// swiftlint:disable nesting
 @testable import Postie
 import XCTest
 
@@ -20,7 +21,7 @@ class RequestEncoderTests: XCTestCase {
             case let APIError.failedToEncodePlainText(failedEncoding):
                 XCTAssertEqual(failedEncoding, encoding)
             default:
-                XCTFail()
+                XCTFail("Unexpected error")
             }
         }
     }
@@ -77,3 +78,4 @@ class RequestEncoderTests: XCTestCase {
         XCTAssertEqual(request.url, URL(string: "https://testing.local?field1=value1"))
     }
 }
+// swiftlint:enable nesting

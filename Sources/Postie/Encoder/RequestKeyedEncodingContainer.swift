@@ -1,11 +1,10 @@
 import Foundation
 
 class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where Key: CodingKey {
-
     var codingPath: [CodingKey]
     let encoder: RequestEncoding
 
-    init(for encoder: RequestEncoding, keyedBy type: Key.Type, codingPath: [CodingKey]) {
+    init(for encoder: RequestEncoding, keyedBy _: Key.Type, codingPath: [CodingKey]) {
         self.encoder = encoder
         self.codingPath = codingPath
     }
@@ -14,7 +13,7 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
         encoder.addQueryItem(name: key.stringValue, value: nil)
     }
 
-    // swiftlint:disable cyclomatic_complexity
+    // swiftlint:disable:next cyclomatic_complexity
     func encode<T>(_ value: T, forKey key: Key) throws where T: Encodable {
         switch value {
         case let queryItem as QueryItemProtocol where queryItem.untypedValue.isCollection:
@@ -49,10 +48,10 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
         }
     }
 
-    // swiftlint:enable cyclomatic_complexity function_body_length
-
-    func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: Key)
-    -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
+    func nestedContainer<NestedKey>(
+        keyedBy keyType: NestedKey.Type,
+        forKey key: Key
+    ) -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
         RequestEncoding(parent: encoder, codingPath: [key]).container(keyedBy: keyType)
     }
 
@@ -64,7 +63,7 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
         encoder
     }
 
-    func superEncoder(forKey key: Key) -> Encoder {
+    func superEncoder(forKey _: Key) -> Encoder {
         encoder
     }
 }

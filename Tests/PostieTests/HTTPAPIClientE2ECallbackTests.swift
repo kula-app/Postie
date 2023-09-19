@@ -1,9 +1,9 @@
-import XCTest
 import Postie
 import PostieMock
+// swiftlint:disable nesting
+import XCTest
 
 class HTTPAPIClientE2ECallbackTests: XCTestCase {
-
     let baseURL = URL(string: "https://local.test")!
 
     func testSending_queryItems_shouldBeInRequestURI() {
@@ -14,7 +14,6 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             @QueryItem var value: Int
             @QueryItem var optionalGivenValue: Bool?
             @QueryItem var optionalNilValue: Bool?
-
         }
         let stubResponse: (data: Data, response: URLResponse) = (
             data: Data(),
@@ -30,12 +29,14 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         var request = Request(value: 321)
         request.name = "This custom name"
         request.optionalGivenValue = true
-        let _ = self.sendTesting(request: request, session: stubSession) { client, request, callback in
+        _ = sendTesting(request: request, session: stubSession) { client, request, callback in
             client.send(request, callback: callback)
         }
 
         // Assert request URL
-        XCTAssertEqual(requestedURL, URL(string: "?custom_name=This%20custom%20name&value=321&optionalGivenValue=true", relativeTo: baseURL)!.absoluteURL)
+        XCTAssertEqual(requestedURL, URL(
+            string: "?custom_name=This%20custom%20name&value=321&optionalGivenValue=true", relativeTo: baseURL
+        )!.absoluteURL)
     }
 
     func testSending_requestHeader_shouldBeInRequestHeaders() {
@@ -46,7 +47,6 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             @RequestHeader var value: Int
             @RequestHeader var optionalNilValue: Bool?
             @RequestHeader var optionalGivenValue: Bool?
-
         }
         let stubResponse: (data: Data, response: URLResponse) = (
             data: Data(),
@@ -54,7 +54,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         )
 
         var requestHeaders: [String: String]?
-        let stubSession = URLSessionCallbackStub(response:stubResponse) { request in
+        let stubSession = URLSessionCallbackStub(response: stubResponse) { request in
             requestHeaders = request.allHTTPHeaderFields
         }
 
@@ -62,7 +62,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         var request = Request(value: 321)
         request.name = "this custom name"
         request.optionalGivenValue = true
-        let _ = self.sendTesting(request: request, session: stubSession) { client, request, callback in
+        _ = sendTesting(request: request, session: stubSession) { client, request, callback in
             client.send(request, callback: callback)
         }
 
@@ -79,6 +79,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             struct Body: Encodable {
                 var value: Int
             }
+
             struct Response: Decodable {}
 
             var body: Body
@@ -89,13 +90,13 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         )
 
         var requestBody: Data?
-        let stubSession = URLSessionCallbackStub(response:stubResponse) { request in
+        let stubSession = URLSessionCallbackStub(response: stubResponse) { request in
             requestBody = request.httpBody
         }
 
         // Send request
         let request = Request(body: .init(value: 321))
-        let _ = self.sendTesting(request: request, session: stubSession) { client, request, callback in
+        _ = sendTesting(request: request, session: stubSession) { client, request, callback in
             client.send(request, callback: callback)
         }
 
@@ -118,10 +119,10 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionCallbackStub(response:stubResponse)
+        let stubSession = URLSessionCallbackStub(response: stubResponse)
 
         // Send request
-        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), session: stubSession) { client, request, callback in
+        let (receivedResponse, receivedError) = sendTesting(request: Request(), session: stubSession) { client, request, callback in
             client.send(request, callback: callback)
         }
 
@@ -156,10 +157,10 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionCallbackStub(response:stubResponse)
+        let stubSession = URLSessionCallbackStub(response: stubResponse)
 
         // Send request
-        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), session: stubSession) { client, request, callback in
+        let (receivedResponse, receivedError) = sendTesting(request: Request(), session: stubSession) { client, request, callback in
             client.send(request, callback: callback)
         }
 
@@ -202,10 +203,10 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             """.data(using: .utf8)!,
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
-        let stubSession = URLSessionCallbackStub(response:stubResponse)
+        let stubSession = URLSessionCallbackStub(response: stubResponse)
 
         // Send request
-        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), session: stubSession) { client, request, callback in
+        let (receivedResponse, receivedError) = sendTesting(request: Request(), session: stubSession) { client, request, callback in
             client.send(request, callback: callback)
         }
 
@@ -233,8 +234,8 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
             data: Data(),
             response: URLResponse(url: baseURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
         )
-        let stubSession = URLSessionCallbackStub(response:stubResponse)
-        let (receivedResponse, receivedError) = self.sendTesting(request: Request(), session: stubSession) { client, request, callback in
+        let stubSession = URLSessionCallbackStub(response: stubResponse)
+        let (receivedResponse, receivedError) = sendTesting(request: Request(), session: stubSession) { client, request, callback in
             client.send(request, callback: callback)
         }
         XCTAssertNil(receivedResponse)
@@ -252,17 +253,18 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
 }
 
 extension HTTPAPIClientE2ECallbackTests {
-
     func sendTesting<Request: Postie.Request>(
         request: Request, session: URLSessionProvider,
-        _ send: (HTTPAPIClient, Request, @escaping (Result<Request.Response, Error>) -> Void) -> Void) -> (response: Request.Response?, error: Error?) {
+        _ send: (HTTPAPIClient, Request, @escaping (Result<Request.Response, Error>) -> Void) -> Void
+    ) -> (response: Request.Response?, error: Error?) {
         let client = HTTPAPIClient(url: baseURL, session: session)
         return sendTesting(request: request, client: client, send)
     }
 
     func sendTesting<Request: Postie.Request>(
         request: Request, client: HTTPAPIClient,
-        _ send: (HTTPAPIClient, Request, @escaping (Result<Request.Response, Error>) -> Void) -> Void) -> (response: Request.Response?, error: Error?) {
+        _ send: (HTTPAPIClient, Request, @escaping (Result<Request.Response, Error>) -> Void) -> Void
+    ) -> (response: Request.Response?, error: Error?) {
         // expectation to be fulfilled when we've received all expected values
         let resultExpectation = expectation(description: "all values received")
         var receivedResponse: Request.Response?
@@ -271,9 +273,9 @@ extension HTTPAPIClientE2ECallbackTests {
         // subscribe to the batterySubject to run the test)
         send(client, request) { result in
             switch result {
-            case .failure(let error):
+            case let .failure(error):
                 receivedError = error
-            case .success(let response):
+            case let .success(response):
                 receivedResponse = response
             }
             resultExpectation.fulfill()
@@ -282,3 +284,5 @@ extension HTTPAPIClientE2ECallbackTests {
         return (receivedResponse, receivedError)
     }
 }
+
+// swiftlint:enable nesting

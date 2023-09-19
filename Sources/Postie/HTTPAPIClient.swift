@@ -315,3 +315,4 @@ open class HTTPAPIClient {
         return url.appendingPathComponent(prefix)
     }
 }
+/* swiftlint:enable line_length */

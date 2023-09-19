@@ -1,3 +1,4 @@
+// swiftlint:disable nesting
 @testable import Postie
 import XCTest
 
@@ -237,3 +238,4 @@ class ResponseBodyCodingTests: XCTestCase {
         XCTAssertEqual(decoded.body?.value, "asdf")
     }
 }
+// swiftlint:enable nesting

@@ -1,7 +1,7 @@
 import XCTest
 @testable import Postie
 
-fileprivate struct Request: Encodable {
+private struct Request: Encodable {
 
     typealias Response = EmptyResponse
 

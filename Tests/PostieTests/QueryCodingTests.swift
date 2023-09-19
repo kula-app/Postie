@@ -1,7 +1,8 @@
+// swiftlint:disable nesting
 import XCTest
 @testable import Postie
 
-fileprivate struct Foo: Encodable {
+private struct Foo: Encodable {
 
     typealias Response = EmptyResponse
 
@@ -114,3 +115,4 @@ class QueryCodingTests: XCTestCase {
         return items
     }
 }
+// swiftlint:enable nesting
