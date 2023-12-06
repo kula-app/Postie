@@ -20,13 +20,13 @@ let package = Package(
             "PostieUtils",
             "XMLCoder"
         ]),
-        //dev .testTarget(name: "PostieTests", dependencies: ["Postie", "PostieMock"]),
+        .testTarget(name: "PostieTests", dependencies: ["Postie", "PostieMock"]),
 
         .target(name: "PostieMock", dependencies: ["Postie"]),
 
         .target(name: "URLEncodedFormCoding", dependencies: ["PostieUtils"]),
 
         .target(name: "PostieUtils"),
-        //dev .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"]),
+        .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"]),
     ]
 )

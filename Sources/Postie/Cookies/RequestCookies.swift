@@ -13,6 +13,7 @@ public struct RequestCookies {
 
 extension RequestCookies: Encodable {
     public func encode(to encoder: Encoder) throws {
-        fatalError()
+        // This method needs to defined because `HTTPCookie` does not conform to `Encodable`, but should never be called anyways
+        preconditionFailure("\(Self.self).encode(to encoder:) should not be called")
     }
 }
