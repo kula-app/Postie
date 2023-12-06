@@ -1,4 +1,4 @@
-// swiftlint:disable nesting type_body_length
+// swiftlint:disable nesting
 @testable import Postie
 import XCTest
 
@@ -107,4 +107,4 @@ class RequestCookiesCodingTests: XCTestCase {
     }
 }
 
-// swiftlint:enable nesting type_body_length
+// swiftlint:enable nesting

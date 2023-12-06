@@ -7,7 +7,8 @@ private struct Response: Decodable {
 
 class ResponseCookiesCodingTests: XCTestCase {
     let response = HTTPURLResponse(url: URL(string: "https://example.local")!, statusCode: 200, httpVersion: nil, headerFields: [
-        "Set-Cookie": "UserSession=xyz123; Domain=example.local; Path=/some/path; Expires=Wed, 06 Dec 2023 09:38:21 GMT; Max-Age=3600; Secure; HttpOnly; SameSite=Strict",
+        // swiftlint:disable:next line_length
+        "Set-Cookie": "UserSession=xyz123; Domain=example.local; Path=/some/path; Expires=Wed, 06 Dec 2023 09:38:21 GMT; Max-Age=3600; Secure; HttpOnly; SameSite=Strict"
     ])!
     let cookie = HTTPCookie(properties: [
         .version: "0",
@@ -20,7 +21,7 @@ class ResponseCookiesCodingTests: XCTestCase {
         .maximumAge: "3600",
 
         .secure: true,
-        .sameSitePolicy: "Strict",
+        .sameSitePolicy: "Strict"
     ])!
 
     func testDecoding_defaultStrategy_shouldDecodeCaseInSensitiveResponseHeaders() {
