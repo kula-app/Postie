@@ -61,6 +61,9 @@ struct MyRequest: JSONRequest {
 
         // Status codes also have convenience utilities
         @ResponseStatusCode var statusCode
+
+        // Cookies send by the remote
+        @RequestCookies var cookies
     }
 
     // The `keyEncodingStrategy` determines how to encode a type’s coding keys as JSON keys.
@@ -84,6 +87,9 @@ struct MyRequest: JSONRequest {
 
     // Set request headers using the property naming
     @RequestHeader var authorization: String?
+
+    // Set multiple instances of HTTPCookie
+    @RequestCookies var cookies
 }
 
 // Create a request
@@ -684,6 +690,24 @@ client.send(request) { result in
         // process response
         break
     }
+}
+```
+
+### Cookies
+
+By default the cookies of requests and responses are handled by the `session` used by the `HTTPAPIClient`. If you want to explicitly set the request cookies, use `RequestCookies`, and to access the response cookies use `ResponseCookies`.
+
+**Example:**
+
+```swift
+struct MyRequest: Request {
+    struct Response: Decodable {
+        // List of HTTPCookie parsed from the `Set-Cookie` headers of the response
+        @ResponseCookies var cookies
+    }
+
+    // List of HTTPCookie to be set in the request as `Cookie` headers
+    @RequestCookies var cookies
 }
 ```
 

@@ -12,6 +12,7 @@ internal class RequestEncoding: Encoder {
     private(set) var queryItems: [URLQueryItem] = []
     private(set) var headers: [String: String] = [:]
     private(set) var pathParameters: [String: RequestPathParameterValue] = [:]
+    private(set) var cookies: [HTTPCookie] = []
 
     init(parent: RequestEncoding? = nil, codingPath: [CodingKey] = []) {
         self.parent = parent
@@ -76,6 +77,14 @@ internal class RequestEncoding: Encoder {
             parent.setPathParameter(key: key, value: value)
         } else {
             pathParameters[key] = value
+        }
+    }
+
+    func setCookies(_ cookies: [HTTPCookie]) {
+        if let parent = parent {
+            parent.setCookies(cookies)
+        } else {
+            self.cookies += cookies
         }
     }
 
