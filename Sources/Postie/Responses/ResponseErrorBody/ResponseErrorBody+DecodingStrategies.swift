@@ -6,4 +6,3 @@ public extension ResponseErrorBody {
     typealias Status410 = ResponseErrorBodyWrapper<Body, ValidateStatus410ErrorBodyStrategy>
     typealias Status422 = ResponseErrorBodyWrapper<Body, ValidateStatus422ErrorBodyStrategy>
 }
-
