@@ -130,7 +130,10 @@ public class RequestEncoder {
         }
         var request = URLRequest(url: url)
         request.httpMethod = encoder.httpMethod.rawValue
-        request.allHTTPHeaderFields = encoder.headers
+        request.allHTTPHeaderFields = HTTPCookie
+            .requestHeaderFields(with: encoder.cookies)
+            // Merge the Cookie headers with the custom headers, where custom headers have precedence
+            .merging(encoder.headers, uniquingKeysWith: { $1 })
         return request
     }
 }
