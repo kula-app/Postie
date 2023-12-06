@@ -487,6 +487,51 @@ struct Request: Postie.Request {
 }
 ```
 
+#### Response parsing strategies
+
+As the response body might differ depending on various factors, you can control the parsing using "decoding strategies".
+
+By default if you use `ResponseBody` to parse the response body, it will use the `DefaultBodyStrategy` (which expects an HTTP status code 2XX or 3XX).
+
+The same applies to the `ResponseErrorBody` to parse the response body for a status code of 400 or above, which is using the `DefaultErrorBodyStrategy`.
+
+For your convenience we added a couple of convenience strategies in `ResponseBody` and `ResponseErrorBody`, you can use with the `ResponseBodyWrapper` and `ResponseErrorBodyWrapper`.
+
+If you want to implement a custom decoding strategy, all you need to do is define a struct implementing the protocol `ResponseBodyDecodingStrategy` or `ResponseErrorBodyDecodingStrategy`.
+
+**Example:***
+
+```swift
+struct CustomBodyDecodingStrategy {
+    public static func allowsEmptyContent(for _: Int) -> Bool {
+        return false
+    }
+
+    public static func validate(statusCode: Int) -> Bool {
+        // e.g. only decode if the status code is 999
+        statusCode == 999
+    }
+}
+
+struct Request: Postie.Request {
+    struct Response: Decodable {
+        struct CreatedResponseBody: JSONDecodable {
+            ...
+        }
+        
+        @ResponseBody<CreatedResponseBody>.Status201 var createdBody: CreatedResponseBody
+        
+        struct CustomResponseBody: JSONDecodable {
+            ...
+        }
+        
+        @ResponseBodyWrapper<CustomResponseBody, CustomBodyDecodingStrategy> var customBody
+    }
+}
+```
+
+Note: Due to technical limitations of the `Codable` protocol in Swift, it is currently not possible to have a non-static/dynamic decoding strategy.  
+
 #### Response headers
 
 Use the property wrapper `@ResponseHeader<Strategy>` inside the response type.
