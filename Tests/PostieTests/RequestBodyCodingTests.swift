@@ -130,7 +130,14 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, #"{"someOtherValue":"Bar","someValue":123}"#.data(using: .utf8)!)
+        // The order of the encoded fields is ambiguous, therefore we need to parse the json and compare it
+        guard let encodedHttpBody = encoded.httpBody else {
+            XCTFail("Encoded HTTP body should exst")
+            return
+        }
+        let parsedJsonObject = try? JSONSerialization.jsonObject(with: encodedHttpBody, options: [])
+        XCTAssertEqual((parsedJsonObject as? [String: Any])?["someValue"] as? Int, 123)
+        XCTAssertEqual((parsedJsonObject as? [String: Any])?["someOtherValue"] as? String, "Bar")
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/json")
     }
 
