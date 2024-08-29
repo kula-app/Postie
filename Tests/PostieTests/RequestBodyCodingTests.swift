@@ -130,7 +130,7 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, #"{"someValue":123,"someOtherValue":"Bar"}"#.data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, #"{"someOtherValue":"Bar","someValue":123}"#.data(using: .utf8)!)
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/json")
     }
 
