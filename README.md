@@ -4,7 +4,7 @@
 
 <div align="center">
 	<a href="https://github.com/kula-app/Postie/actions">
-		<img src="https://github.com/kula-app/Postie/workflows/Build,%20Lint%20&%20Test/badge.svg" alt="GitHub Actions">
+		<img src="https://github.com/kula-app/Postie/actions/workflows/build-test.yml/badge.svg" alt="GitHub Actions">
 	</a>
 	<a href="https://kula-app.github.io/Postie/">
 		<img src="https://raw.githubusercontent.com/kula-app/Postie/gh-pages/badge.svg"/>
