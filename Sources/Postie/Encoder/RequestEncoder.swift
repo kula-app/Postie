@@ -31,6 +31,7 @@ public class RequestEncoder {
     ) throws -> Data {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = keyEncodingStrategy
+        encoder.outputFormatting = .sortedKeys
         return try encoder.encode(body)
     }
 
