@@ -6,9 +6,9 @@ extension String {
         let normalPattern = "([a-z0-9])([A-Z])"
         return
             self
-            .processCamelCaseRegex(pattern: acronymPattern)!
-            .processCamelCaseRegex(pattern: normalPattern)!
-            .lowercased()
+            .processCamelCaseRegex(pattern: acronymPattern)?
+            .processCamelCaseRegex(pattern: normalPattern)?
+            .lowercased() ?? self
     }
 
     fileprivate func processCamelCaseRegex(pattern: String) -> String? {

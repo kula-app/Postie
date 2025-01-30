@@ -1,4 +1,4 @@
-/* swiftlint:disable line_length */
+// swiftlint:disable line_length
 import Combine
 import Foundation
 import os.log
@@ -283,12 +283,15 @@ open class HTTPAPIClient {
     ///   - request: request conforming to the `Request` protocol
     ///   - urlRequest: generated `urlRequest` with is sent to the endpoint
     fileprivate func log<Request>(request: Request, _ urlRequest: URLRequest) {
+        let requestHttpMethod = urlRequest.httpMethod ?? "?"
+        let requestType = String(describing: type(of: request))
+        let requestUrl = urlRequest.url?.absoluteString ?? "?"
         os_log(
             .debug,
             "[%@] Sending request of type %@ to URL: %@",
-            urlRequest.httpMethod!,
-            String(describing: type(of: request)),
-            urlRequest.url!.absoluteString
+            requestHttpMethod,
+            requestType,
+            requestUrl
         )
     }
 
@@ -348,4 +351,4 @@ open class HTTPAPIClient {
         return url.appendingPathComponent(prefix)
     }
 }
-/* swiftlint:enable line_length */
+// swiftlint:enable line_length

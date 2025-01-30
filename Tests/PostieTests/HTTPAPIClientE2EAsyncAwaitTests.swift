@@ -249,6 +249,7 @@ extension HTTPAPIClientE2EAsyncAwaitTests {
 }
 
 extension XCTest {
+    // swift-format-ignore: AlwaysUseLowerCamelCase
     func XCTAssertThrowsError<T: Sendable>(
         _ expression: @autoclosure () async throws -> T,
         _ message: @autoclosure () -> String = "",

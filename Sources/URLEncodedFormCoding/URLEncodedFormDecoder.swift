@@ -48,6 +48,7 @@ open class URLEncodedFormDecoder: TopLevelDecoder {
     }
 }
 
+// swift-format-ignore: NoLeadingUnderscores
 private final class _URLEncodedFormDecoder: Decoder {
     let codingPath: [CodingKey]
 
@@ -74,6 +75,7 @@ private final class _URLEncodedFormDecoder: Decoder {
     }
 }
 
+// swift-format-ignore: NoLeadingUnderscores
 private final class _URLEncodedFormSingleValueDecoder: SingleValueDecodingContainer {
     let context: URLEncodedFormDataContext
     var codingPath: [CodingKey]
@@ -110,6 +112,7 @@ private final class _URLEncodedFormSingleValueDecoder: SingleValueDecodingContai
     }
 }
 
+// swift-format-ignore: NoLeadingUnderscores
 private final class _URLEncodedFormKeyedDecoder<Key>: KeyedDecodingContainerProtocol where Key: CodingKey {
     let context: URLEncodedFormDataContext
     var codingPath: [CodingKey]
@@ -157,6 +160,7 @@ private final class _URLEncodedFormKeyedDecoder<Key>: KeyedDecodingContainerProt
     }
 }
 
+// swift-format-ignore: NoLeadingUnderscores
 private final class _URLEncodedFormUnkeyedDecoder: UnkeyedDecodingContainer {
     let context: URLEncodedFormDataContext
 

@@ -83,6 +83,7 @@ public enum HTTPStatusCode: UInt16 {
     /// (WebDAV; RFC 5842)
     case alreadyReported = 208
 
+    // swift-format-ignore: AlwaysUseLowerCamelCase
     /// The server has fulfilled a request for the resource, and the response is a representation of the result of one or more
     /// instance-manipulations applied to the current instance.
     ///
