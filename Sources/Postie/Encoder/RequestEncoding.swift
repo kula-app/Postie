@@ -13,6 +13,7 @@ internal class RequestEncoding: Encoder {
     private(set) var headers: [String: String] = [:]
     private(set) var pathParameters: [String: RequestPathParameterValue] = [:]
     private(set) var cookies: [HTTPCookie] = []
+    private(set) var cachePolicy: URLRequest.CachePolicy?
 
     init(parent: RequestEncoding? = nil, codingPath: [CodingKey] = []) {
         self.parent = parent
@@ -85,6 +86,14 @@ internal class RequestEncoding: Encoder {
             parent.setCookies(cookies)
         } else {
             self.cookies += cookies
+        }
+    }
+
+    func setCachePolicy(_ cachePolicy: URLRequest.CachePolicy) {
+        if let parent = parent {
+            parent.setCachePolicy(cachePolicy)
+        } else {
+            self.cachePolicy = cachePolicy
         }
     }
 
