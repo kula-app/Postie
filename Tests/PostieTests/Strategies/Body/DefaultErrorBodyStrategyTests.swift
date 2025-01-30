@@ -1,5 +1,6 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class DefaultErrorBodyStrategyTests: XCTestCase {
     func testIsError_statusBelow400_shouldNotBeAnError() {

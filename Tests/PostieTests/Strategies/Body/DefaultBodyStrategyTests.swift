@@ -1,15 +1,16 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class DefaultBodyStrategyTests: XCTestCase {
     func testAllowsEmptyContent_shouldAlwaysBeFalse() {
-        for statusCode in 100 ... 599 {
+        for statusCode in 100...599 {
             XCTAssertFalse(DefaultBodyStrategy.allowsEmptyContent(for: statusCode))
         }
     }
 
     func testValidateStatusCode_statusBelow2XXRange_shouldBeValid() {
-        for statusCode in 0 ..< 200 {
+        for statusCode in 0..<200 {
             XCTAssertFalse(DefaultBodyStrategy.validate(statusCode: statusCode))
         }
     }
@@ -21,7 +22,7 @@ class DefaultBodyStrategyTests: XCTestCase {
     }
 
     func testValidateStatusCode_statusGreaterThan2XXRange_shouldBeValid() {
-        for statusCode in 300 ..< 599 {
+        for statusCode in 300..<599 {
             XCTAssertFalse(DefaultBodyStrategy.validate(statusCode: statusCode))
         }
     }

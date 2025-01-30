@@ -1,7 +1,6 @@
 import Foundation
 
 internal class RequestEncoding: Encoder {
-
     var parent: RequestEncoding?
     var codingPath: [CodingKey]
     var userInfo: [CodingUserInfoKey: Any] = [:]
@@ -26,7 +25,7 @@ internal class RequestEncoding: Encoder {
     }
 
     func unkeyedContainer() -> UnkeyedEncodingContainer {
-        fatalError()
+        fatalError("Unkeyed encoding is not supported")
     }
 
     func singleValueContainer() -> SingleValueEncodingContainer {
@@ -100,7 +99,7 @@ internal class RequestEncoding: Encoder {
     // MARK: - Accessors
 
     func resolvedPath() throws -> String {
-        return pathParameters.reduce(path) { partialResult, parameter in
+        pathParameters.reduce(path) { partialResult, parameter in
             let key = parameter.key
             let value = parameter.value
             let replacement = value.serialized

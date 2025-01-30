@@ -4,7 +4,6 @@ import URLEncodedFormCoding
 import XMLCoder
 
 internal struct ResponseDecoding: Decoder {
-
     var codingPath: [CodingKey]
     var userInfo: [CodingUserInfoKey: Any] = [:]
     var response: HTTPURLResponse

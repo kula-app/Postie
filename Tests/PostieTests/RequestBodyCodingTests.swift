@@ -1,14 +1,13 @@
-// swiftlint:disable nesting type_body_length
-@testable import Postie
 import XCTest
 
-class RequestBodyCodingTests: XCTestCase {
+// swiftlint:disable type_body_length
+@testable import Postie
 
+class RequestBodyCodingTests: XCTestCase {
     let baseURL = URL(string: "https://local.url")!
 
     func testEncoding_emptyJsonBody_shouldEncodeToEmptyJsonAndSetContentTypeHeader() {
         struct Foo: JSONEncodable {
-
             struct Body: Encodable {}
             typealias Response = EmptyResponse
 
@@ -24,13 +23,12 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, "{}".data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data("{}".utf8))
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/json")
     }
 
     func testEncoding_customJsonContentTypeHeader_shouldUseCustomHeader() {
         struct Foo: JSONEncodable {
-
             struct Body: Encodable {}
             typealias Response = EmptyResponse
 
@@ -49,13 +47,12 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, "{}".data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data("{}".utf8))
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "postie-test")
     }
 
     func testEncoding_nonEmptyJsonBody_shouldEncodeToValidJsonAndSetContentTypeHeader() {
         struct Foo: JSONEncodable {
-
             struct Body: Encodable {
                 var value: Int
             }
@@ -74,13 +71,12 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, #"{"value":123}"#.data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data(#"{"value":123}"#.utf8))
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/json")
     }
 
     func testEncoding_nonEmptyJSONBody_shouldEncodeToValidSnakeCaseJSON() {
         struct Foo: JSONEncodable {
-
             struct Body: Encodable {
                 var someValue: Int
                 var someOtherValue: String
@@ -100,13 +96,12 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, #"{"some_other_value":"Bar","some_value":123}"#.data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data(#"{"some_other_value":"Bar","some_value":123}"#.utf8))
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/json")
     }
 
     func testEncoding_nonEmptyJSONBody_shouldEncodeToValidCamelCaseJSON() {
         struct Foo: JSONEncodable {
-
             struct Body: Encodable {
                 var someValue: Int
                 var someOtherValue: String
@@ -115,7 +110,7 @@ class RequestBodyCodingTests: XCTestCase {
             typealias Response = EmptyResponse
 
             var keyEncodingStrategy: JSONEncoder.KeyEncodingStrategy {
-                return .useDefaultKeys
+                .useDefaultKeys
             }
 
             var body: Body
@@ -143,7 +138,6 @@ class RequestBodyCodingTests: XCTestCase {
 
     func testEncoding_emptyFormURLEncodedBody_shouldEncodeToEmptyBodyAndSetContentTypeHeader() {
         struct Foo: FormURLEncodedEncodable {
-
             struct Body: Encodable {}
             typealias Response = EmptyResponse
 
@@ -166,7 +160,6 @@ class RequestBodyCodingTests: XCTestCase {
 
     func testEncoding_customFormURLEncodedContentTypeHeader_shouldUseCustomHeader() {
         struct Foo: FormURLEncodedEncodable {
-
             struct Body: Encodable {}
             typealias Response = EmptyResponse
 
@@ -192,7 +185,6 @@ class RequestBodyCodingTests: XCTestCase {
 
     func testEncoding_nonEmptyFormURLEncodedBody_shouldEncodeToValidFormURLEncodedStringAndSetContentTypeHeader() {
         struct Foo: FormURLEncodedEncodable {
-
             struct Body: Encodable {
                 var value: Int
                 var others: String
@@ -212,13 +204,12 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, "others=This%20escaped%20string&value=123".data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data("others=This%20escaped%20string&value=123".utf8))
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded")
     }
 
     func testEncoding_nonEmptyPlainTextBody_shouldEncodeUsingDefaultEncoding() {
         struct Foo: PlainEncodable {
-
             typealias Response = EmptyResponse
 
             var body: String
@@ -233,12 +224,11 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, "some string".data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data("some string".utf8))
     }
 
     func testEncoding_nonEmptyPlainTextBodyCustomEncoding_shouldEncodeUsingCustomEncoding() {
         struct Foo: PlainEncodable {
-
             typealias Response = EmptyResponse
 
             var body: String
@@ -261,7 +251,6 @@ class RequestBodyCodingTests: XCTestCase {
 
     func testEncoding_emptyXMLBody_shouldEncodeToSingleClosedXMLTagAndSetContentTypeHeader() {
         struct Foo: XMLEncodable {
-
             struct Body: Encodable {}
             typealias Response = EmptyResponse
 
@@ -277,13 +266,12 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, "<Body />".data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data("<Body />".utf8))
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "text/xml")
     }
 
     func testEncoding_customXMLContentTypeHeader_shouldUseCustomHeader() {
         struct Foo: XMLEncodable {
-
             struct Body: Encodable {}
             typealias Response = EmptyResponse
 
@@ -302,13 +290,12 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, "<Body />".data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data("<Body />".utf8))
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "postie-test")
     }
 
     func testEncoding_nonEmptyXMLBody_shouldEncodeToValidXMLAndSetContentTypeHeader() {
         struct Foo: XMLEncodable {
-
             struct Body: Encodable {
                 var value: Int
             }
@@ -327,8 +314,8 @@ class RequestBodyCodingTests: XCTestCase {
             XCTFail("Failed to encode: " + error.localizedDescription)
             return
         }
-        XCTAssertEqual(encoded.httpBody, "<Body><value>123</value></Body>".data(using: .utf8)!)
+        XCTAssertEqual(encoded.httpBody, Data("<Body><value>123</value></Body>".utf8))
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Content-Type"), "text/xml")
     }
 }
-// swiftlint:enable nesting type_body_length
+// swiftlint:enable type_body_length

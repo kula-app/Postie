@@ -1,17 +1,13 @@
-// swiftlint:disable nesting
 import XCTest
 @testable import Postie
 
 private struct Request: Encodable {
-
     typealias Response = EmptyResponse
 
     @RequestHTTPMethod var method
-
 }
 
 class RequestHTTPMethodCodingTests: XCTestCase {
-
     let baseURL = URL(string: "https://local.url")!
 
     func testEncoding_emptyMethod_shouldSetHttpMethodToGet() {
@@ -33,12 +29,10 @@ class RequestHTTPMethodCodingTests: XCTestCase {
 
     func testEncoding_duplicateMethods_shouldUseFirstOccurence() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestHTTPMethod var method1 = .delete
             @RequestHTTPMethod var method2 = .connect
-
         }
         guard let urlRequest = encodeRequest(request: Request()) else {
             return
@@ -58,4 +52,3 @@ class RequestHTTPMethodCodingTests: XCTestCase {
         return encoded
     }
 }
-// swiftlint:enable nesting

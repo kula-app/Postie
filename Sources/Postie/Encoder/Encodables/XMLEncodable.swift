@@ -2,9 +2,7 @@
 public typealias XMLEncodable = Encodable & XMLFormatProvider & XMLBodyProvider
 
 public protocol XMLBodyProvider {
-
     associatedtype Body: Encodable
 
     var body: Body { get }
-
 }

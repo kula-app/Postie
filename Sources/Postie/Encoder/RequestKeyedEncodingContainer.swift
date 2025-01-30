@@ -31,8 +31,10 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
                 encoder.setHeader(name: header.name ?? key.stringValue, value: serializedHeaderValue)
             }
         case let param as RequestPathParameterProtocol:
-            encoder.setPathParameter(key: param.name ?? key.stringValue,
-                                     value: param.untypedValue.serialized)
+            encoder.setPathParameter(
+                key: param.name ?? key.stringValue,
+                value: param.untypedValue.serialized
+            )
         case let path as RequestPath:
             encoder.setPath(path.wrappedValue)
         case let method as RequestHTTPMethod:

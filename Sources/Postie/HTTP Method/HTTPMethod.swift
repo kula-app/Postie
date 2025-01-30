@@ -1,6 +1,5 @@
 /// Common HTTP Methods
 public enum HTTPMethod: String, Encodable {
-
     /// The `GET` method requests a representation of the specified resource.
     ///
     /// Requests using `GET` should only retrieve data.
@@ -29,5 +28,4 @@ public enum HTTPMethod: String, Encodable {
 
     /// The `PATCH` method is used to apply partial modifications to a resource.
     case patch = "PATCH"
-
 }

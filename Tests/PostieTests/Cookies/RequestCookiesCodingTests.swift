@@ -1,6 +1,6 @@
-// swiftlint:disable nesting
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class RequestCookiesCodingTests: XCTestCase {
     let baseURL = URL(string: "https://local.url")!
@@ -9,7 +9,7 @@ class RequestCookiesCodingTests: XCTestCase {
             .domain: "local.url",
             .path: "/some/path",
             .name: "key",
-            .value: "value"
+            .value: "value",
         ])!
     ]
 
@@ -106,5 +106,3 @@ class RequestCookiesCodingTests: XCTestCase {
         XCTAssertEqual(encoded.value(forHTTPHeaderField: "Cookie"), "some header")
     }
 }
-
-// swiftlint:enable nesting

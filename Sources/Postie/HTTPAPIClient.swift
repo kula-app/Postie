@@ -4,7 +4,6 @@ import Foundation
 import os.log
 
 open class HTTPAPIClient {
-
     public private(set) var session: URLSessionProvider
     public var url: URL
     public var pathPrefix: String?
@@ -32,7 +31,11 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: R.Response.self, urlRequest: urlRequest, receiveOn: queue, callback: callback)
     }
 
-    open func send<Request: JSONRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: JSONRequest>(
+        _ request: Request,
+        receiveOn queue: DispatchQueue? = nil,
+        callback: @escaping (Result<Request.Response, Error>
+    ) -> Void) {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
@@ -47,7 +50,11 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, receiveOn: queue, callback: callback)
     }
 
-    open func send<Request: FormURLEncodedRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: FormURLEncodedRequest>(
+        _ request: Request,
+        receiveOn queue: DispatchQueue? = nil,
+        callback: @escaping (Result<Request.Response, Error>
+    ) -> Void) {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
@@ -62,7 +69,11 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, receiveOn: queue, callback: callback)
     }
 
-    open func send<Request: PlainRequest>(_ request: Request, receiveOn queue: DispatchQueue? = nil, callback: @escaping (Result<Request.Response, Error>) -> Void) {
+    open func send<Request: PlainRequest>(
+        _ request: Request,
+        receiveOn queue: DispatchQueue? = nil,
+        callback: @escaping (Result<Request.Response, Error>
+    ) -> Void) {
         // Create a request encoder
         let encoder = RequestEncoder(baseURL: prepareURL())
         // Encode request
@@ -77,9 +88,14 @@ open class HTTPAPIClient {
         return sendUrlRequest(responseType: Request.Response.self, urlRequest: urlRequest, receiveOn: queue, callback: callback)
     }
 
-    private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest, receiveOn queue: DispatchQueue?, callback: @escaping (Result<Response, Error>) -> Void) {
+    private func sendUrlRequest<Response: Decodable>(
+        responseType: Response.Type,
+        urlRequest: URLRequest,
+        receiveOn queue: DispatchQueue?,
+        callback: @escaping (Result<Response, Error>
+    ) -> Void) {
         // Send request using the given URL session provider
-        session.send(urlRequest: urlRequest, completion: { data, response, error in
+        session.send(urlRequest: urlRequest) { data, response, error in
             guard let response = response as? HTTPURLResponse, let data = data else {
                 return callback(.failure(APIError.invalidResponse))
             }
@@ -100,7 +116,7 @@ open class HTTPAPIClient {
             } else {
                 syncBlock()
             }
-        })
+        }
     }
 
     // MARK: - Async-Await
@@ -239,7 +255,7 @@ open class HTTPAPIClient {
 
     private func sendUrlRequest<Response: Decodable>(responseType: Response.Type, urlRequest: URLRequest) -> AnyPublisher<Response, Error> {
         // Send request using the given URL session provider
-        return session
+        session
             .send(urlRequest: urlRequest)
             .tryMap { (data: Data, response: URLResponse) in
                 guard let response = response as? HTTPURLResponse else {
@@ -259,7 +275,11 @@ open class HTTPAPIClient {
     ///   - request: request conforming to the `Request` protocol
     ///   - urlRequest: generated `urlRequest` with is sent to the endpoint
     fileprivate func log<Request>(request: Request, _ urlRequest: URLRequest) {
-        os_log(.debug, "[%@] Sending request of type %@ to URL: %@", urlRequest.httpMethod!, String(describing: type(of: request)), urlRequest.url!.absoluteString)
+        os_log(.debug,
+               "[%@] Sending request of type %@ to URL: %@",
+               urlRequest.httpMethod!,
+               String(describing: type(of: request)),
+               urlRequest.url!.absoluteString)
     }
 
     /// Logs a request with the received response and data
@@ -273,7 +293,8 @@ open class HTTPAPIClient {
         let dataCount = data.count.description
         let requestHttpMethod = urlRequest.httpMethod ?? "?"
         let requestUrl = urlRequest.url?.absoluteString ?? "?"
-        os_log(.debug, "Received HTTP status %s with %s as response for HTTP %s %s",
+        os_log(.debug,
+               "Received HTTP status %s with %s as response for HTTP %s %s",
                responseStatus,
                dataCount,
                requestHttpMethod,

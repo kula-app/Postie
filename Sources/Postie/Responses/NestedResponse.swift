@@ -1,6 +1,5 @@
 @propertyWrapper
 public struct NestedResponse<Response: Decodable> {
-
     public var wrappedValue: Response
 
     public init(wrappedValue: Response) {
@@ -9,7 +8,6 @@ public struct NestedResponse<Response: Decodable> {
 }
 
 extension NestedResponse: Decodable {
-
     public init(from decoder: Decoder) throws {
         wrappedValue = try Response(from: decoder)
     }

@@ -2,7 +2,6 @@ import XCTest
 @testable import Postie
 
 class ResponseStatusCodeCodingTests: XCTestCase {
-
     func testDecoding_noStatusCodeVariable_shouldDecodeWithoutStatusCode() {
         struct Response: Decodable {}
 
@@ -13,9 +12,7 @@ class ResponseStatusCodeCodingTests: XCTestCase {
 
     func testDecoding_singleStatusCodeVariable_shouldDecodeStatusCodeIntoVariable() {
         struct Response: Decodable {
-
             @ResponseStatusCode var statusCode
-
         }
         let response = HTTPURLResponse(url: URL(string: "http://example.local")!, statusCode: 404, httpVersion: nil, headerFields: nil)!
         let decoder = ResponseDecoder()
@@ -27,10 +24,8 @@ class ResponseStatusCodeCodingTests: XCTestCase {
 
     func testDecoding_multipleStatusCodeVariables_shouldDecodeSameStatusCodeIntoAll() {
         struct Response: Decodable {
-
             @ResponseStatusCode var statusCode
             @ResponseStatusCode var statusCodeAgain
-
         }
         let response = HTTPURLResponse(url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let decoder = ResponseDecoder()

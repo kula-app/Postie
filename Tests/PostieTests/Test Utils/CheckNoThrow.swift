@@ -9,8 +9,13 @@ func CheckNoThrow<T>(
 ) -> T? {
     // swiftlint:disable:next identifier_name
     var r: T?
-    XCTAssertNoThrow(try {
-        r = try expression()
-    }(), message(), file: file, line: line)
+    XCTAssertNoThrow(
+        try {
+            r = try expression()
+        }(),
+        message(),
+        file: file,
+        line: line
+    )
     return r
 }

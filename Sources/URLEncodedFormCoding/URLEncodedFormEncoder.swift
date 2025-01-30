@@ -1,8 +1,7 @@
-import Foundation
 import Combine
+import Foundation
 
 public class URLEncodedFormEncoder: TopLevelEncoder {
-
     public enum DecodingError: LocalizedError {
         case failedToConvertUsingEncoding
     }
@@ -46,7 +45,6 @@ public class URLEncodedFormEncoder: TopLevelEncoder {
 }
 
 private final class _URLEncodedFormEncoder: Encoder {
-
     /// See `Encoder`
     var userInfo: [CodingUserInfoKey: Any] = [:]
 
@@ -80,7 +78,6 @@ private final class _URLEncodedFormEncoder: Encoder {
 
 /// Private `SingleValueEncodingContainer`.
 private final class _URLEncodedFormSingleValueEncoder: SingleValueEncodingContainer {
-
     /// See `SingleValueEncodingContainer`
     var codingPath: [CodingKey]
 
@@ -142,7 +139,8 @@ private final class _URLEncodedFormKeyedEncoder<K>: KeyedEncodingContainerProtoc
     }
 
     /// See `KeyedEncodingContainerProtocol`
-    func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: K) -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey {
+    func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: K) -> KeyedEncodingContainer<NestedKey>
+    where NestedKey: CodingKey {
         .init(_URLEncodedFormKeyedEncoder<NestedKey>(context: context, codingPath: codingPath + [key]))
     }
 
@@ -160,12 +158,10 @@ private final class _URLEncodedFormKeyedEncoder<K>: KeyedEncodingContainerProtoc
     func superEncoder(forKey key: K) -> Encoder {
         _URLEncodedFormEncoder(context: context, codingPath: codingPath + [key])
     }
-
 }
 
 /// Private `UnkeyedEncodingContainer`.
 private final class _URLEncodedFormUnkeyedEncoder: UnkeyedEncodingContainer {
-
     /// See `UnkeyedEncodingContainer`.
     var codingPath: [CodingKey]
 
@@ -177,7 +173,7 @@ private final class _URLEncodedFormUnkeyedEncoder: UnkeyedEncodingContainer {
 
     /// Converts the current count to a coding key
     var index: CodingKey {
-        return BasicKey(count)
+        BasicKey(count)
     }
 
     /// Creates a new `_URLEncodedFormUnkeyedEncoder`.

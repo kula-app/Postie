@@ -1,5 +1,6 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class OptionalContentStrategyTests: XCTestCase {
     func testAllowsEmptyContent_shouldAlwaysBeFalse() {

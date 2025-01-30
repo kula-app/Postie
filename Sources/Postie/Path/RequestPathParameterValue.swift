@@ -1,5 +1,4 @@
 public protocol RequestPathParameterValue {
-
     var serialized: String { get }
 }
 
@@ -25,9 +24,9 @@ extension Int64: RequestPathParameterValue {
 
 extension Optional: RequestPathParameterValue where Wrapped: RequestPathParameterValue {
     public var serialized: String {
-      if let value = self {
-        return value.serialized
-      }
-      return "nil"
+        if let value = self {
+            return value.serialized
+        }
+        return "nil"
     }
 }

@@ -1,5 +1,4 @@
 internal protocol RequestHeaderProtocol {
-
     /// Custom name of the header item, can be nil
     var name: String? { get }
 
@@ -9,7 +8,6 @@ internal protocol RequestHeaderProtocol {
 
 @propertyWrapper
 public struct RequestHeader<T> where T: RequestHeaderValue {
-
     public var name: String?
     public var wrappedValue: T
 
@@ -23,17 +21,15 @@ public struct RequestHeader<T> where T: RequestHeaderValue {
     }
 }
 
-public extension RequestHeader where T == String {
-
-    init(name: String?) {
+extension RequestHeader where T == String {
+    public init(name: String?) {
         self.name = name
         wrappedValue = ""
     }
 }
 
-public extension RequestHeader where T == String? {
-
-    init(name: String?) {
+extension RequestHeader where T == String? {
+    public init(name: String?) {
         self.name = name
         wrappedValue = nil
     }
@@ -46,7 +42,6 @@ extension RequestHeader: Encodable where T: Encodable {}
 // MARK: - RequestHeaderProtocol
 
 extension RequestHeader: RequestHeaderProtocol {
-
     var untypedValue: RequestHeaderValue {
         wrappedValue
     }

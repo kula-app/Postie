@@ -1,16 +1,14 @@
 import XCTest
+
 @testable import Postie
 
 private struct Request: Encodable {
-
     typealias Response = EmptyResponse
 
     @RequestPath var path
-
 }
 
 class RequestPathCodingTests: XCTestCase {
-
     let baseURL = URL(string: "https://local.url/")!
 
     func testEncoding_emptyPath_shouldSetEmptyURLPath() {

@@ -2,7 +2,6 @@ import Foundation
 
 @propertyWrapper
 public struct RequestCachePolicy {
-
     public var wrappedValue: URLRequest.CachePolicy
 
     public init(wrappedValue: URLRequest.CachePolicy = .useProtocolCachePolicy) {

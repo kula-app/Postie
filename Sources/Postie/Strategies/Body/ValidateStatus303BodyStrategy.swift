@@ -1,6 +1,6 @@
 public struct ValidateStatus303BodyStrategy: ResponseBodyDecodingStrategy {
     public static func allowsEmptyContent(for _: Int) -> Bool {
-        return true
+        true
     }
 
     public static func validate(statusCode: Int) -> Bool {

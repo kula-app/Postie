@@ -134,7 +134,7 @@ public class RequestEncoder {
         request.allHTTPHeaderFields = HTTPCookie
             .requestHeaderFields(with: encoder.cookies)
             // Merge the Cookie headers with the custom headers, where custom headers have precedence
-            .merging(encoder.headers, uniquingKeysWith: { $1 })
+            .merging(encoder.headers) { $1 }
         if let cachePolicy = encoder.cachePolicy {
             request.cachePolicy = cachePolicy
         }

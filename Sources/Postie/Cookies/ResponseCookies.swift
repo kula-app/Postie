@@ -2,7 +2,6 @@ import Foundation
 
 @propertyWrapper
 public struct ResponseCookies {
-
     public var wrappedValue: [HTTPCookie]
 
     public init(wrappedValue: [HTTPCookie] = []) {
@@ -11,7 +10,6 @@ public struct ResponseCookies {
 }
 
 extension ResponseCookies: Decodable {
-
     public init(from decoder: Decoder) throws {
         // Check if the decoder is response decoder, otherwise throw fatal error, because this property wrapper must use the correct decoder
         guard let responseDecoding = decoder as? ResponseDecoding else {

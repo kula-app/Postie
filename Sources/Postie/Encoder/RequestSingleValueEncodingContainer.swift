@@ -1,5 +1,4 @@
 class RequestSingleValueEncodingContainer: SingleValueEncodingContainer {
-
     let encoder: RequestEncoding
     var codingPath: [CodingKey]
 
@@ -9,10 +8,10 @@ class RequestSingleValueEncodingContainer: SingleValueEncodingContainer {
     }
 
     func encodeNil() throws {
-        fatalError()
+        fatalError("Encoding nil is not supported")
     }
 
     func encode<T>(_ value: T) throws where T: Encodable {
-        fatalError()
+        fatalError("Encoding \(T.self) is not supported")
     }
 }
