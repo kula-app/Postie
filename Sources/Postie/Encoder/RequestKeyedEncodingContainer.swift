@@ -44,6 +44,8 @@ class RequestKeyedEncodingContainer<Key>: KeyedEncodingContainerProtocol where K
             encoder.setCustomURL(url: customURL)
         case let cookies as RequestCookies:
             encoder.setCookies(cookies.wrappedValue)
+        case let cachePolicy as RequestCachePolicy:
+            encoder.setCachePolicy(cachePolicy.wrappedValue)
         default:
             // ignore any other values
             break
