@@ -12,7 +12,7 @@ class OptionalContentStrategyTests: XCTestCase {
     }
 
     func testValidateStatusCode_statusShouldMatchDefaultStrategy() {
-        for statusCode in 0 ... 599 {
+        for statusCode in 0...599 {
             XCTAssertEqual(OptionalContentStrategy.validate(statusCode: statusCode), DefaultBodyStrategy.validate(statusCode: statusCode))
         }
     }

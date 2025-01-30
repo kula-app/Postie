@@ -1,6 +1,6 @@
 import Foundation
-import os.log
 import URLEncodedFormCoding
+import os.log
 
 class LoggingURLEncodedFormDecoder: URLEncodedFormDecoder {
     override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {

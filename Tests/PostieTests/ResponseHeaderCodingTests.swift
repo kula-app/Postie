@@ -1,5 +1,6 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 private struct Response: Decodable {
     @ResponseHeader<DefaultHeaderStrategy>
@@ -19,12 +20,14 @@ private struct Response: Decodable {
 }
 
 class ResponseHeaderCodingTests: XCTestCase {
-    let response = HTTPURLResponse(url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil, headerFields: [
-        "authorization": "Bearer Token",
-        "LENGTH": "123",
-        "Content-Type": "application/json",
-        "X-CUSTOM-HEADER": "second custom header"
-    ])!
+    let response = HTTPURLResponse(
+        url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil,
+        headerFields: [
+            "authorization": "Bearer Token",
+            "LENGTH": "123",
+            "Content-Type": "application/json",
+            "X-CUSTOM-HEADER": "second custom header",
+        ])!
 
     func testDecoding_defaultStrategy_shouldDecodeCaseInSensitiveResponseHeaders() {
         let decoder = ResponseDecoder()
@@ -60,13 +63,15 @@ class ResponseHeaderCodingTests: XCTestCase {
     }
 
     func testDecoding_optionalStringValueGiven_shouldDecodeToValue() {
-        let response = HTTPURLResponse(url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil, headerFields: [
-            "authorization": "Bearer Token",
-            "LENGTH": "123",
-            "Content-Type": "application/json",
-            "X-Custom-Header": "a custom value",
-            "optionalStringValue": "value"
-        ])!
+        let response = HTTPURLResponse(
+            url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil,
+            headerFields: [
+                "authorization": "Bearer Token",
+                "LENGTH": "123",
+                "Content-Type": "application/json",
+                "X-Custom-Header": "a custom value",
+                "optionalStringValue": "value",
+            ])!
         let decoder = ResponseDecoder()
         guard let decoded = try CheckNoThrow(decoder.decode(Response.self, from: (Data(), response))) else {
             return
@@ -75,13 +80,15 @@ class ResponseHeaderCodingTests: XCTestCase {
     }
 
     func testDecoding_optionalIntValueGiven_shouldDecodeToValue() {
-        let response = HTTPURLResponse(url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil, headerFields: [
-            "authorization": "Bearer Token",
-            "LENGTH": "123",
-            "Content-Type": "application/json",
-            "X-Custom-Header": "a custom value",
-            "optionalIntValue": "10"
-        ])!
+        let response = HTTPURLResponse(
+            url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil,
+            headerFields: [
+                "authorization": "Bearer Token",
+                "LENGTH": "123",
+                "Content-Type": "application/json",
+                "X-Custom-Header": "a custom value",
+                "optionalIntValue": "10",
+            ])!
         let decoder = ResponseDecoder()
         guard let decoded = try CheckNoThrow(decoder.decode(Response.self, from: (Data(), response))) else {
             return

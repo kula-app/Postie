@@ -1,5 +1,5 @@
-import Foundation
 import Combine
+import Foundation
 
 public protocol URLSessionProvider {
     func send(urlRequest request: URLRequest) -> AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure>

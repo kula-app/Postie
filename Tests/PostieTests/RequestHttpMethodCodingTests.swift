@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import Postie
 
 private struct Request: Encodable {
