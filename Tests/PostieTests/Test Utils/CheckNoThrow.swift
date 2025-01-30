@@ -1,5 +1,6 @@
 import XCTest
 
+// swift-format-ignore: AlwaysUseLowerCamelCase
 // swiftlint:disable:next identifier_name
 func CheckNoThrow<T>(
     _ expression: @autoclosure () throws -> T,

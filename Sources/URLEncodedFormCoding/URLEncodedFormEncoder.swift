@@ -38,12 +38,15 @@ public class URLEncodedFormEncoder: TopLevelEncoder {
             lhs.name < rhs.name
         }
         // Use URLComponent for automatic query escaping
-        var comps = URLComponents(string: "")!
+        guard var comps = URLComponents(string: "") else {
+            return ""
+        }
         comps.queryItems = items
         return comps.url?.query ?? ""
     }
 }
 
+// swift-format-ignore: NoLeadingUnderscores
 private final class _URLEncodedFormEncoder: Encoder {
     /// See `Encoder`
     var userInfo: [CodingUserInfoKey: Any] = [:]
@@ -76,6 +79,7 @@ private final class _URLEncodedFormEncoder: Encoder {
     }
 }
 
+// swift-format-ignore: NoLeadingUnderscores
 /// Private `SingleValueEncodingContainer`.
 private final class _URLEncodedFormSingleValueEncoder: SingleValueEncodingContainer {
     /// See `SingleValueEncodingContainer`
@@ -106,6 +110,7 @@ private final class _URLEncodedFormSingleValueEncoder: SingleValueEncodingContai
     }
 }
 
+// swift-format-ignore: NoLeadingUnderscores
 /// Private `KeyedEncodingContainerProtocol`.
 private final class _URLEncodedFormKeyedEncoder<K>: KeyedEncodingContainerProtocol where K: CodingKey {
     /// See `KeyedEncodingContainerProtocol`
@@ -160,6 +165,7 @@ private final class _URLEncodedFormKeyedEncoder<K>: KeyedEncodingContainerProtoc
     }
 }
 
+// swift-format-ignore: NoLeadingUnderscores
 /// Private `UnkeyedEncodingContainer`.
 private final class _URLEncodedFormUnkeyedEncoder: UnkeyedEncodingContainer {
     /// See `UnkeyedEncodingContainer`.
