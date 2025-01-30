@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import Postie
 
 class ResponseStatusCodeCodingTests: XCTestCase {

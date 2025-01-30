@@ -34,7 +34,8 @@ internal struct ResponseDecoding: Decoder {
             guard let key = key.base as? String else {
                 continue
             }
-            let existingKey = key
+            let existingKey =
+                key
                 .split(separator: "-")
                 .map(\.uppercasingFirst)
                 .joined()
@@ -43,7 +44,7 @@ internal struct ResponseDecoding: Decoder {
             if let value = value as? String, existingKey == header.lowercased() {
                 switch T.self {
                 case is IntegerLiteralType.Type,
-                     is IntegerLiteralType?.Type:
+                    is IntegerLiteralType?.Type:
                     return Int(value) as? T
 
                 default:
@@ -114,10 +115,11 @@ internal struct ResponseDecoding: Decoder {
         let encoding: String.Encoding = .utf8
 
         guard let value = String(data: data, encoding: encoding) as? T else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(
-                codingPath: codingPath,
-                debugDescription: "Failed to decode using encoding: \(encoding)"
-            )
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(
+                    codingPath: codingPath,
+                    debugDescription: "Failed to decode using encoding: \(encoding)"
+                )
             )
         }
         return value

@@ -1,5 +1,5 @@
-import Foundation
 import Combine
+import Foundation
 import PostieUtils
 
 open class URLEncodedFormDecoder: TopLevelDecoder {
@@ -94,7 +94,9 @@ private final class _URLEncodedFormSingleValueDecoder: SingleValueDecodingContai
         switch element {
         case .text(let content):
             guard let castedText = content as? T else {
-                throw DecodingError.typeMismatch(T.self, .init(
+                throw DecodingError.typeMismatch(
+                    T.self,
+                    .init(
                         codingPath: codingPath,
                         debugDescription: "Failed to decode String to type " + String(describing: T.self)
                     )
@@ -122,11 +124,11 @@ private final class _URLEncodedFormKeyedDecoder<Key>: KeyedDecodingContainerProt
     }
 
     func contains(_ key: Key) -> Bool {
-        fatalError("Contains not implemented") // return context.data.get(at: codingPath)?.dictionary?[key.stringValue] != nil
+        fatalError("Contains not implemented")  // return context.data.get(at: codingPath)?.dictionary?[key.stringValue] != nil
     }
 
     func decodeNil(forKey key: Key) throws -> Bool {
-        fatalError("Decoding nil not implemented") // return context.data.get(at: codingPath + [key]) == nil
+        fatalError("Decoding nil not implemented")  // return context.data.get(at: codingPath + [key]) == nil
     }
 
     func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T: Decodable {
@@ -135,7 +137,7 @@ private final class _URLEncodedFormKeyedDecoder<Key>: KeyedDecodingContainerProt
     }
 
     func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws -> KeyedDecodingContainer<NestedKey>
-        where NestedKey: CodingKey {
+    where NestedKey: CodingKey {
         .init(_URLEncodedFormKeyedDecoder<NestedKey>(context: context, codingPath: codingPath + [key]))
     }
 
@@ -187,7 +189,7 @@ private final class _URLEncodedFormUnkeyedDecoder: UnkeyedDecodingContainer {
     }
 
     func decodeNil() throws -> Bool {
-        fatalError("Decoding nil not implemented") // return context.data.get(at: codingPath + [index]) == nil
+        fatalError("Decoding nil not implemented")  // return context.data.get(at: codingPath + [index]) == nil
     }
 
     /// See `UnkeyedDecodingContainer`.
@@ -199,7 +201,7 @@ private final class _URLEncodedFormUnkeyedDecoder: UnkeyedDecodingContainer {
 
     /// See `UnkeyedDecodingContainer`.
     func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey>
-        where NestedKey: CodingKey {
+    where NestedKey: CodingKey {
         .init(_URLEncodedFormKeyedDecoder<NestedKey>(context: context, codingPath: codingPath + [index]))
     }
 
@@ -217,20 +219,18 @@ private final class _URLEncodedFormUnkeyedDecoder: UnkeyedDecodingContainer {
 
 extension Dictionary where Key == String, Value == URLEncodedElement {
     func get(at path: [CodingKey]) -> Value? {
-        if let key = path.first?.stringValue {
-            return self[key]
-        } else {
+        guard let key = path.first?.stringValue else {
             return nil
         }
+        return self[key]
     }
 }
 
 extension Array where Element == URLEncodedElement {
     func get(at path: [CodingKey]) -> Element? {
-        if let index = path.first?.intValue {
-            return self[index]
-        } else {
+        guard let index = path.first?.intValue else {
             return nil
         }
+        return self[index]
     }
 }

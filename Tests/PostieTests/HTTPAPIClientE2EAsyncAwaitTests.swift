@@ -33,10 +33,12 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
         }
 
         // Assert request URL
-        XCTAssertEqual(requestedURL, URL(
-            string: "?custom_name=This%20custom%20name&value=321&optionalGivenValue=true",
-            relativeTo: baseURL
-        )!.absoluteURL)
+        XCTAssertEqual(
+            requestedURL,
+            URL(
+                string: "?custom_name=This%20custom%20name&value=321&optionalGivenValue=true",
+                relativeTo: baseURL
+            )!.absoluteURL)
     }
 
     func testSending_requestHeader_shouldBeInRequestHeaders() async throws {
@@ -67,11 +69,13 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
         }
 
         // Assert request URL
-        XCTAssertEqual(requestHeaders, [
-            "custom_name": "this custom name",
-            "value": "321",
-            "optionalGivenValue": "true"
-        ])
+        XCTAssertEqual(
+            requestHeaders,
+            [
+                "custom_name": "this custom name",
+                "value": "321",
+                "optionalGivenValue": "true",
+            ])
     }
 
     func testSending_requestBody_shouldBeInRequest() async throws {
