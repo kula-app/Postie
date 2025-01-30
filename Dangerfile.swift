@@ -8,7 +8,7 @@ let sourceChanges = allSourceFiles.contains { $0.hasPrefix("Source") }
 
 // Ensure no copyright header
 let swiftFilesWithCopyright = allSourceFiles.filter {
-    $0.contains("Copyright") && ($0.fileType == .swift  || $0.fileType == .m)
+    $0.contains("Copyright") && ($0.fileType == .swift || $0.fileType == .m)
 }
 for file in swiftFilesWithCopyright {
     danger.fail(message: "Please remove this copyright header", file: file, line: 0)
