@@ -1,8 +1,8 @@
-// swiftlint:disable line_length
 import Combine
 import Foundation
 import os.log
 
+// swiftlint:disable:next type_body_length
 open class HTTPAPIClient {
     public private(set) var session: URLSessionProvider
     public var url: URL
@@ -351,4 +351,3 @@ open class HTTPAPIClient {
         return url.appendingPathComponent(prefix)
     }
 }
-// swiftlint:enable line_length

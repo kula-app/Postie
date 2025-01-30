@@ -21,7 +21,9 @@ private struct Response: Decodable {
 
 class ResponseHeaderCodingTests: XCTestCase {
     let response = HTTPURLResponse(
-        url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil,
+        url: URL(string: "http://example.local")!,
+        statusCode: 200,
+        httpVersion: nil,
         headerFields: [
             "authorization": "Bearer Token",
             "LENGTH": "123",
@@ -64,7 +66,9 @@ class ResponseHeaderCodingTests: XCTestCase {
 
     func testDecoding_optionalStringValueGiven_shouldDecodeToValue() {
         let response = HTTPURLResponse(
-            url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil,
+            url: URL(string: "http://example.local")!,
+            statusCode: 200,
+            httpVersion: nil,
             headerFields: [
                 "authorization": "Bearer Token",
                 "LENGTH": "123",
@@ -81,7 +85,9 @@ class ResponseHeaderCodingTests: XCTestCase {
 
     func testDecoding_optionalIntValueGiven_shouldDecodeToValue() {
         let response = HTTPURLResponse(
-            url: URL(string: "http://example.local")!, statusCode: 200, httpVersion: nil,
+            url: URL(string: "http://example.local")!,
+            statusCode: 200,
+            httpVersion: nil,
             headerFields: [
                 "authorization": "Bearer Token",
                 "LENGTH": "123",
