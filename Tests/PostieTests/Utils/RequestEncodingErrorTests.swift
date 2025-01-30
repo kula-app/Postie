@@ -1,8 +1,8 @@
 import XCTest
+
 @testable import Postie
 
 class RequestEncodingErrorTests: XCTestCase {
-
     func testErrorDescription_invalidBaseURL_shouldHaveCorrectDescription() {
         let error: Error = RequestEncodingError.invalidBaseURL
         XCTAssertEqual(error.localizedDescription, "Invalid base URL")

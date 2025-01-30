@@ -4,7 +4,6 @@
 ///
 /// Reference: [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 public enum HTTPStatusCode: UInt16 {
-
     // +---------------------------------------------------------------------------+
     // | 1xx informational response – the request was received, continuing process |
     // +---------------------------------------------------------------------------+
@@ -393,11 +392,9 @@ public enum HTTPStatusCode: UInt16 {
     ///
     /// (RFC 6585)
     case networkAuthenticationRequired = 511
-
 }
 
 extension HTTPStatusCode: Comparable, Equatable {
-
     public static func < (lhs: HTTPStatusCode, rhs: HTTPStatusCode) -> Bool {
         lhs.rawValue < rhs.rawValue
     }
@@ -415,9 +412,11 @@ extension HTTPStatusCode: Comparable, Equatable {
     }
 }
 
-func ~= (range: Range<HTTPStatusCode>, value: Int) -> Bool {
-    guard let status = HTTPStatusCode(rawValue: UInt16(value)) else {
-        return false
+extension Range where Bound == HTTPStatusCode {
+    public static func ~= (range: Range<HTTPStatusCode>, value: Int) -> Bool {
+        guard let status = HTTPStatusCode(rawValue: UInt16(value)) else {
+            return false
+        }
+        return range.contains(status)
     }
-    return range.contains(status)
 }

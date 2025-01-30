@@ -1,7 +1,7 @@
-public extension ResponseBody {
-    typealias OptionalContent = ResponseBodyWrapper<Body, OptionalContentStrategy>
+extension ResponseBody {
+    public typealias OptionalContent = ResponseBodyWrapper<Body, OptionalContentStrategy>
 
-    typealias Status200 = ResponseBodyWrapper<Body, ValidateStatus200BodyStrategy>
-    typealias Status201 = ResponseBodyWrapper<Body, ValidateStatus201BodyStrategy>
-    typealias Status303 = ResponseBodyWrapper<Body, ValidateStatus303BodyStrategy>
+    public typealias Status200 = ResponseBodyWrapper<Body, ValidateStatus200BodyStrategy>
+    public typealias Status201 = ResponseBodyWrapper<Body, ValidateStatus201BodyStrategy>
+    public typealias Status303 = ResponseBodyWrapper<Body, ValidateStatus303BodyStrategy>
 }

@@ -1,6 +1,5 @@
 import Postie
 import PostieMock
-// swiftlint:disable nesting
 import XCTest
 
 class HTTPAPIClientE2ECallbackTests: XCTestCase {
@@ -101,7 +100,7 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
         }
 
         // Assert request URL
-        XCTAssertEqual(requestBody, "{\"value\":321}".data(using: .utf8)!)
+        XCTAssertEqual(requestBody, Data("{\"value\":321}".utf8))
     }
 
     func testSending_PlainResponse_shouldDecodeResponse() {
@@ -114,9 +113,10 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            this is random unformatted plain text
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                this is random unformatted plain text
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionCallbackStub(response: stubResponse)
@@ -150,11 +150,12 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            {
-                "value": "response value"
-            }
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                {
+                    "value": "response value"
+                }
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionCallbackStub(response: stubResponse)
@@ -191,16 +192,17 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            [
-                {
-                    "value": "response value1"
-                },
-                {
-                    "value": "response value2"
-                }
-            ]
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                [
+                    {
+                        "value": "response value1"
+                    },
+                    {
+                        "value": "response value2"
+                    }
+                ]
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionCallbackStub(response: stubResponse)
@@ -254,7 +256,8 @@ class HTTPAPIClientE2ECallbackTests: XCTestCase {
 
 extension HTTPAPIClientE2ECallbackTests {
     func sendTesting<Request: Postie.Request>(
-        request: Request, session: URLSessionProvider,
+        request: Request,
+        session: URLSessionProvider,
         _ send: (HTTPAPIClient, Request, @escaping (Result<Request.Response, Error>) -> Void) -> Void
     ) -> (response: Request.Response?, error: Error?) {
         let client = HTTPAPIClient(url: baseURL, session: session)
@@ -262,7 +265,8 @@ extension HTTPAPIClientE2ECallbackTests {
     }
 
     func sendTesting<Request: Postie.Request>(
-        request: Request, client: HTTPAPIClient,
+        request: Request,
+        client: HTTPAPIClient,
         _ send: (HTTPAPIClient, Request, @escaping (Result<Request.Response, Error>) -> Void) -> Void
     ) -> (response: Request.Response?, error: Error?) {
         // expectation to be fulfilled when we've received all expected values
@@ -284,5 +288,3 @@ extension HTTPAPIClientE2ECallbackTests {
         return (receivedResponse, receivedError)
     }
 }
-
-// swiftlint:enable nesting

@@ -1,6 +1,6 @@
 public struct DefaultBodyStrategy: ResponseBodyDecodingStrategy {
     public static func allowsEmptyContent(for _: Int) -> Bool {
-        return false
+        false
     }
 
     public static func validate(statusCode: Int) -> Bool {

@@ -1,16 +1,15 @@
 import Combine
 import Postie
 import PostieMock
-// swiftlint:disable nesting
 import XCTest
 
 class HTTPAPIClientE2ECombineTests: XCTestCase {
-    var cancellables: Set<AnyCancellable>!
+    var cancellables: Set<AnyCancellable> = []
 
     let baseURL = URL(string: "https://local.test")!
 
     override func setUp() {
-        cancellables = []
+        cancellables.removeAll()
     }
 
     func testSending_queryItems_shouldBeInRequestURI() {
@@ -109,7 +108,7 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
         }
 
         // Assert request URL
-        XCTAssertEqual(requestBody, "{\"value\":321}".data(using: .utf8)!)
+        XCTAssertEqual(requestBody, Data("{\"value\":321}".utf8))
     }
 
     func testSending_PlainResponse_shouldDecodeResponse() {
@@ -122,9 +121,10 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            this is random unformatted plain text
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                this is random unformatted plain text
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionCombineStub(response: stubResponse)
@@ -158,11 +158,12 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            {
-                "value": "response value"
-            }
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                {
+                    "value": "response value"
+                }
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionCombineStub(response: stubResponse)
@@ -199,16 +200,17 @@ class HTTPAPIClientE2ECombineTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            [
-                {
-                    "value": "response value1"
-                },
-                {
-                    "value": "response value2"
-                }
-            ]
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                [
+                    {
+                        "value": "response value1"
+                    },
+                    {
+                        "value": "response value2"
+                    }
+                ]
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionCombineStub(response: stubResponse)
@@ -297,5 +299,3 @@ extension HTTPAPIClientE2ECombineTests {
         return (receivedResponse, receivedError)
     }
 }
-
-// swiftlint:enable nesting

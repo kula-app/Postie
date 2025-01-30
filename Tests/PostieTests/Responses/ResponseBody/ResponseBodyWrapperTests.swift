@@ -1,6 +1,6 @@
-// swiftlint:disable nesting
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class ResponseBodyWrapperTests: XCTestCase {
     func testDecoding_responseDecoder_shouldDecode() throws {
@@ -34,7 +34,7 @@ class ResponseBodyWrapperTests: XCTestCase {
             httpVersion: nil,
             headerFields: nil
         )!
-        let data = "{\"foo\":\"value\"}".data(using: .utf8)!
+        let data = Data("{\"foo\":\"value\"}".utf8)
         let response = try decoder.decode(Foo.self, from: (data: data, response: httpUrlResponse))
         // Assert
         XCTAssertEqual(response.body, Foo.Body(foo: "value"))
@@ -73,7 +73,7 @@ class ResponseBodyWrapperTests: XCTestCase {
             httpVersion: nil,
             headerFields: nil
         )!
-        let data = "{\"foo\":\"value\"}".data(using: .utf8)!
+        let data = Data("{\"foo\":\"value\"}".utf8)
         let response = try decoder.decode(Foo.self, from: (data: data, response: httpUrlResponse))
         // Assert
         XCTAssertNil(response.body)
@@ -106,7 +106,7 @@ class ResponseBodyWrapperTests: XCTestCase {
         }
         // Act
         let decoder = JSONDecoder()
-        let response = try decoder.decode(Foo.self, from: "{\"body\":{\"foo\":\"value\"}}".data(using: .utf8)!)
+        let response = try decoder.decode(Foo.self, from: Data("{\"body\":{\"foo\":\"value\"}}".utf8))
         // Assert
         XCTAssertEqual(response.body, .init(foo: "value"))
     }
@@ -142,7 +142,7 @@ class ResponseBodyWrapperTests: XCTestCase {
             httpVersion: nil,
             headerFields: nil
         )!
-        let data = "".data(using: .utf8)!
+        let data = Data()
         let response = try decoder.decode(AllowedResponse.self, from: (data: data, response: httpUrlResponse))
         // Assert
         XCTAssertNil(response.body)
@@ -180,7 +180,7 @@ class ResponseBodyWrapperTests: XCTestCase {
             httpVersion: nil,
             headerFields: nil
         )!
-        let data = "".data(using: .utf8)!
+        let data = Data()
         await XCTAssertThrowsError(try decoder.decode(DisallowedResponse.self, from: (data: data, response: httpUrlResponse))) { error in
             switch error {
             case let DecodingError.dataCorrupted(context):
@@ -193,4 +193,3 @@ class ResponseBodyWrapperTests: XCTestCase {
         XCTAssertTrue(DisallowsEmptyBodyStrategy.didCallAllowsEmptyContent)
     }
 }
-// swiftlint:enable nesting

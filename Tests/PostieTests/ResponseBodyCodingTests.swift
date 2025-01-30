@@ -1,27 +1,24 @@
-// swiftlint:disable nesting
-@testable import Postie
 import XCTest
 
-class ResponseBodyCodingTests: XCTestCase {
+@testable import Postie
 
+class ResponseBodyCodingTests: XCTestCase {
     let baseURL = URL(string: "https://test.local")!
 
     func testJSONResponseBodyDecoding_shouldDecodeEmptyBody() {
         struct Response: Decodable {
-
             struct Body: JSONDecodable {}
 
             @ResponseBody<Body> var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        let data = "{}".data(using: .utf8)!
+        let data = Data("{}".utf8)
         let decoder = ResponseDecoder()
         XCTAssertNoThrow(try decoder.decode(Response.self, from: (data, response)))
     }
 
     func testJSONResponseBodyDecoding_valueInData_shouldDecodeFromData() {
         struct Response: Decodable {
-
             struct Body: JSONDecodable {
                 var value: String
             }
@@ -29,11 +26,12 @@ class ResponseBodyCodingTests: XCTestCase {
             @ResponseBody<Body> var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        let data = """
-        {
-            "value": "asdf"
-        }
-        """.data(using: .utf8)!
+        let data = Data(
+            """
+            {
+                "value": "asdf"
+            }
+            """.utf8)
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
             return
@@ -44,7 +42,6 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testJSONResponseBodyDecoding_invalidStatusCode_shouldNotDecodeData() {
         struct Response: Decodable {
-
             struct Body: JSONDecodable {
                 var value: String
             }
@@ -52,11 +49,12 @@ class ResponseBodyCodingTests: XCTestCase {
             @ResponseBody<Body> var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 401, httpVersion: nil, headerFields: nil)!
-        let data = """
-        {
-            "value": "asdf"
-        }
-        """.data(using: .utf8)!
+        let data = Data(
+            """
+            {
+                "value": "asdf"
+            }
+            """.utf8)
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
             return
@@ -66,20 +64,18 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testFormURLEncodedResponseBodyDecoding_shouldDecodeEmptyBody() {
         struct Response: Decodable {
-
             struct Body: FormURLEncodedDecodable {}
 
             @ResponseBody<Body> var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        let data = "".data(using: .utf8)!
+        let data = Data()
         let decoder = ResponseDecoder()
         XCTAssertNoThrow(try decoder.decode(Response.self, from: (data, response)))
     }
 
     func testFormURLEncodedResponseBodyDecoding_valueInData_shouldDecodeFromData() {
         struct Response: Decodable {
-
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
@@ -87,9 +83,10 @@ class ResponseBodyCodingTests: XCTestCase {
             @ResponseBody<Body> var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        let data = """
-        value=asdf
-        """.data(using: .utf8)!
+        let data = Data(
+            """
+            value=asdf
+            """.utf8)
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
             return
@@ -100,7 +97,6 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testFormURLEncodedResponseBodyDecoding_optionalContent_shouldDecodeNil() {
         struct Response: Decodable {
-
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
@@ -118,7 +114,6 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testFormURLEncodedResponseBodyDecoding_invalidStatusCode_shouldNotDecodeData() {
         struct Response: Decodable {
-
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
@@ -126,9 +121,10 @@ class ResponseBodyCodingTests: XCTestCase {
             @ResponseBody<Body> var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 401, httpVersion: nil, headerFields: nil)!
-        let data = """
-        value=asdf
-        """.data(using: .utf8)!
+        let data = Data(
+            """
+            value=asdf
+            """.utf8)
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
             return
@@ -138,15 +134,14 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testPlainTextResponseBodyDecoding_shouldReturnPlainTextBody() {
         struct Response: Decodable {
-
             @ResponseBody<PlainDecodable> var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         let responseBody = """
-        {
-            "value": "asdf"
-        }
-        """
+            {
+                "value": "asdf"
+            }
+            """
         let data = responseBody.data(using: .utf8)!
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
@@ -158,7 +153,6 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testJSONEncodedResponseBodyDecoding_optionalContent_shouldDecodeNil() {
         struct Response: Decodable {
-
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
@@ -176,7 +170,6 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testJSONEncodedResponseBodyDecoding_valueInData_optionalContent_shouldDecodeFromData() {
         struct Response: Decodable {
-
             struct Body: FormURLEncodedDecodable {
                 var value: String
             }
@@ -184,9 +177,10 @@ class ResponseBodyCodingTests: XCTestCase {
             @ResponseBody<Body>.OptionalContent var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        let data = """
-        value=asdf
-        """.data(using: .utf8)!
+        let data = Data(
+            """
+            value=asdf
+            """.utf8)
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response))) else {
             return
@@ -199,7 +193,6 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testXMLResponseBodyDecoding_optionalContent_shouldDecodeNil() {
         struct Response: Decodable {
-
             struct Body: XMLDecodable {
                 var value: String
             }
@@ -217,7 +210,6 @@ class ResponseBodyCodingTests: XCTestCase {
 
     func testXMLResponseBodyDecoding_valueInData_optionalContent_shouldDecodeFromData() {
         struct Response: Decodable {
-
             struct Body: XMLDecodable {
                 var value: String
             }
@@ -225,11 +217,12 @@ class ResponseBodyCodingTests: XCTestCase {
             @ResponseBody<Body>.OptionalContent var body
         }
         let response = HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        let data = """
-        <body>
-            <value>asdf</value>
-        </body>
-        """.data(using: .utf8)!
+        let data = Data(
+            """
+            <body>
+                <value>asdf</value>
+            </body>
+            """.utf8)
         let decoder = ResponseDecoder()
         guard let decoded = CheckNoThrow(try decoder.decode(Response.self, from: (data, response)), "Failed to decode response") else {
             return
@@ -238,4 +231,3 @@ class ResponseBodyCodingTests: XCTestCase {
         XCTAssertEqual(decoded.body?.value, "asdf")
     }
 }
-// swiftlint:enable nesting

@@ -1,5 +1,6 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class ValidateStatus303BodyStrategyTests: XCTestCase {
     func testAllowsEmptyContent_statusIs303_shouldBeTrue() {

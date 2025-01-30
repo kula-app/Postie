@@ -1,6 +1,6 @@
-// swiftlint:disable nesting
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class ResponseErrorBodyWrapperTests: XCTestCase {
     func testDecoding_responseDecoder_shouldDecode() throws {
@@ -28,7 +28,7 @@ class ResponseErrorBodyWrapperTests: XCTestCase {
             httpVersion: nil,
             headerFields: nil
         )!
-        let data = "{\"foo\":\"value\"}".data(using: .utf8)!
+        let data = Data("{\"foo\":\"value\"}".utf8)
         let response = try decoder.decode(Foo.self, from: (data: data, response: httpUrlResponse))
         // Assert
         XCTAssertEqual(response.body, Foo.Body(foo: "value"))
@@ -60,7 +60,7 @@ class ResponseErrorBodyWrapperTests: XCTestCase {
             httpVersion: nil,
             headerFields: nil
         )!
-        let data = "{\"foo\":\"value\"}".data(using: .utf8)!
+        let data = Data("{\"foo\":\"value\"}".utf8)
         let response = try decoder.decode(Foo.self, from: (data: data, response: httpUrlResponse))
         // Assert
         XCTAssertNil(response.body)
@@ -86,9 +86,8 @@ class ResponseErrorBodyWrapperTests: XCTestCase {
         }
         // Act
         let decoder = JSONDecoder()
-        let response = try decoder.decode(Foo.self, from: "{\"body\":{\"foo\":\"value\"}}".data(using: .utf8)!)
+        let response = try decoder.decode(Foo.self, from: Data("{\"body\":{\"foo\":\"value\"}}".utf8))
         // Assert
         XCTAssertEqual(response.body, .init(foo: "value"))
     }
 }
-// swiftlint:enable nesting

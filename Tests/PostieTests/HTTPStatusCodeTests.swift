@@ -1,9 +1,9 @@
 // swiftlint:disable type_body_length
 import XCTest
+
 @testable import Postie
 
 class HTTPStatusCodeTests: XCTestCase {
-
     func testKnownStatus_continue_shouldHaveCorrectRawValue() {
         XCTAssertEqual(HTTPStatusCode.continue.rawValue, 100)
     }

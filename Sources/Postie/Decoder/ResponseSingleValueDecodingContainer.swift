@@ -1,7 +1,6 @@
 import Foundation
 
 class ResponseSingleValueDecodingContainer: SingleValueDecodingContainer {
-
     let decoder: ResponseDecoding
     var codingPath: [CodingKey]
 

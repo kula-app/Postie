@@ -1,5 +1,6 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class ValidateStatus422ErrorBodyStrategyTests: XCTestCase {
     func testIsError_statusIs422_shouldBeTrue() {

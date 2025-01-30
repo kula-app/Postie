@@ -1,6 +1,6 @@
-// swiftlint:disable nesting
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class RequestEncoderTests: XCTestCase {
     let baseURL = URL(string: "https://postie.local")!
@@ -78,4 +78,3 @@ class RequestEncoderTests: XCTestCase {
         XCTAssertEqual(request.url, URL(string: "https://testing.local?field1=value1"))
     }
 }
-// swiftlint:enable nesting

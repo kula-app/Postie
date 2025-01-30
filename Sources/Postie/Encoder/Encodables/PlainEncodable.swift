@@ -4,19 +4,15 @@ import Foundation
 public typealias PlainEncodable = Encodable & PlainFormatProvider & PlainBodyProvider
 
 public protocol PlainBodyProvider {
-
     var body: String { get }
     var encoding: String.Encoding { get }
-
 }
 
 extension PlainBodyProvider {
-
     public var encoding: String.Encoding {
         .utf8
     }
 }
 
-extension String.Encoding: Encodable {
-
+extension String.Encoding: @retroactive Encodable {
 }

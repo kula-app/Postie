@@ -1,7 +1,6 @@
 import Foundation
 
 public struct DefaultHeaderStrategy<RawValue>: ResponseHeaderDecodingStrategy where RawValue: Codable {
-
     public static func decode(decoder: Decoder) throws -> RawValue {
         guard let key = decoder.codingPath.last?.stringValue else {
             throw ResponseHeaderDecodingError.missingCodingKey

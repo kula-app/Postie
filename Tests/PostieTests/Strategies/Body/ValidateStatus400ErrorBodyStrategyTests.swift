@@ -1,5 +1,6 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class ValidateStatus400ErrorBodyStrategyTests: XCTestCase {
     func testIsError_statusIs400_shouldBeTrue() {

@@ -1,5 +1,4 @@
 extension String {
-
     /// Convert from "snake_case_keys" to "camelCaseKeys" before attempting to match a key with the one specified by each type.
     ///
     /// Converting from snake case to camel case:
@@ -34,19 +33,17 @@ extension String {
 }
 
 extension Substring {
-
     public var uppercasingFirst: String {
-        return prefix(1).uppercased() + dropFirst()
+        prefix(1).uppercased() + dropFirst()
     }
 
     public var lowercasingFirst: String {
-        return prefix(1).lowercased() + dropFirst()
+        prefix(1).lowercased() + dropFirst()
     }
 }
 
 extension String {
-
     public var lowercasingFirst: String {
-        return prefix(1).lowercased() + dropFirst()
+        prefix(1).lowercased() + dropFirst()
     }
 }

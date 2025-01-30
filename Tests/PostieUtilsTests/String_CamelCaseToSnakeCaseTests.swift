@@ -1,9 +1,9 @@
 import XCTest
+
 @testable import PostieUtils
 
 // swiftlint:disable:next type_name
 final class String_CamelCaseToSnakeCaseTests: XCTestCase {
-
     func testConversion_leadingUnderscore_shouldBePreserved() {
         XCTAssertEqual("JSON123".camelCaseToSnakeCase, "json_123")
         XCTAssertEqual("JSON123Test".camelCaseToSnakeCase, "json_123_test")

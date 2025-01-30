@@ -1,14 +1,12 @@
-// swiftlint:disable nesting
-@testable import Postie
 import XCTest
 
-class RequestPathParameterCodingTests: XCTestCase {
+@testable import Postie
 
+class RequestPathParameterCodingTests: XCTestCase {
     let baseURL = URL(string: "https://local.url")!
 
     func testEncoding_missingParameter_shouldNotBeReplacedInPath() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/some-path/{unknown_id}/more-path"
@@ -22,7 +20,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_unnamedParameter_shouldReplaceValueInPathByVariableName() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/some-path/{id}/more-path"
@@ -37,7 +34,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_namedParameter_shouldReplaceValueInPathByVariableName() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/some-path/{custom_id}/more-path"
@@ -53,7 +49,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_multipleNamedParameters_shouldFailWithRangeOutOfBoundsIfAnyRegression() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/some-path/{some_id}/{id}"
@@ -63,12 +58,12 @@ class RequestPathParameterCodingTests: XCTestCase {
         let request = Request(someID: 123, id: 456)
 
         // Only fails if regression was made.
+        // swiftlint:disable:next xct_specific_matcher
         XCTAssert(encodeRequest(request: request) != nil, "Range out of bounds")
     }
 
     func testEncoding_multipleOccurrencesSameKey_shouldReplaceAllOccurrencesInPath() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/some/{id}/and/more/{id}/later"
@@ -83,7 +78,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_emptyPath_shouldIgnorePathParameters() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = ""
@@ -100,7 +94,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_stringParameter_shouldBePercentageEscaped() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/{name}"
@@ -115,7 +108,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_stringParameterCustomNaming_shouldUseCustomName() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/{another_name}"
@@ -131,7 +123,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_intParameterCustomNaming_shouldUseCustomName() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/{my_id}"
@@ -147,7 +138,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_stringParameterCustomNamingDefaultValue_shouldUseDefaultValue() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/{another_name}"
@@ -162,7 +152,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_optionalStringParameter_shouldBeReplacedWithLiteralNil() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/{name}"
@@ -177,7 +166,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_optionalIntParameter_shouldBeReplacedWithLiteralNil() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/{id}"
@@ -192,7 +180,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_optionalParamIsGiven_shouldSerializedWrappedValue() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/{id}"
@@ -208,7 +195,6 @@ class RequestPathParameterCodingTests: XCTestCase {
 
     func testEncoding_paramValueContainsUnescapedCharacters_shouldEscapeCharacters() {
         struct Request: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestPath var path = "/{id}"
@@ -234,4 +220,3 @@ class RequestPathParameterCodingTests: XCTestCase {
         return encoded
     }
 }
-// swiftlint:enable nesting

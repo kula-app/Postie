@@ -1,9 +1,8 @@
-// swiftlint:disable nesting
 import XCTest
+
 @testable import Postie
 
 private struct Foo: Encodable {
-
     typealias Response = EmptyResponse
 
     @QueryItem
@@ -14,11 +13,9 @@ private struct Foo: Encodable {
 
     @QueryItem
     var optionalText: String?
-
 }
 
 class QueryCodingTests: XCTestCase {
-
     let baseURL = URL(string: "https://local.url")!
 
     func testEncoding_shouldEncodeUnnamedQueryItem() {
@@ -47,7 +44,7 @@ class QueryCodingTests: XCTestCase {
             return
         }
         XCTAssertEqual(items.count, 2)
-        XCTAssertFalse(items.contains(where: { $0.name == "optionalText" }))
+        XCTAssertFalse(items.contains { $0.name == "optionalText" })
     }
 
     func testEncoding_optionalQueryItemIsSet_shouldBeAddedToQuery() {
@@ -61,12 +58,10 @@ class QueryCodingTests: XCTestCase {
 
     func testEncoding_defaultValueIsGiven_shouldBeUsed() {
         struct Foo: Encodable {
-
             typealias Response = EmptyResponse
 
             @QueryItem(defaultValue: "some default")
             var text: String
-
         }
 
         let request = Foo()
@@ -79,12 +74,10 @@ class QueryCodingTests: XCTestCase {
 
     func testEncoding_defaultValueWithCustomNameIsGiven_shouldBeUsed() {
         struct Foo: Encodable {
-
             typealias Response = EmptyResponse
 
             @QueryItem(name: "other_text", defaultValue: "some default")
             var text: String
-
         }
 
         let request = Foo()
@@ -115,4 +108,3 @@ class QueryCodingTests: XCTestCase {
         return items
     }
 }
-// swiftlint:enable nesting

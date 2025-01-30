@@ -1,6 +1,5 @@
 /// A basic `CodingKey` implementation.
 public struct BasicKey: CodingKey {
-
     /// See `CodingKey`.
     public var stringValue: String
 

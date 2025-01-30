@@ -1,5 +1,6 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class ValidateStatus201BodyStrategyTests: XCTestCase {
     func testAllowsEmptyContent_statusIs201_shouldBeFalse() {

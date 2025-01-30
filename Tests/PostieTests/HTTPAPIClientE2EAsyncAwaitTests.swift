@@ -1,4 +1,3 @@
-// swiftlint:disable nesting
 import Postie
 import PostieMock
 import XCTest
@@ -101,7 +100,7 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
         }
 
         // Assert request URL
-        XCTAssertEqual(requestBody, "{\"value\":321}".data(using: .utf8)!)
+        XCTAssertEqual(requestBody, Data("{\"value\":321}".utf8))
     }
 
     func testSending_PlainResponse_shouldDecodeResponse() async throws {
@@ -114,9 +113,10 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            this is random unformatted plain text
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                this is random unformatted plain text
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionAsyncAwaitStub(response: stubResponse)
@@ -143,11 +143,12 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            {
-                "value": "response value"
-            }
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                {
+                    "value": "response value"
+                }
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionAsyncAwaitStub(response: stubResponse)
@@ -177,16 +178,17 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
 
         // Prepare response stub
         let stubResponse: (data: Data, response: URLResponse) = (
-            data: """
-            [
-                {
-                    "value": "response value1"
-                },
-                {
-                    "value": "response value2"
-                }
-            ]
-            """.data(using: .utf8)!,
+            data: Data(
+                """
+                [
+                    {
+                        "value": "response value1"
+                    },
+                    {
+                        "value": "response value2"
+                    }
+                ]
+                """.utf8),
             response: HTTPURLResponse(url: baseURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
         )
         let stubSession = URLSessionAsyncAwaitStub(response: stubResponse)
@@ -225,7 +227,8 @@ class HTTPAPIClientE2EAsyncAwaitTests: XCTestCase {
 
 extension HTTPAPIClientE2EAsyncAwaitTests {
     func sendTesting<Request: Postie.Request>(
-        request: Request, session: URLSessionProvider,
+        request: Request,
+        session: URLSessionProvider,
         _ send: (HTTPAPIClient, Request) async throws -> Request.Response
     ) async throws -> Request.Response {
         let client = HTTPAPIClient(url: baseURL, session: session)
@@ -233,10 +236,11 @@ extension HTTPAPIClientE2EAsyncAwaitTests {
     }
 
     func sendTesting<Request: Postie.Request>(
-        request: Request, client: HTTPAPIClient,
+        request: Request,
+        client: HTTPAPIClient,
         _ send: (HTTPAPIClient, Request) async throws -> Request.Response
     ) async throws -> Request.Response {
-        return try await send(client, request)
+        try await send(client, request)
     }
 }
 
@@ -256,5 +260,3 @@ extension XCTest {
         }
     }
 }
-
-// swiftlint:enable nesting

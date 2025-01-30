@@ -1,5 +1,6 @@
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 private struct Response: Decodable {
     @ResponseCookies var cookies
@@ -21,7 +22,7 @@ class ResponseCookiesCodingTests: XCTestCase {
         .maximumAge: "3600",
 
         .secure: true,
-        .sameSitePolicy: "Strict"
+        .sameSitePolicy: "Strict",
     ])!
 
     func testDecoding_defaultStrategy_shouldDecodeCaseInSensitiveResponseHeaders() {

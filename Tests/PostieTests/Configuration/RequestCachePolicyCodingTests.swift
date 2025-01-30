@@ -1,6 +1,6 @@
-// swiftlint:disable nesting
-@testable import Postie
 import XCTest
+
+@testable import Postie
 
 class RequestCachePolicyCodingTests: XCTestCase {
     let baseURL = URL(string: "https://local.url")!
@@ -75,5 +75,3 @@ class RequestCachePolicyCodingTests: XCTestCase {
         XCTAssertEqual(encoded.cachePolicy, .returnCacheDataDontLoad)
     }
 }
-
-// swiftlint:enable nesting

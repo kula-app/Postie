@@ -1,5 +1,4 @@
 class URLEncodedFormDataContext {
-
     var fields: [String: URLEncodedElement] = [:]
 
     func set(to element: URLEncodedElement, at path: [CodingKey]) {

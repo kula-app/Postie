@@ -1,5 +1,4 @@
 public protocol QueryItemValue {
-
     var serializedQueryItem: String? { get }
 
     var isCollection: Bool { get }
@@ -10,13 +9,12 @@ public protocol QueryItemValue {
 // MARK: - Array + QueryItemValue
 
 extension Array: QueryItemValue where Element: QueryItemValue {
-
     public var serializedQueryItem: String? {
         fatalError("This method should not be called. Multiple query items should be added to the query individually")
     }
 
     public var isCollection: Bool {
-        return true
+        true
     }
 
     public func iterateCollection(_ iterator: (QueryItemValue) -> Void) {
@@ -27,7 +25,6 @@ extension Array: QueryItemValue where Element: QueryItemValue {
 // MARK: - Bool + QueryItemValue
 
 extension Bool: QueryItemValue {
-
     public var serializedQueryItem: String? {
         self ? "true" : "false"
     }
@@ -42,7 +39,6 @@ extension Bool: QueryItemValue {
 // MARK: - Double + QueryItemValue
 
 extension Double: QueryItemValue {
-
     public var serializedQueryItem: String? {
         description
     }
@@ -57,7 +53,6 @@ extension Double: QueryItemValue {
 // MARK: - Int + QueryItemValue
 
 extension Int: QueryItemValue {
-
     public var serializedQueryItem: String? {
         description
     }
@@ -72,7 +67,6 @@ extension Int: QueryItemValue {
 // MARK: - String + QueryItemValue
 
 extension String: QueryItemValue {
-
     public var serializedQueryItem: String? {
         self
     }
@@ -87,7 +81,6 @@ extension String: QueryItemValue {
 // MARK: - Optional + QueryItemValue
 
 extension Optional: QueryItemValue where Wrapped: QueryItemValue {
-
     public var serializedQueryItem: String? {
         guard let value = self else {
             return nil
@@ -113,13 +106,12 @@ extension Optional: QueryItemValue where Wrapped: QueryItemValue {
 // MARK: - Set + QueryItemValue
 
 extension Set: QueryItemValue where Element: QueryItemValue {
-
     public var serializedQueryItem: String? {
         fatalError("This method should not be called. Multiple query items should be added to the query individually")
     }
 
     public var isCollection: Bool {
-        return true
+        true
     }
 
     public func iterateCollection(_ iterator: (QueryItemValue) -> Void) {
@@ -127,17 +119,16 @@ extension Set: QueryItemValue where Element: QueryItemValue {
     }
 }
 
-public extension QueryItemValue where Self: RawRepresentable, RawValue: QueryItemValue {
-
-    var serializedQueryItem: String? {
+extension QueryItemValue where Self: RawRepresentable, RawValue: QueryItemValue {
+    public var serializedQueryItem: String? {
         rawValue.serializedQueryItem
     }
 
-    var isCollection: Bool {
+    public var isCollection: Bool {
         rawValue.isCollection
     }
 
-    func iterateCollection(_ iterator: (QueryItemValue) -> Void) {
+    public func iterateCollection(_ iterator: (QueryItemValue) -> Void) {
         rawValue.iterateCollection(iterator)
     }
 }

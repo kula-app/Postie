@@ -1,8 +1,8 @@
 import XCTest
+
 @testable import Postie
 
 class ResponseStatusCodeTests: XCTestCase {
-
     private struct Foo {
         @ResponseStatusCode var bar
     }

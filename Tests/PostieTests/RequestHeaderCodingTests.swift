@@ -1,9 +1,8 @@
-// swiftlint:disable nesting
 import XCTest
+
 @testable import Postie
 
 private struct Foo: Encodable {
-
     typealias Response = EmptyResponse
 
     @RequestHeader
@@ -14,11 +13,9 @@ private struct Foo: Encodable {
 
     @RequestHeader
     var optionalText: String?
-
 }
 
 class RequestHeaderCodingTests: XCTestCase {
-
     let baseURL = URL(string: "https://local.url")!
 
     func testEncoding_shouldEncodeUnnamedAndNamedRequestHeaders() {
@@ -57,7 +54,6 @@ class RequestHeaderCodingTests: XCTestCase {
 
     func testEncoding_defaultValueHeaderIsGiven_shouldBeUsedIfNoneIsSet() {
         struct Foo: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestHeader(defaultValue: "some value")
@@ -74,7 +70,6 @@ class RequestHeaderCodingTests: XCTestCase {
 
     func testEncoding_namedHeaderWithDefaultValueIsGiven_shouldBeUsedIfNoneIsSet() {
         struct Foo: Encodable {
-
             typealias Response = EmptyResponse
 
             @RequestHeader(name: "some key", defaultValue: "some value")
@@ -101,4 +96,3 @@ class RequestHeaderCodingTests: XCTestCase {
         return encoded.allHTTPHeaderFields
     }
 }
-// swiftlint:enable nesting

@@ -1,7 +1,6 @@
 import Foundation
 
 public enum APIError: LocalizedError {
-
     case responseError(statusCode: Int, data: Data)
     case invalidResponse
     case urlError(URLError)
@@ -11,7 +10,7 @@ public enum APIError: LocalizedError {
 
     public var errorDescription: String? {
         switch self {
-        case .responseError(let statusCode, let data):
+        case let .responseError(statusCode, data):
             return "ResponseError \(statusCode), data: " + (String(data: data, encoding: .utf8) ?? "nil")
         case .invalidResponse:
             return "Received invalid URL response"
