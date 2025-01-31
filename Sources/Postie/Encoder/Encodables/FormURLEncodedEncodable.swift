@@ -1,3 +1,6 @@
+/// A type that can decode itself from an external form-url encoded representation.
+public typealias FormURLEncodedEncodable = Encodable & FormURLEncodedFormatProvider & FormURLEncodedBodyProvider
+
 /// A provider for form URL encoded body data.
 ///
 /// The `FormURLEncodedBodyProvider` protocol defines a type that provides a body for form URL encoded data.
