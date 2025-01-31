@@ -1,4 +1,8 @@
 public protocol RequestPathParameterValue {
+    /// The serialized value of the path parameter.
+    ///
+    /// This property represents the serialized value of the path parameter.
+    /// It is used to convert the path parameter value into a string format suitable for URL paths.
     var serialized: String { get }
 }
 

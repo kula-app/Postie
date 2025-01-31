@@ -1,8 +1,21 @@
 public protocol QueryItemValue {
+    /// The serialized value of the query item.
+    ///
+    /// This property represents the serialized value of the query item.
+    /// It is used to convert the query item value into a string format suitable for URL query parameters.
     var serializedQueryItem: String? { get }
 
+    /// Indicates whether the query item is a collection.
+    ///
+    /// This property is used to determine if the query item is a collection.
     var isCollection: Bool { get }
 
+    /// Iterates over the elements of the collection.
+    ///
+    /// - Parameter iterator: A closure that is called for each element in the collection.
+    ///
+    /// This method is used to iterate over the elements of the collection.
+    /// If the query item is not a collection, this method should not be called.
     func iterateCollection(_ iterator: (QueryItemValue) -> Void)
 }
 

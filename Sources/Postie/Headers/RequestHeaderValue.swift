@@ -1,5 +1,8 @@
 public protocol RequestHeaderValue {
     /// The serialized value of the header.
+    ///
+    /// This property represents the serialized value of the header.
+    /// It is used to convert the header value into a string format suitable for HTTP headers.
     var serializedHeaderValue: String? { get }
 }
 
