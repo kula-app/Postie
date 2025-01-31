@@ -45,11 +45,6 @@ extension ResponseErrorBodyWrapper: Decodable {
     ///
     /// - Parameter decoder: The decoder to use for decoding the error response body.
     /// - Throws: An error if the decoder is not a `ResponseDecoding` instance or if the response body cannot be decoded.
-    ///
-    /// Example usage:
-    /// ```
-    /// let errorResponseBody: MyErrorResponseType? = try ResponseErrorBodyWrapper(from: decoder)
-    /// ```
     public init(from decoder: Decoder) throws {
         guard let responseDecoder = decoder as? ResponseDecoding else {
             self.wrappedValue = try Body(from: decoder)

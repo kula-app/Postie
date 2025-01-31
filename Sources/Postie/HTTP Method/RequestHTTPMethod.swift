@@ -7,7 +7,8 @@
 /// ```
 /// @RequestHTTPMethod var httpMethod: HTTPMethod = .post
 /// ```
-@propertyWrapper public struct RequestHTTPMethod: Encodable {
+@propertyWrapper
+public struct RequestHTTPMethod: Encodable {
     /// The wrapped value representing the HTTP method.
     ///
     /// This property holds the `HTTPMethod` value that is managed by this property wrapper.

@@ -7,7 +7,8 @@
 /// ```
 /// @ResponseHeader<CustomDecodingStrategy> var header: String
 /// ```
-@propertyWrapper public struct ResponseHeader<DecodingStrategy: ResponseHeaderDecodingStrategy> {
+@propertyWrapper
+public struct ResponseHeader<DecodingStrategy: ResponseHeaderDecodingStrategy> {
     /// The wrapped value representing the decoded header value.
     ///
     /// This property holds the `DecodingStrategy.RawValue` value that is managed by this property wrapper.

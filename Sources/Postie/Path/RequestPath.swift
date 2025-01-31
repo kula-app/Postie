@@ -7,7 +7,8 @@
 /// ```
 /// @RequestPath var path: String
 /// ```
-@propertyWrapper public struct RequestPath: Encodable {
+@propertyWrapper
+public struct RequestPath: Encodable {
     /// The wrapped value representing the request path.
     ///
     /// This property holds the `String` value that is managed by this property wrapper.

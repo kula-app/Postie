@@ -1,5 +1,3 @@
-import Foundation
-
 /// A type alias for `ResponseBodyWrapper` with a default body decoding strategy.
 ///
 /// The `ResponseBody` type alias provides a convenient way to use `ResponseBodyWrapper` with the `DefaultBodyStrategy`.

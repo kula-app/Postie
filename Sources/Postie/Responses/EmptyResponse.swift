@@ -5,6 +5,6 @@
 ///
 /// Example usage:
 /// ```
-/// let emptyResponse = try JSONDecoder().decode(EmptyResponse.self, from: Data())
+/// @ResponseBody<EmptyResponse> var responseBody
 /// ```
 public struct EmptyResponse: Decodable {}
