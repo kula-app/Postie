@@ -1,3 +1,7 @@
+/// A type that can be used as a value for a request path parameter.
+///
+/// The `RequestPathParameterValue` protocol defines a type that can be used as a value for a request path parameter.
+/// It requires conforming types to provide a `serialized` property that returns a string representation of the path parameter value.
 public protocol RequestPathParameterValue {
     /// The serialized value of the path parameter.
     ///

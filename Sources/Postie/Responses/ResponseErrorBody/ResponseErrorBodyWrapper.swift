@@ -1,3 +1,12 @@
+/// A property wrapper that wraps an error response body.
+///
+/// The `ResponseErrorBodyWrapper` property wrapper is used to wrap an error response body value.
+/// It provides a `wrappedValue` property that holds the error response body value.
+///
+/// Example usage:
+/// ```
+/// @ResponseErrorBodyWrapper var errorResponseBody: MyErrorResponseType?
+/// ```
 @propertyWrapper
 public struct ResponseErrorBodyWrapper<Body: Decodable, BodyStrategy: ResponseErrorBodyDecodingStrategy> {
     /// The wrapped value representing the decoded error response body.
@@ -30,7 +39,16 @@ public struct ResponseErrorBodyWrapper<Body: Decodable, BodyStrategy: ResponseEr
 
 // MARK: Decodable
 
+/// Implements the `Decodable` protocol for `ResponseErrorBodyWrapper`.
 extension ResponseErrorBodyWrapper: Decodable {
+    /// Initializes a new instance of `ResponseErrorBodyWrapper` from a decoder.
+    ///
+    /// - Parameter decoder: The decoder to use for decoding the error response body.
+    ///
+    /// Example usage:
+    /// ```
+    /// let errorResponseBody: MyErrorResponseType? = try ResponseErrorBodyWrapper(from: decoder)
+    /// ```
     public init(from decoder: Decoder) throws {
         guard let responseDecoder = decoder as? ResponseDecoding else {
             self.wrappedValue = try Body(from: decoder)

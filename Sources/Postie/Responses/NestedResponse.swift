@@ -1,3 +1,29 @@
+/// A property wrapper that wraps a nested response.
+///
+/// To support inheritance, which can be especially useful for pagination, use the property wrapper `@NestedResponse` to add nested responses.
+///
+/// While decoding the flat HTTP response will be applied recursively to all nested responses, therefore it is possible, that different nested responses access different values of the original HTTP response.
+///
+/// **Example:**
+///
+/// ```swift
+/// struct PaginatedResponse<NestedRequest: Request>: Decodable {
+///
+///     /// Header which indicates how many more elements are available
+///     @ResponseHeader<DefaultHeaderStrategy> var totalElements
+///
+///     @NestedResponse var nested: NestedRequest
+/// }
+///
+/// struct ListRequest: Request {
+///
+///     typealias Response = PaginatedResponse<ListResponse>
+///
+///     struct ListResponse: Decodable {
+///         // see other examples
+///     }
+/// }
+/// ```
 @propertyWrapper
 public struct NestedResponse<Response: Decodable> {
     /// The wrapped value representing the nested response.

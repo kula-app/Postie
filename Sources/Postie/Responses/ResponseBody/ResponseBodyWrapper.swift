@@ -1,3 +1,12 @@
+/// A property wrapper that wraps a response body.
+///
+/// The `ResponseBodyWrapper` property wrapper is used to wrap a response body value.
+/// It provides a `wrappedValue` property that holds the response body value.
+///
+/// Example usage:
+/// ```
+/// @ResponseBodyWrapper var responseBody: MyResponseType?
+/// ```
 @propertyWrapper
 public struct ResponseBodyWrapper<Body: Decodable, BodyStrategy: ResponseBodyDecodingStrategy> {
     /// The wrapped value representing the decoded response body.
@@ -31,6 +40,14 @@ public struct ResponseBodyWrapper<Body: Decodable, BodyStrategy: ResponseBodyDec
 // MARK: Decodable
 
 extension ResponseBodyWrapper: Decodable {
+    /// Initializes a new instance of `ResponseBodyWrapper` from a decoder.
+    ///
+    /// - Parameter decoder: The decoder to use for decoding the response body.
+    ///
+    /// Example usage:
+    /// ```
+    /// let responseBody: MyResponseType? = try ResponseBodyWrapper(from: decoder)
+    /// ```
     public init(from decoder: Decoder) throws {
         guard let responseDecoder = decoder as? ResponseDecoding else {
             self.wrappedValue = try Body(from: decoder)

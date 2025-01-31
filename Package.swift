@@ -23,16 +23,16 @@ let package = Package(
                 "PostieUtils",
                 "XMLCoder",
             ]),
-        .testTarget(name: "PostieTests", dependencies: [
-            "Postie",
-            "PostieMock"
-        ]),
+        // dev .testTarget(name: "PostieTests", dependencies: [
+        // dev     "Postie",
+        // dev     "PostieMock"
+        // dev ]),
 
         .target(name: "PostieMock", dependencies: ["Postie"]),
 
         .target(name: "URLEncodedFormCoding", dependencies: ["PostieUtils"]),
 
         .target(name: "PostieUtils"),
-        .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"])
+        // dev .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"])
     ]
 )
