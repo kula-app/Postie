@@ -13,7 +13,6 @@ public struct ValidateStatus200BodyStrategy: ResponseBodyDecodingStrategy {
     ///
     /// This method always returns `false` for status code 200, indicating that empty content is not allowed.
     ///
-    /// - Parameter statusCode: The HTTP status code of the response.
     /// - Returns: A Boolean value indicating whether empty content is allowed.
     public static func allowsEmptyContent(for _: Int) -> Bool {
         false

@@ -43,6 +43,7 @@ extension ResponseBodyWrapper: Decodable {
     /// Initializes a new instance of `ResponseBodyWrapper` from a decoder.
     ///
     /// - Parameter decoder: The decoder to use for decoding the response body.
+    /// - Throws: An error if the decoder is not a `ResponseDecoding` instance or if the response body cannot be decoded.
     ///
     /// Example usage:
     /// ```
