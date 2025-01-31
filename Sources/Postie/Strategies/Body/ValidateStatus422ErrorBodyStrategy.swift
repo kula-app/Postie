@@ -1,3 +1,11 @@
+/// A strategy for validating the body of a response with a status code of 422.
+///
+/// The `ValidateStatus422ErrorBodyStrategy` struct provides a strategy for validating the body of a response with a status code of 422.
+///
+/// Example usage:
+/// ```
+/// @ResponseErrorBodyWrapper<Body, ValidateStatus422ErrorBodyStrategy> var body: Body
+/// ```
 public struct ValidateStatus422ErrorBodyStrategy: ResponseErrorBodyDecodingStrategy {
     /// Determines if the given status code represents an error.
     ///
@@ -5,13 +13,7 @@ public struct ValidateStatus422ErrorBodyStrategy: ResponseErrorBodyDecodingStrat
     ///
     /// - Parameter statusCode: The status code to check.
     /// - Returns: `true` if the status code is 422, otherwise `false`.
-    ///
-    /// Example usage:
-    /// ```
-    /// @ResponseErrorBodyWrapper<Body, ValidateStatus422ErrorBodyStrategy> var body: Body
-    /// ```
     public static func isError(statusCode: Int) -> Bool {
         statusCode == HTTPStatusCode.unprocessableEntity.rawValue
     }
 }
-

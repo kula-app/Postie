@@ -15,11 +15,6 @@ public struct ValidateStatus404ErrorBodyStrategy: ResponseErrorBodyDecodingStrat
     ///
     /// - Parameter statusCode: The status code to check.
     /// - Returns: `true` if the status code is 404, otherwise `false`.
-    ///
-    /// Example usage:
-    /// ```
-    /// @ResponseErrorBodyWrapper<Body, ValidateStatus404ErrorBodyStrategy> var body: Body
-    /// ```
     public static func isError(statusCode: Int) -> Bool {
         statusCode == HTTPStatusCode.notFound.rawValue
     }

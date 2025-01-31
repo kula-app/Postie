@@ -15,12 +15,6 @@ public struct ValidateStatus400ErrorBodyStrategy: ResponseErrorBodyDecodingStrat
     ///
     /// - Parameter statusCode: The status code to check.
     /// - Returns: `true` if the status code is 400, `false` otherwise.
-    ///
-    /// Example usage:
-    /// ```
-    /// let isError = ValidateStatus400ErrorBodyStrategy.isError(statusCode: 400)
-    /// print(isError) // true
-    /// ```
     public static func isError(statusCode: Int) -> Bool {
         statusCode == HTTPStatusCode.badRequest.rawValue
     }

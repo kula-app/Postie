@@ -15,12 +15,6 @@ public struct ValidateStatus401ErrorBodyStrategy: ResponseErrorBodyDecodingStrat
     ///
     /// - Parameter statusCode: The status code to check.
     /// - Returns: `true` if the status code is 401, `false` otherwise.
-    ///
-    /// Example usage:
-    /// ```
-    /// let isError = ValidateStatus401ErrorBodyStrategy.isError(statusCode: 401)
-    /// print(isError) // true
-    /// ```
     public static func isError(statusCode: Int) -> Bool {
         statusCode == HTTPStatusCode.unauthorized.rawValue
     }

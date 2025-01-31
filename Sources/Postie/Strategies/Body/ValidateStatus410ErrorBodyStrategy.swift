@@ -1,3 +1,11 @@
+/// A strategy for validating the body of a response with a status code of 410.
+///
+/// The `ValidateStatus410ErrorBodyStrategy` struct provides a strategy for validating the body of a response with a status code of 410.
+///
+/// Example usage:
+/// ```
+/// @ResponseErrorBodyWrapper<Body, ValidateStatus410ErrorBodyStrategy> var body: Body
+/// ```
 public struct ValidateStatus410ErrorBodyStrategy: ResponseErrorBodyDecodingStrategy {
     /// Determines if the given status code represents an error.
     ///
@@ -5,11 +13,6 @@ public struct ValidateStatus410ErrorBodyStrategy: ResponseErrorBodyDecodingStrat
     ///
     /// - Parameter statusCode: The status code to check.
     /// - Returns: `true` if the status code is 410, otherwise `false`.
-    ///
-    /// Example usage:
-    /// ```
-    /// @ResponseErrorBodyWrapper<Body, ValidateStatus410ErrorBodyStrategy> var body: Body
-    /// ```
     public static func isError(statusCode: Int) -> Bool {
         statusCode == HTTPStatusCode.gone.rawValue
     }

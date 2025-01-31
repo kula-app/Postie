@@ -1,5 +1,3 @@
-import Foundation
-
 /// A strategy for validating error response bodies with status code 403.
 ///
 /// The `ValidateStatus403ErrorBodyStrategy` struct provides a strategy for validating error response bodies
@@ -17,12 +15,6 @@ public struct ValidateStatus403ErrorBodyStrategy: ResponseErrorBodyDecodingStrat
     ///
     /// - Parameter statusCode: The status code to check.
     /// - Returns: `true` if the status code is 403 (Forbidden), `false` otherwise.
-    ///
-    /// Example usage:
-    /// ```
-    /// let isError = ValidateStatus403ErrorBodyStrategy.isError(statusCode: 403)
-    /// print(isError) // true
-    /// ```
     public static func isError(statusCode: Int) -> Bool {
         statusCode == HTTPStatusCode.forbidden.rawValue
     }
