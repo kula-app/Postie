@@ -1,3 +1,13 @@
+/// A strategy for validating response bodies with status code 200.
+///
+/// The `ValidateStatus200BodyStrategy` struct provides a strategy for validating response bodies
+/// with a status code of 200 (OK). It conforms to the `ResponseBodyDecodingStrategy` protocol
+/// and defines the `allowsEmptyContent(for:)` and `validate(statusCode:)` methods.
+///
+/// Example usage:
+/// ```
+/// @ResponseBodyWrapper<Body, ValidateStatus200BodyStrategy> var body: Body
+/// ```
 public struct ValidateStatus200BodyStrategy: ResponseBodyDecodingStrategy {
     /// Indicates whether empty content is allowed for the given status code.
     ///

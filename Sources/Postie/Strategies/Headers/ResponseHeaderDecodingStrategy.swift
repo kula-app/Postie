@@ -1,3 +1,13 @@
+/// A protocol for defining strategies for decoding response headers.
+///
+/// Implement this protocol to create custom strategies for decoding response headers.
+///
+/// Example usage:
+/// ```swift
+/// public class SpecificHeaderDecodingStrategy: ResponseHeaderDecodingStrategy {
+///     // Implement the required methods and properties here
+/// }
+/// ```
 public protocol ResponseHeaderDecodingStrategy {
     /// The type of the raw value that will be decoded from the response header.
     ///
@@ -12,12 +22,6 @@ public protocol ResponseHeaderDecodingStrategy {
     /// - Parameter decoder: The decoder to read data from.
     /// - Returns: The decoded raw value.
     /// - Throws: An error if the decoding process fails.
-    ///
-    /// Example usage:
-    /// ```
-    /// let decoder = JSONDecoder()
-    /// let rawValue = try MyHeaderDecodingStrategy.decode(decoder: decoder)
-    /// ```
     static func decode(decoder: Decoder) throws -> RawValue
 }
 

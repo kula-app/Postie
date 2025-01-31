@@ -1,4 +1,3 @@
-@propertyWrapper
 /// A property wrapper that provides a convenient way to handle request paths.
 ///
 /// The `RequestPath` struct is a property wrapper that allows you to specify the path for a request.
@@ -8,7 +7,7 @@
 /// ```
 /// @RequestPath var path: String
 /// ```
-public struct RequestPath: Encodable {
+@propertyWrapper public struct RequestPath: Encodable {
     /// The wrapped value representing the request path.
     ///
     /// This property holds the `String` value that is managed by this property wrapper.
@@ -28,10 +27,21 @@ public struct RequestPath: Encodable {
 }
 
 extension RequestPath: ExpressibleByStringLiteral, ExpressibleByExtendedGraphemeClusterLiteral, ExpressibleByUnicodeScalarLiteral {
+    /// Initializes a new instance of `RequestPath` with the specified string literal.
     public typealias ExtendedGraphemeClusterLiteralType = String.ExtendedGraphemeClusterLiteralType
+    /// Initializes a new instance of `RequestPath` with the specified string literal.
     public typealias UnicodeScalarLiteralType = String.UnicodeScalarLiteralType
+    /// Initializes a new instance of `RequestPath` with the specified string literal.
     public typealias StringLiteralType = String.StringLiteralType
 
+    /// Initializes a new instance of `RequestPath` with the specified string literal.
+    ///
+    /// - Parameter value: The string literal to initialize the `RequestPath` with.
+    ///
+    /// Example usage:
+    /// ```
+    /// @RequestPath var path: String = "/api/v1/resource"
+    /// ```
     public init(stringLiteral value: String) {
         wrappedValue = value
     }

@@ -1,3 +1,13 @@
+/// A strategy for validating error response bodies with status code 404.
+///
+/// The `ValidateStatus404ErrorBodyStrategy` struct provides a strategy for validating error response bodies
+/// with a status code of 404 (Not Found). It conforms to the `ResponseErrorBodyDecodingStrategy` protocol
+/// and defines the `isError(statusCode:)` method to check if the status code is 404.
+///
+/// Example usage:
+/// ```
+/// @ResponseErrorBodyWrapper<Body, ValidateStatus404ErrorBodyStrategy> var body: Body
+/// ```
 public struct ValidateStatus404ErrorBodyStrategy: ResponseErrorBodyDecodingStrategy {
     /// Determines if the given status code represents an error.
     ///
@@ -8,8 +18,7 @@ public struct ValidateStatus404ErrorBodyStrategy: ResponseErrorBodyDecodingStrat
     ///
     /// Example usage:
     /// ```
-    /// let isError = ValidateStatus404ErrorBodyStrategy.isError(statusCode: 404)
-    /// print(isError) // true
+    /// @ResponseErrorBodyWrapper<Body, ValidateStatus404ErrorBodyStrategy> var body: Body
     /// ```
     public static func isError(statusCode: Int) -> Bool {
         statusCode == HTTPStatusCode.notFound.rawValue

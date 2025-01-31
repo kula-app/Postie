@@ -1,4 +1,3 @@
-@propertyWrapper
 /// A property wrapper that provides a convenient way to handle HTTP headers in a response.
 ///
 /// The `ResponseHeader` struct is a property wrapper that allows you to decode HTTP headers from a response
@@ -8,7 +7,7 @@
 /// ```
 /// @ResponseHeader<CustomDecodingStrategy> var header: String
 /// ```
-public struct ResponseHeader<DecodingStrategy: ResponseHeaderDecodingStrategy> {
+@propertyWrapper public struct ResponseHeader<DecodingStrategy: ResponseHeaderDecodingStrategy> {
     /// The wrapped value representing the decoded header value.
     ///
     /// This property holds the `DecodingStrategy.RawValue` value that is managed by this property wrapper.

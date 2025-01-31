@@ -1,5 +1,3 @@
-import Foundation
-
 /// A strategy for validating error response bodies with status code 401.
 ///
 /// The `ValidateStatus401ErrorBodyStrategy` struct provides a strategy for validating error response bodies
@@ -8,8 +6,7 @@ import Foundation
 ///
 /// Example usage:
 /// ```
-/// let isError = ValidateStatus401ErrorBodyStrategy.isError(statusCode: 401)
-/// print(isError) // true
+/// @ResponseErrorBodyWrapper<Body, ValidateStatus401ErrorBodyStrategy> var body: Body
 /// ```
 public struct ValidateStatus401ErrorBodyStrategy: ResponseErrorBodyDecodingStrategy {
     /// Checks if the given status code represents an error.

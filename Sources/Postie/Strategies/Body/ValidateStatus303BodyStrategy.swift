@@ -1,3 +1,13 @@
+/// A strategy for validating response bodies with status code 303.
+///
+/// The `ValidateStatus303BodyStrategy` struct provides a strategy for validating response bodies
+/// with a status code of 303 (See Other). It conforms to the `ResponseBodyDecodingStrategy` protocol
+/// and defines the `allowsEmptyContent(for:)` and `validate(statusCode:)` methods.
+///
+/// Example usage:
+/// ```
+/// @ResponseBodyWrapper<Body, ValidateStatus303BodyStrategy> var body: Body
+/// ```
 public struct ValidateStatus303BodyStrategy: ResponseBodyDecodingStrategy {
     /// Indicates whether empty content is allowed for the given status code.
     ///

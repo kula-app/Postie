@@ -1,5 +1,3 @@
-import Foundation
-
 /// A type that has a default format of xml
 public protocol XMLFormatProvider {
     /// Format of data, default extension is set to `.xml`

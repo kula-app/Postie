@@ -1,5 +1,3 @@
-import Foundation
-
 /// Protocol used to define a response type to a given request type.
 ///
 /// The `Request` protocol is used to define a response type for a given request type.

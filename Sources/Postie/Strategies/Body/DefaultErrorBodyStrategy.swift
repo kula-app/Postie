@@ -1,3 +1,12 @@
+/// A default strategy for validating error response bodies.
+///
+/// The `DefaultErrorBodyStrategy` struct provides a default strategy for validating error response bodies
+/// by checking if the status code is greater than or equal to 400 (Bad Request).
+///
+/// Example usage:
+/// ```
+/// @ResponseErrorBodyWrapper<Body, DefaultErrorBodyStrategy> var body: Body
+/// ```
 public struct DefaultErrorBodyStrategy: ResponseErrorBodyDecodingStrategy {
     /// Determines if the given status code represents an error.
     ///

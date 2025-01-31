@@ -1,4 +1,14 @@
-public class OptionalContentStrategy: ResponseBodyDecodingStrategy {
+/// A strategy for validating response bodies with status code 204.
+///
+/// The `OptionalContentStrategy` struct provides a strategy for validating response bodies
+/// with a status code of 204 (No Content). It conforms to the `ResponseBodyDecodingStrategy` protocol
+/// and defines the `allowsEmptyContent(for:)` and `validate(statusCode:)` methods.
+///
+/// Example usage:
+/// ```
+/// @ResponseBodyWrapper<Body, OptionalContentStrategy> var body: Body
+/// ```
+public struct OptionalContentStrategy: ResponseBodyDecodingStrategy {
     /// Determines whether the decoding should fail when no content is returned.
     ///
     /// - Parameter statusCode: The HTTP status code of the response.

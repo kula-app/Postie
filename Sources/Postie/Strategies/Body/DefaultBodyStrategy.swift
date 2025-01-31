@@ -1,3 +1,14 @@
+/// A default strategy for validating response bodies.
+///
+/// The `DefaultBodyStrategy` struct provides a default strategy for validating response bodies
+/// by checking if the status code is between 200 (OK) and 300 (Multiple Choices).
+/// It conforms to the `ResponseBodyDecodingStrategy` protocol and defines the
+/// `allowsEmptyContent(for:)` and `validate(statusCode:)` methods.
+///
+/// Example usage:
+/// ```
+/// @ResponseBodyWrapper<Body, DefaultBodyStrategy> var body: Body
+/// ```
 public struct DefaultBodyStrategy: ResponseBodyDecodingStrategy {
     /// Determines whether the decoding should fail when no content is returned.
     ///
