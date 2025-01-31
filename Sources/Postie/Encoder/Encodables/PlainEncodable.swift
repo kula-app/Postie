@@ -21,15 +21,10 @@ public typealias PlainEncodable = Encodable & PlainFormatProvider & PlainBodyPro
 /// }
 /// ```
 public protocol PlainBodyProvider {
-    /// The associated type representing the body of the plain text data.
-    ///
-    /// This associated type must conform to the `Encodable` protocol.
-    associatedtype Body: Encodable
-
     /// The body of the plain text data.
     ///
     /// This property holds the body of the plain text data.
-    var body: Body { get }
+    var body: String { get }
 
     /// The encoding used for the plain text data.
     ///
