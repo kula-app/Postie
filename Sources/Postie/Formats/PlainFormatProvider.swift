@@ -5,6 +5,7 @@ public protocol PlainFormatProvider {
 }
 
 extension PlainFormatProvider {
+    /// Default implementation is `.plain`
     public static var format: APIDataFormat {
         .plain
     }

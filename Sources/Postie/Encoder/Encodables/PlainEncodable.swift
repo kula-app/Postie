@@ -37,6 +37,17 @@ public protocol PlainBodyProvider {
     var encoding: String.Encoding { get }
 }
 
+extension PlainBodyProvider {
+    /// The encoding used for the plain text data.
+    ///
+    /// This property holds the encoding used for the plain text data.
+    /// Default implementation is `.utf8`
+    ///
+    /// - Note: This property is required by the `PlainBodyProvider` protocol.
+    public var encoding: String.Encoding {
+        .utf8
+    }
+}
 
 /// Extension to make `String.Encoding` conform to `Encodable`
 extension String.Encoding: @retroactive Encodable {
