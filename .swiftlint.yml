@@ -2,6 +2,7 @@ included:
   - Sources
   - Tests
   - Dangerfile.swift
+  - Package.swift
 
 # Rules
 disabled_rules:

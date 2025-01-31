@@ -5,33 +5,34 @@ import PackageDescription
 let package = Package(
     name: "Postie",
     platforms: [
-        //lint .macOS(.v12),
         .macOS(.v10_15),
-        .iOS(.v13)
+        .iOS(.v13),
     ],
     products: [
         .library(name: "Postie", targets: ["Postie"]),
-        .library(name: "PostieMock", targets: ["PostieMock"])
+        .library(name: "PostieMock", targets: ["PostieMock"]),
     ],
     dependencies: [
         .package(url: "https://github.com/MaxDesiatov/XMLCoder", .upToNextMajor(from: "0.17.1"))
     ],
     targets: [
-        .target(name: "Postie", dependencies: [
-            "URLEncodedFormCoding",
-            "PostieUtils",
-            "XMLCoder"
-        ]),
-        //dev .testTarget(name: "PostieTests", dependencies: [
-        //dev     "Postie",
-        //dev     "PostieMock"
-        //dev ]),
+        .target(
+            name: "Postie",
+            dependencies: [
+                "URLEncodedFormCoding",
+                "PostieUtils",
+                "XMLCoder",
+            ]),
+        // dev .testTarget(name: "PostieTests", dependencies: [
+        // dev     "Postie",
+        // dev     "PostieMock"
+        // dev ]),
 
         .target(name: "PostieMock", dependencies: ["Postie"]),
 
         .target(name: "URLEncodedFormCoding", dependencies: ["PostieUtils"]),
 
         .target(name: "PostieUtils"),
-        //dev .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"])
+        // dev .testTarget(name: "PostieUtilsTests", dependencies: ["PostieUtils"])
     ]
 )
