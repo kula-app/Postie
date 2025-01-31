@@ -1,3 +1,7 @@
+/// A type that can be used as a value for a query item.
+///
+/// The `QueryItemValue` protocol defines a type that can be used as a value for a query item.
+/// It requires conforming types to provide a `serialized` property that returns a string representation of the query item value.
 internal protocol QueryItemProtocol {
     /// Custom name of the query item, can be nil
     var name: String? { get }
@@ -171,8 +175,21 @@ extension QueryItem where T == String? {
 
 // MARK: - OptionalType
 
+/// A type that can be used as a value for a query item.
+///
+/// The `OptionalType` protocol defines a type that can be used as a value for a query item.
+/// It requires conforming types to provide a `none` property that returns a nil value.
 public protocol OptionalType {
+    /// The type of the wrapped value.
+    ///
+    /// This property represents the type of the wrapped value.
+    /// It is used to represent the type of the wrapped value for the optional type.
     associatedtype Wrapped
+
+    /// The nil value of the optional type.
+    ///
+    /// This property represents the nil value of the optional type.
+    /// It is used to represent a nil value for the optional type.
     static var none: Self { get }
 }
 

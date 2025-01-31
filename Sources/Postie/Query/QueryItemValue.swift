@@ -1,3 +1,7 @@
+/// A type that can be used as a value for a query item.
+///
+/// The `QueryItemValue` protocol defines a type that can be used as a value for a query item.
+/// It requires conforming types to provide a `serializedQueryItem` property that returns a string representation of the query item value.
 public protocol QueryItemValue {
     /// The serialized value of the query item.
     ///

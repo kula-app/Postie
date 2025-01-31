@@ -414,6 +414,12 @@ extension HTTPStatusCode: Comparable, Equatable {
 }
 
 extension Range where Bound == HTTPStatusCode {
+    /// Checks if a value is within a range of HTTP status codes.
+    ///
+    /// - Parameters:
+    ///   - range: The range of HTTP status codes to check against.
+    ///   - value: The value to check against the range.
+    /// - Returns: `true` if the value is within the range, otherwise `false`.
     public static func ~= (range: Range<HTTPStatusCode>, value: Int) -> Bool {
         guard let status = HTTPStatusCode(rawValue: UInt16(value)) else {
             return false

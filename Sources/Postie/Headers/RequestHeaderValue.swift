@@ -1,3 +1,7 @@
+/// A type that can be used as a value for an HTTP header.
+///
+/// The `RequestHeaderValue` protocol defines a type that can be used as a value for an HTTP header.
+/// It requires conforming types to provide a `serializedHeaderValue` property that returns a string representation of the header value.
 public protocol RequestHeaderValue {
     /// The serialized value of the header.
     ///
