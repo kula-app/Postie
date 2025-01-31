@@ -170,7 +170,7 @@ public class RequestEncoder {
             if encoder.path.starts(with: "/") {
                 path = String(path.dropFirst())
             }
-            if (!path.isEmpty) {
+            if !path.isEmpty {
                 url = url.appendingPathComponent(path)
             }
             guard let comps = URLComponents(url: url, resolvingAgainstBaseURL: true) else {

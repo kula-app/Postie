@@ -1,7 +1,6 @@
 public struct DefaultBodyStrategy: ResponseBodyDecodingStrategy {
     /// Determines whether the decoding should fail when no content is returned.
     ///
-    /// - Parameter statusCode: The HTTP status code of the response.
     /// - Returns: A Boolean value indicating whether empty content is allowed.
     ///
     /// Example usage:

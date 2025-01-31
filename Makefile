@@ -6,7 +6,7 @@ format-swift-format:
 	swift format --configuration .swift-format --in-place --recursive Sources Tests Dangerfile.swift Package.swift
 
 format-swiftlint:
-	swiftlint --fix --config .swiftlint.yml Sources Tests
+	swiftlint --fix --config .swiftlint.yml --quiet Sources Tests Dangerfile.swift Package.swift
 
 build:
 	swift build
@@ -23,4 +23,4 @@ lint-swift-format:
 	swift format lint --configuration .swift-format --strict --recursive Sources Tests Dangerfile.swift Package.swift
 
 lint-swiftlint:
-	swiftlint lint --config .swiftlint.yml Sources Tests
+	swiftlint lint --config .swiftlint.yml --strict --quiet Sources Tests Dangerfile.swift Package.swift

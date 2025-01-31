@@ -17,33 +17,33 @@ public enum APIError: LocalizedError {
     ///   - statusCode: The HTTP status code of the response.
     ///   - data: The response data.
     case responseError(statusCode: Int, data: Data)
-    
+
     /// Indicates an invalid response.
     ///
     /// This error occurs when the API returns an invalid response, such as a response with missing or malformed data.
     case invalidResponse
-    
+
     /// Indicates a URL error.
     ///
     /// This error occurs when there is an issue with the URL, such as a network connectivity problem or an invalid URL.
     ///
     /// - Parameter error: The underlying `URLError` that caused the failure.
     case urlError(URLError)
-    
+
     /// Indicates a decoding error.
     ///
     /// This error occurs when there is an issue decoding the response data into the expected type.
     ///
     /// - Parameter error: The underlying `DecodingError` that caused the failure.
     case decodingError(DecodingError)
-    
+
     /// Indicates a failure to encode plain text with a specific encoding.
     ///
     /// This error occurs when there is an issue encoding plain text data using the specified encoding.
     ///
     /// - Parameter encoding: The `String.Encoding` used for encoding.
     case failedToEncodePlainText(encoding: String.Encoding)
-    
+
     /// Indicates an unknown error.
     ///
     /// This error occurs when an unknown error is encountered.
