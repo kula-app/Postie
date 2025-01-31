@@ -2,7 +2,7 @@ import Combine
 import Foundation
 import os.log
 
-// swiftlint:disable:next type_body_length
+// swiftlint:disable file_length type_body_length
 /// A class responsible for sending HTTP API requests and handling responses.
 ///
 /// The `HTTPAPIClient` class provides methods to send HTTP API requests using different encoding formats
@@ -592,3 +592,4 @@ open class HTTPAPIClient {
         return url.appendingPathComponent(prefix)
     }
 }
+// swiftlint:enable file_length type_body_length
