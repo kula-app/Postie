@@ -1,4 +1,5 @@
 public protocol RequestHeaderValue {
+    /// The serialized value of the header.
     var serializedHeaderValue: String? { get }
 }
 

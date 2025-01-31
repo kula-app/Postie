@@ -1,13 +1,21 @@
 import Foundation
 
+/// Represents various errors that can occur when interacting with the API.
 public enum APIError: LocalizedError {
+    /// Indicates a response error with a specific status code and data.
     case responseError(statusCode: Int, data: Data)
+    /// Indicates an invalid response.
     case invalidResponse
+    /// Indicates a URL error.
     case urlError(URLError)
+    /// Indicates a decoding error.
     case decodingError(DecodingError)
+    /// Indicates a failure to encode plain text with a specific encoding.
     case failedToEncodePlainText(encoding: String.Encoding)
+    /// Indicates an unknown error.
     case unknown(error: Error)
 
+    /// A localized message describing what error occurred.
     public var errorDescription: String? {
         switch self {
         case let .responseError(statusCode, data):
@@ -36,6 +44,10 @@ public enum APIError: LocalizedError {
         }
     }
 
+    /// Converts a coding path to a string representation.
+    ///
+    /// - Parameter codingPath: The coding path to convert.
+    /// - Returns: A string representation of the coding path.
     private func codingPathToString(_ codingPath: [CodingKey]) -> String {
         codingPath
             .map { item in
