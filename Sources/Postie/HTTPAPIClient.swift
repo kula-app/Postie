@@ -83,6 +83,7 @@ open class HTTPAPIClient {
             guard let response = response as? HTTPURLResponse, let data = data else {
                 return callback(.failure(APIError.invalidResponse))
             }
+            self.log(urlRequest: urlRequest, response: response, data: data)
             var syncBlock: () -> Void
             do {
                 let decoder = ResponseDecoder()
@@ -245,6 +246,7 @@ open class HTTPAPIClient {
                 guard let response = response as? HTTPURLResponse else {
                     throw APIError.invalidResponse
                 }
+                self.log(urlRequest: urlRequest, response: response, data: data)
                 return (data: data, response: response)
             }
             .decode(type: Response.self, decoder: ResponseDecoder())
@@ -259,7 +261,11 @@ open class HTTPAPIClient {
     ///   - request: request conforming to the `Request` protocol
     ///   - urlRequest: generated `urlRequest` with is sent to the endpoint
     fileprivate func log<Request>(request: Request, _ urlRequest: URLRequest) {
-        os_log(.debug, "[%@] Sending request of type %@ to URL: %@", urlRequest.httpMethod!, String(describing: type(of: request)), urlRequest.url!.absoluteString)
+        os_log(.debug, "[%@] Sending request of type %@ to URL: %@",
+               urlRequest.httpMethod ?? "?",
+               String(describing: type(of: request)),
+               urlRequest.url?.absoluteString ?? "?"
+        )
     }
 
     /// Logs a request with the received response and data
@@ -273,7 +279,8 @@ open class HTTPAPIClient {
         let dataCount = data.count.description
         let requestHttpMethod = urlRequest.httpMethod ?? "?"
         let requestUrl = urlRequest.url?.absoluteString ?? "?"
-        os_log(.debug, "Received HTTP status %s with %s as response for HTTP %s %s",
+        os_log(.debug, "[%@] Received HTTP status %s with %s as response for HTTP %s %s",
+               urlRequest.httpMethod ?? "?",
                responseStatus,
                dataCount,
                requestHttpMethod,
@@ -308,7 +315,6 @@ open class HTTPAPIClient {
     ///
     /// - Returns: Transformed URL
     private func prepareURL() -> URL {
-        // Append the path prefix if given
         guard let prefix = pathPrefix else {
             return url
         }
