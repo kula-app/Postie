@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HTTPAPIClient Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/HTTPAPIClient" class="dashAnchor"></a>
+
+    <a title="HTTPAPIClient Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          Postie (main)
+        </a>
+         (100% documented)
+      </p>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/kula-app/Postie">
+            <img class="header-icon" src="../img/gh.png" alt="GitHub"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">Postie</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      <a class="breadcrumb" href="../Classes.html">Classes</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      HTTPAPIClient Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/HTTPAPIClient.html">HTTPAPIClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RequestEncoder.html">RequestEncoder</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ResponseDecoder.html">ResponseDecoder</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/APIDataFormat.html">APIDataFormat</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/APIError.html">APIError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/HTTPMethod.html">HTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/HTTPStatusCode.html">HTTPStatusCode</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Bool.html">Bool</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Double.html">Double</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int.html">Int</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int16.html">Int16</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int32.html">Int32</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Int64.html">Int64</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Optional.html">Optional</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/PlainDecodable.html">PlainDecodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Range.html">Range</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ResponseBody.html">ResponseBody</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/ResponseErrorBody.html">ResponseErrorBody</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Set.html">Set</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/String/Encoding.html">– Encoding</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/URLSession.html">URLSession</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/FormURLEncodedBodyProvider.html">FormURLEncodedBodyProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/FormURLEncodedFormatProvider.html">FormURLEncodedFormatProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/JSONBodyProvider.html">JSONBodyProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/JSONFormatProvider.html">JSONFormatProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/OptionalType.html">OptionalType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PlainBodyProvider.html">PlainBodyProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PlainFormatProvider.html">PlainFormatProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/QueryItemValue.html">QueryItemValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/Request.html">Request</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RequestHeaderValue.html">RequestHeaderValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RequestPathParameterValue.html">RequestPathParameterValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ResponseBodyDecodingStrategy.html">ResponseBodyDecodingStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ResponseErrorBodyDecodingStrategy.html">ResponseErrorBodyDecodingStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ResponseHeaderDecodingStrategy.html">ResponseHeaderDecodingStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/URLSessionProvider.html">URLSessionProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/XMLBodyProvider.html">XMLBodyProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/XMLFormatProvider.html">XMLFormatProvider</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DefaultBodyStrategy.html">DefaultBodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DefaultErrorBodyStrategy.html">DefaultErrorBodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DefaultHeaderStrategy.html">DefaultHeaderStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DefaultHeaderStrategyOptional.html">DefaultHeaderStrategyOptional</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/EmptyResponse.html">EmptyResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/NestedResponse.html">NestedResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/OptionalContentStrategy.html">OptionalContentStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/QueryItem.html">QueryItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RequestCachePolicy.html">RequestCachePolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RequestCookies.html">RequestCookies</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RequestHTTPMethod.html">RequestHTTPMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RequestHeader.html">RequestHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RequestPath.html">RequestPath</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RequestPathParameter.html">RequestPathParameter</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/RequestURL.html">RequestURL</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ResponseBodyWrapper.html">ResponseBodyWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ResponseCookies.html">ResponseCookies</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ResponseErrorBodyWrapper.html">ResponseErrorBodyWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ResponseHeader.html">ResponseHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ResponseStatusCode.html">ResponseStatusCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus200BodyStrategy.html">ValidateStatus200BodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus201BodyStrategy.html">ValidateStatus201BodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus303BodyStrategy.html">ValidateStatus303BodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus400ErrorBodyStrategy.html">ValidateStatus400ErrorBodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus401ErrorBodyStrategy.html">ValidateStatus401ErrorBodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus403ErrorBodyStrategy.html">ValidateStatus403ErrorBodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus404ErrorBodyStrategy.html">ValidateStatus404ErrorBodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus410ErrorBodyStrategy.html">ValidateStatus410ErrorBodyStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ValidateStatus422ErrorBodyStrategy.html">ValidateStatus422ErrorBodyStrategy</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/FormURLEncodedDecodable.html">FormURLEncodedDecodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/FormURLEncodedEncodable.html">FormURLEncodedEncodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/FormURLEncodedRequest.html">FormURLEncodedRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/JSONDecodable.html">JSONDecodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/JSONEncodable.html">JSONEncodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/JSONRequest.html">JSONRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/PlainDecodable.html">PlainDecodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/PlainEncodable.html">PlainEncodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/PlainRequest.html">PlainRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/ResponseBody.html">ResponseBody</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/ResponseErrorBody.html">ResponseErrorBody</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/XMLDecodable.html">XMLDecodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/XMLEncodable.html">XMLEncodable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases/XMLRequest.html">XMLRequest</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>HTTPAPIClient</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">HTTPAPIClient</span></code></pre>
+
+                </div>
+              </div>
+            <p>A class responsible for sending HTTP API requests and handling responses.</p>
+
+<p>The <code>HTTPAPIClient</code> class provides methods to send HTTP API requests using different encoding formats
+and handle the responses. It supports callbacks, async-await, and Combine for handling responses.</p>
+
+              <div class="slightly-smaller">
+                <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L10-L594">Show on GitHub</a>
+              </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC7sessionAA18URLSessionProvider_pvp"></a>
+                    <a name="//apple_ref/swift/Property/session" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC7sessionAA18URLSessionProvider_pvp">session</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The URL session provider used for sending requests.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">session</span><span class="p">:</span> <span class="kt"><a href="../Protocols/URLSessionProvider.html">URLSessionProvider</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L12">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC3url10Foundation3URLVvp"></a>
+                    <a name="//apple_ref/swift/Property/url" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC3url10Foundation3URLVvp">url</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The base URL for the API requests.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L14">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC10pathPrefixSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/pathPrefix" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC10pathPrefixSSSgvp">pathPrefix</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An optional path prefix to be appended to the base URL.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">pathPrefix</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L16">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC3url10pathPrefix7sessionAC10Foundation3URLV_SSSgAA18URLSessionProvider_ptcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(url:pathPrefix:session:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC3url10pathPrefix7sessionAC10Foundation3URLV_SSSgAA18URLSessionProvider_ptcfc">init(url:<wbr>pathPrefix:<wbr>session:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a new instance of <code>HTTPAPIClient</code> with the specified URL, path prefix, and session provider.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">pathPrefix</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">session</span><span class="p">:</span> <span class="kt"><a href="../Protocols/URLSessionProvider.html">URLSessionProvider</a></span> <span class="o">=</span> <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The base URL for the API requests.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pathPrefix</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional path prefix to be appended to the base URL.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>session</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL session provider used for sending requests. Defaults to <code>URLSession.shared</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L24-L28">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Callbacks"></a>
+                <a name="//apple_ref/swift/Section/Callbacks" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Callbacks"></a>
+                  <h3 class="section-name"><span>Callbacks</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4send_9receiveOn8callbackyx_So17OS_dispatch_queueCSgys6ResultOy8ResponseQzs5Error_pGctAA7RequestRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:receiveOn:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4send_9receiveOn8callbackyx_So17OS_dispatch_queueCSgys6ResultOy8ResponseQzs5Error_pGctAA7RequestRzlF">send(_:<wbr>receiveOn:<wbr>callback:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request using a callback to handle the response.</p>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myRequest</span><span class="p">)</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">response</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Request failed with error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">R</span><span class="p">,</span> <span class="n">receiveOn</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">.</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">where</span> <span class="kt">R</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional dispatch queue to receive the callback on. Defaults to <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to handle the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L51-L64">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4send_9receiveOn8callbackyx_So17OS_dispatch_queueCSgys6ResultOy8ResponseAA7RequestPQzs5Error_pGctAA16JSONBodyProviderRzAA010JSONFormatO0RzAaMRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:receiveOn:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4send_9receiveOn8callbackyx_So17OS_dispatch_queueCSgys6ResultOy8ResponseAA7RequestPQzs5Error_pGctAA16JSONBodyProviderRzAA010JSONFormatO0RzAaMRzlF">send(_:<wbr>receiveOn:<wbr>callback:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a JSON body using a callback to handle the response.</p>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myJsonRequest</span><span class="p">)</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">response</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Request failed with error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">:</span> <span class="kt"><a href="../Typealiases/JSONRequest.html">JSONRequest</a></span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">,</span>
+    <span class="n">receiveOn</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span>
+        <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional dispatch queue to receive the callback on. Defaults to <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to handle the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L85-L104">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4send_9receiveOn8callbackyx_So17OS_dispatch_queueCSgys6ResultOy8ResponseAA7RequestPQzs5Error_pGctAA26FormURLEncodedBodyProviderRzAA0no6FormatQ0RzAaMRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:receiveOn:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4send_9receiveOn8callbackyx_So17OS_dispatch_queueCSgys6ResultOy8ResponseAA7RequestPQzs5Error_pGctAA26FormURLEncodedBodyProviderRzAA0no6FormatQ0RzAaMRzlF">send(_:<wbr>receiveOn:<wbr>callback:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a Form URL Encoded body using a callback to handle the response.</p>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myFormURLEncodedRequest</span><span class="p">)</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">response</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Request failed with error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">:</span> <span class="kt"><a href="../Typealiases/FormURLEncodedRequest.html">FormURLEncodedRequest</a></span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">,</span>
+    <span class="n">receiveOn</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span>
+        <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional dispatch queue to receive the callback on. Defaults to <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to handle the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L125-L144">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4send_9receiveOn8callbackyx_So17OS_dispatch_queueCSgys6ResultOy8ResponseAA7RequestPQzs5Error_pGctAA17PlainBodyProviderRzAA0n6FormatP0RzAaMRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:receiveOn:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4send_9receiveOn8callbackyx_So17OS_dispatch_queueCSgys6ResultOy8ResponseAA7RequestPQzs5Error_pGctAA17PlainBodyProviderRzAA0n6FormatP0RzAaMRzlF">send(_:<wbr>receiveOn:<wbr>callback:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a plain text body using a callback to handle the response.</p>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myPlainRequest</span><span class="p">)</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">response</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Request failed with error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">:</span> <span class="kt"><a href="../Typealiases/PlainRequest.html">PlainRequest</a></span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">,</span>
+    <span class="n">receiveOn</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span>
+        <span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional dispatch queue to receive the callback on. Defaults to <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>callback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The callback to handle the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L165-L184">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Async-Await"></a>
+                <a name="//apple_ref/swift/Section/Async-Await" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Async-Await"></a>
+                  <h3 class="section-name"><span>Async-Await</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4sendy8ResponseQzxYaKAA7RequestRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4sendy8ResponseQzxYaKAA7RequestRzlF">send(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request using async-await to handle the response.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    An error if the request encoding or response decoding fails.
+
+</div>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="k">try</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myRequest</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">R</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">R</span><span class="o">.</span><span class="kt">Response</span> <span class="k">where</span> <span class="kt">R</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The decoded response.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L240-L253">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4sendy8ResponseAA7RequestPQzxYaKAA16JSONBodyProviderRzAA010JSONFormatG0RzAaFRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4sendy8ResponseAA7RequestPQzxYaKAA16JSONBodyProviderRzAA010JSONFormatG0RzAaFRzlF">send(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a JSON body using async-await to handle the response.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    An error if the request encoding or response decoding fails.
+
+</div>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="k">try</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myJsonRequest</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span> <span class="k">where</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/JSONBodyProvider.html">JSONBodyProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/JSONFormatProvider.html">JSONFormatProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The decoded response.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L267-L280">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4sendy8ResponseAA7RequestPQzxYaKAA26FormURLEncodedBodyProviderRzAA0fg6FormatI0RzAaFRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4sendy8ResponseAA7RequestPQzxYaKAA26FormURLEncodedBodyProviderRzAA0fg6FormatI0RzAaFRzlF">send(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a Form URL Encoded body using async-await to handle the response.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    An error if the request encoding or response decoding fails.
+
+</div>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="k">try</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myFormURLEncodedRequest</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span> <span class="k">where</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/FormURLEncodedBodyProvider.html">FormURLEncodedBodyProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/FormURLEncodedFormatProvider.html">FormURLEncodedFormatProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The decoded response.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L294-L307">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4sendy8ResponseAA7RequestPQzxYaKAA17PlainBodyProviderRzAA0f6FormatH0RzAaFRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4sendy8ResponseAA7RequestPQzxYaKAA17PlainBodyProviderRzAA0f6FormatH0RzAaFRzlF">send(_:<wbr>)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Asynchronous
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a plain text body using async-await to handle the response.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    An error if the request encoding or response decoding fails.
+
+</div>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">response</span> <span class="o">=</span> <span class="k">try</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myPlainRequest</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span> <span class="k">where</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PlainBodyProvider.html">PlainBodyProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PlainFormatProvider.html">PlainFormatProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The decoded response.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L321-L334">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Combine"></a>
+                <a name="//apple_ref/swift/Section/Combine" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Combine"></a>
+                  <h3 class="section-name"><span>Combine</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4sendy7Combine12AnyPublisherVy8ResponseQzs5Error_pGxAA7RequestRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4sendy7Combine12AnyPublisherVy8ResponseQzs5Error_pGxAA7RequestRzlF">send(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request using Combine to handle the response.</p>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myRequest</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">sink</span><span class="p">(</span><span class="nv">receiveCompletion</span><span class="p">:</span> <span class="p">{</span> <span class="n">completion</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">completion</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">finished</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Request completed successfully"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Request failed with error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="nv">receiveValue</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="o">.</span><span class="nf">store</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">cancellables</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">.</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">R</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A publisher that emits the decoded response or an error.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L376-L389">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4sendy7Combine12AnyPublisherVy8ResponseAA7RequestPQzs5Error_pGxAA16JSONBodyProviderRzAA010JSONFormatK0RzAaIRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4sendy7Combine12AnyPublisherVy8ResponseAA7RequestPQzs5Error_pGxAA16JSONBodyProviderRzAA010JSONFormatK0RzAaIRzlF">send(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a JSON body using Combine to handle the response.</p>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myJsonRequest</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">sink</span><span class="p">(</span><span class="nv">receiveCompletion</span><span class="p">:</span> <span class="p">{</span> <span class="n">completion</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">completion</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">finished</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Request completed successfully"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Request failed with error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="nv">receiveValue</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="o">.</span><span class="nf">store</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">cancellables</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/JSONBodyProvider.html">JSONBodyProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/JSONFormatProvider.html">JSONFormatProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A publisher that emits the decoded response or an error.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L412-L425">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4sendy7Combine12AnyPublisherVy8ResponseAA7RequestPQzs5Error_pGxAA26FormURLEncodedBodyProviderRzAA0jk6FormatM0RzAaIRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4sendy7Combine12AnyPublisherVy8ResponseAA7RequestPQzs5Error_pGxAA26FormURLEncodedBodyProviderRzAA0jk6FormatM0RzAaIRzlF">send(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a Form URL Encoded body using Combine to handle the response.</p>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myFormURLEncodedRequest</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">sink</span><span class="p">(</span><span class="nv">receiveCompletion</span><span class="p">:</span> <span class="p">{</span> <span class="n">completion</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">completion</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">finished</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Request completed successfully"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Request failed with error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="nv">receiveValue</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="o">.</span><span class="nf">store</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">cancellables</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/FormURLEncodedBodyProvider.html">FormURLEncodedBodyProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/FormURLEncodedFormatProvider.html">FormURLEncodedFormatProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A publisher that emits the decoded response or an error.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L448-L461">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Postie13HTTPAPIClientC4sendy7Combine12AnyPublisherVy8ResponseAA7RequestPQzs5Error_pGxAA17PlainBodyProviderRzAA0j6FormatL0RzAaIRzlF"></a>
+                    <a name="//apple_ref/swift/Method/send(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Postie13HTTPAPIClientC4sendy7Combine12AnyPublisherVy8ResponseAA7RequestPQzs5Error_pGxAA17PlainBodyProviderRzAA0j6FormatL0RzAaIRzlF">send(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sends an HTTP API request with a plain text body using Combine to handle the response.</p>
+
+<p>Example usage:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">HTTPAPIClient</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://api.example.com"</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">myPlainRequest</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">sink</span><span class="p">(</span><span class="nv">receiveCompletion</span><span class="p">:</span> <span class="p">{</span> <span class="n">completion</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">completion</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">finished</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Request completed successfully"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Request failed with error: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="nv">receiveValue</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Received response: </span><span class="se">\(</span><span class="n">response</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="o">.</span><span class="nf">store</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">cancellables</span><span class="p">)</span>
+</code></pre>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="n">send</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt"><a href="../Protocols/Request.html">Request</a></span><span class="o">.</span><span class="kt">Response</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PlainBodyProvider.html">PlainBodyProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/PlainFormatProvider.html">PlainFormatProvider</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Request.html">Request</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request to send.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A publisher that emits the decoded response or an error.</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/kula-app/Postie/tree/main/Sources/Postie/HTTPAPIClient.swift#L484-L497">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>© 2023 <a class="link" href="https://kula.app" target="_blank" rel="external noopener">kula app GmbH</a>, <a class="link" href="https://philprime.dev" target="_blank" rel="external noopener">Philip Niedertscheider</a>. All rights reserved.</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.15.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
+  </body>
+</html>
