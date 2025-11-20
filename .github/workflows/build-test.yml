@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           # Set the fetch-depth > 1 or set to 0 for codecov upload detection
           fetch-depth: 2
