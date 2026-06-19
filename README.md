@@ -101,22 +101,17 @@ request.authorization = "Bearer my-oauth-token"
 let client = HTTPAPIClient(url: URL(string: "https://example.org")!)
 
 // Send the request
-client.send(request)
-    .sink { result in
-        switch result {
-        case .failure(let error):
-            print("Oh no something went wrong :(")
-            print(error)
-        case .finished:
-            print("Everything worked fine :)")
-        }
-    } receiveValue: { response in
-        // The single response object contains all the interesting data
-        print(response.statusCode)
-        print(response.body)
-        print(response.errorBody)
-        print(response.contentType)
-    }
+do {
+    let response = try await client.send(request)
+    // The single response object contains all the interesting data
+    print(response.statusCode)
+    print(response.body)
+    print(response.errorBody)
+    print(response.contentType)
+} catch {
+    print("Oh no something went wrong :(")
+    print(error)
+}
 ```
 
 ## Core Concept
@@ -621,74 +616,48 @@ struct ListRequest: Request {
 
 The easiest way of sending Postie requests, is using the `HTTPAPIClient` which takes care of encoding requests, and decoding responses.
 
-All it takes to create a client, is the URL which is used as a base for all requests. Afterwards you can just send the requests, either using Async-Await, Combine publishers, or classic callbacks.
+All it takes to create a client, is the URL which is used as a base for all requests. Afterwards you can send the requests using async/await.
 
 Additionally the `HTTPAPIClient` provides the option of setting a `session` provider, which encapsulates the default `URLSession` by a protocol.
 This allows to create networking clients which can be mocked (perfect for unit testing).
-
-#### Async Await
 
 **Example:**
 
 ```swift
 let url: URL = ...
-let client = HTTPAPIClient(baseURL: url)
+let client = HTTPAPIClient(url: url)
 
 // ... create request ...
 
-try {
+do {
     let response = try await client.send(request)
     // process response
-    print(response)
 } catch {
     // handle error
 }
 ```
 
-#### Combine
+#### Alternatives
 
-**Example:**
+The `HTTPAPIClient` also supports **Combine** publishers and **callbacks** as alternative patterns:
 
 ```swift
-let url: URL = ...
-let client = HTTPAPIClient(baseURL: url)
-
-// ... create request ...
-
+// Combine
 client.send(request)
     .sink(receiveCompletion: { completion in
-        switch completion {
-        case .failure(let error):
-            // handle error
-            break
-        case .finished:
-            break
-        }
+        // handle completion
     }, receiveValue: { response in
         // process response
-        print(response)
     })
     .store(in: &cancellables)
-```
 
-#### Callback
-
-**Example:**
-
-```swift
-let url: URL = ...
-let client = HTTPAPIClient(baseURL: url)
-
-// ... create request ...
-
-client.send(request) { result in
+// Callback
+client.send(request) { (result: Result<MyRequest.Response, Error>) in
     switch result {
+    case .success(let response):
+        // process response
     case .failure(let error):
         // handle error
-        break
-    case .finished(let response):
-        // process response
-        break
     }
 }
 ```
